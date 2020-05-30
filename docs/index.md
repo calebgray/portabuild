@@ -6,7 +6,7 @@ function a(b) {
 }
 </script>
 
-<label for="sdf">sdf: <input id="sdf" type="text" onkeydown="a(this)"></label>
+<label for="sdf">sdf: <input id="sdf" type="text" onkeydown="a(this)" onpaste="a(this)"></label>
 
 ### tl;dr
 
