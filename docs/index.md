@@ -21,16 +21,15 @@ function $hand(self, key, hook) {
     key = self.id;
   case 2:
     if (!$hand_[key]) {
-      $hand_[key] = { self: self, hooks: {} };
+      $hand_[key] = { hooks: {} };
     } else {
-      $hand_[key].self = self;
       for (const hook of Object.values($hand_[key].hooks)) {
-        hook(self);
+        hook($hand_[key].self, self);
       }
     }
     return;
   case 3:
-    if (!$hand_[key]) $hand_[key] = { hooks: {} };
+    if (!$hand_[key]) $hand_[key] = { self: self, hooks: {} };
     $hand_[key].hooks[hook._id] = hook;
     if ($hand_[key].self !== undefined) {
       for (const hook of Object.values($hand_[key].hooks)) {
