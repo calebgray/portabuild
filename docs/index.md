@@ -1,14 +1,4 @@
-<script>
-    window.console.log('script!')
-</script>
-<noscript>
-    <p>No JavaScript? No Poo for You!</p>
-    <p>To <a href="https://github.com/calebgray/portapoo.action">github.com/calebgray/portapoo.action</a>?</p>
-    <p>To <a href="https://calebgray.com">calebgray.com</a>?</p>
-</noscript>
-<p>No JavaScript? No Poo for You!</p>
-<p>To <a href="https://github.com/calebgray/portapoo.action">github.com/calebgray/portapoo.action</a>?</p>
-<p>To <a href="https://calebgray.com">calebgray.com</a>?</p>
+<script>console.log('LOG')</script>
 
 # tl;dr
 > 0. https://github.com/yourname/yourappname/new/master `name: .github/workflows/yourappname.yml, title: portapoo, body: `
