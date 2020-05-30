@@ -50,8 +50,6 @@ function setText(self) {
 }
 </script>
 
--?[_a-zA-Z]+[_a-zA-Z0-9-]*
-
 <label for="a">A: <input id="a" type="text" onkeydown="$hand(this)" onpaste="$hand(this)"></label>
 
 <b class="_" animationstart="$hand(this, 'a', setText)">yourappname</b>
