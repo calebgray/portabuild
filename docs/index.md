@@ -3,6 +3,19 @@
 <script>
 'use strict';
 
+let _id = 0;
+Function.defineProperty(Function.prototype, '_id', {
+get: function() {
+  Function.defineProperty(this, '_id', {
+    value: ++_id,
+    writable: false,
+    enumerable: false,
+  });
+  return this._id;
+},
+enumerable: false,
+});
+
 const $hand_ = {};
 function $hand(self, key, hook) {
   if (!key) {
@@ -20,6 +33,8 @@ function $hand(self, key, hook) {
     console.log(hook);
   }
 }
+
+console.log(typeof $hand);
 
 function setText(self) {
   console.log(arguments);
