@@ -1,8 +1,15 @@
 <style>.header-level-1{display:none}</style># _
 
-<script>console.log('LOG')</script>
+<script>
+function a(b) {
+  console.log(arguments)
+}
+</script>
 
-# tl;dr
+<label for="sdf">sdf: <input id="sdf" type="text" onkeydown="a(this)"></label>
+
+### tl;dr
+
 > 0. https://github.com/yourname/yourappname/new/master `name: .github/workflows/yourappname.yml, title: portapoo, body: `
 > 
 > ```yaml
@@ -20,7 +27,7 @@
 >       uses: calebgray/portapoo.action@master
 > ```
 
-# +Upload
+### Upload
 
 > 0. _<sub><sup>[optional]</sup></sub>_ [CreateRepo](https://github.com/new) `name: yourappname-builds, type: private, readme: true`
 >
