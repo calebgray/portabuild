@@ -1,5 +1,5 @@
 <style>.header-level-1{display:none}</style># _
-<style>img._,blockquote._{display:none}</style>
+<style>img._,blockquote._a{display:none}</style>
 <script>
 'use strict';
 
@@ -52,8 +52,9 @@ function renderTemplate(trigger) {
 </script>
 
 <form>
-<label for="yourname">Your Name: <input id="yourname" type="text" oninput="$hand(this)" onpropertychange="$hand(this)" placeholder="yourname"></label>
-<label for="appname">App Name: <input id="appname" type="text" oninput="$hand(this)" onpropertychange="$hand(this)" placeholder="appname"></label>
+  <label for="yourname">Your Name: <input id="yourname" type="text" oninput="$hand(this)" onpropertychange="$hand(this)" placeholder="yourname"></label>
+
+  <label for="appname">App Name: <input id="appname" type="text" oninput="$hand(this)" onpropertychange="$hand(this)" placeholder="appname"></label>
 </form>
 
 > ### tl;dr
