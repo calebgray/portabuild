@@ -46,8 +46,13 @@ function setEscapedUri(trigger) {
 }
 
 function renderTemplate(trigger) {
-  if (!trigger) return;
-  this.innerHTML = trigger.value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+  if (!trigger) {
+    Object.defineProperty(this, '_template', { value: this.innerHTML });    
+    return;
+  }
+  if (trigger._template) this.innerHTML = trigger._template.replace(/{{\s*\.(.*?)\s*}}/g, function(match, $1, $2){
+    console.log(arguments);
+  });
 }
 </script>
 
