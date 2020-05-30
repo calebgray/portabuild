@@ -1,3 +1,5 @@
+<style>.header-level-1{display:none}</style># _
+
 <script>console.log('LOG')</script>
 
 # tl;dr
