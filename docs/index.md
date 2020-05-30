@@ -40,19 +40,25 @@ function setEscapedHtml(trigger) {
   this.innerHTML = trigger.value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
 }
 
+function setEscapedUri(trigger) {
+  if (!trigger) return;
+  this.innerHTML = encodeURI(trigger.value);
+}
+
 function renderTemplate(trigger) {
   if (!trigger) return;
   this.innerHTML = trigger.value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
 }
 </script>
 
+<form>
 <label for="yourname">Your Name: <input id="yourname" type="text" oninput="$hand(this)" onpropertychange="$hand(this)" placeholder="yourname"></label>
-
-<label for="appname">App Name: <input id="appname" type="text" oninput="$hand(this)" onpropertychange="$hand(this)" placeholder="yourname"></label>
+<label for="appname">App Name: <input id="appname" type="text" oninput="$hand(this)" onpropertychange="$hand(this)" placeholder="appname"></label>
+</form>
 
 > ### tl;dr
 > 
-> 0. https://github.com/<span>yourname<img class="_" onload="$hand(this.parentNode, 'yourname', setEscapedHtml)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/></span>/<span>appname<img class="_" onload="$hand(this.parentNode, 'appname', setEscapedHtml)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/></span>/new/master `name: .github/workflows/appname.yml, title: portapoo, body: `
+> 0. https://github.com/<span>yourname<img class="_" onload="$hand(this.parentNode, 'yourname', setEscapedUri)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/></span>/<span>appname<img class="_" onload="$hand(this.parentNode, 'appname', setEscapedUri)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/></span>/new/master `name: .github/workflows/appname.yml, title: portapoo, body: `
 > 
 > ```yaml
 > on: [ push, pull_request ]
@@ -120,5 +126,5 @@ function renderTemplate(trigger) {
 >   Inner Paragraph?
 > </p>
 > 
-> <img class="_" onload="$hand(this.parentNode.parentNode, '_', renderTemplate)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+> <img class="_" onload="$hand(this.parentNode.parentNode, '_', renderTemplate)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
 {:._}
