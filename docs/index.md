@@ -35,6 +35,7 @@ function $hand(context, id, hook) {
     $hand_[id].self = context;
   }
   $hand_[id].hooks[hook._id] = hook;
+  arguments[0] = undefined;
   for (const hook of Object.values($hand_[id].hooks)) {
     hook.apply(context, arguments);
   }
@@ -52,7 +53,7 @@ function setEscapedHtml(trigger) {
 
 <span>yourname<img class="_" onload="$hand(this.parentNode, 'yourname', setEscapedHtml)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/></span>
 
-> <img class="_" onload="$hand(this.parentNode, 'target', setEscapedHtml, this)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+> <img class="_" onload="$hand(this.parentNode.parentNode, 'target', setEscapedHtml, this)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
 > 
 > ### tl;dr
 > 
