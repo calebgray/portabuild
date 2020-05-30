@@ -16,7 +16,7 @@ function $hand(self, key, hook) {
     $hand_[key] = { hooks: {} };
   }
   if (hook) $hand_[key].hooks[hook] = hook;
-  for (const hook of $hand_[key].hooks) {
+  for (const hook of Object.keys($hand_[key].hooks)) {
     console.log(hook);
   }
 }
