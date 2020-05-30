@@ -1,6 +1,6 @@
 <style>.header-level-1{display:none}</style># _
 
-<style>img._{display:none}</style>
+<style>img._,blockquote{display:none}</style>
 
 <script>
 'use strict';
@@ -120,3 +120,7 @@ function setEscapedHtml(trigger) {
 >     || [ -x /usr/sbin/init ] && /usr/sbin/init \
 >     || find /'
 > ```
+> 
+> <p class='specialParagraph' markdown='1'>
+>   Inner Paragraph?
+> </p>
