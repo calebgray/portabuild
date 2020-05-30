@@ -5,13 +5,13 @@
 
 let _id = 0;
 Object.defineProperty(Function.prototype, '_id', {
-get: function() {
-  Object.defineProperty(this, '_id', {
-    value: ++_id,
-    writable: false,
-  });
-  return this._id;
-},
+  get: function() {
+    Object.defineProperty(this, '_id', {
+      value: ++_id,
+      writable: false,
+    });
+    return this._id;
+  }
 });
 
 const $hand_ = {};
@@ -26,9 +26,9 @@ function $hand(self, key, hook) {
     
     $hand_[key] = { hooks: {} };
   }
-  if (hook) $hand_[key].hooks[hook] = hook;
-  for (const hook of Object.keys($hand_[key].hooks)) {
-    console.log(hook);
+  if (hook) $hand_[key].hooks[hook._id] = hook;
+  for (const hookPair of Object.entries($hand_[key].hooks)) {
+    console.log(hookPair);
   }
 }
 
