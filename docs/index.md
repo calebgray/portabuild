@@ -22,6 +22,7 @@ function $hand(self, key, hook) {
     key = self.id;
     if (!$hand_[key]) {
       $hand_[key] = { self: self, hooks: {} };
+      self = $hand_[key].self;
     } else {
       $hand_[key].self = self;
     }
@@ -30,8 +31,8 @@ function $hand(self, key, hook) {
     if (hook) {
       $hand_[key].hooks[hook._id] = hook;
     }
+    self = $hand_[key].self;
   }
-  self = $hand_[key].self;
   for (const hook of Object.values($hand_[key].hooks)) {
     hook(self);
   }
@@ -42,7 +43,7 @@ function setText(self) {
 }
 </script>
 
-<label for="a">A: <input id="a" type="text" onkeydown="$hand(this)" onpaste="$hand(this)"></label>
+<label for="a">A: <input id="a" type="text" onchange="$hand(this)"></label>
 
 <img class="_" onload="$hand(this, 'a', setText)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
 
