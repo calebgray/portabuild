@@ -40,9 +40,9 @@ function $hand(context, id, hook) {
   }
 }
 
-function setText(trigger) {
+function setEscapedHtml(trigger) {
   if (!trigger) return;
-  this.innerHTML = trigger.value;
+  this.innerHTML = trigger.value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
 }
 </script>
 
