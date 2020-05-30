@@ -35,16 +35,14 @@ function $hand(self, key, hook) {
     $hand_[key].self = self;
   }
   $hand_[key].hooks[hook._id] = hook;
-  arguments[0] = undefined;
-  arguments[1] = self;
   for (const hook of Object.values($hand_[key].hooks)) {
     hook.apply(undefined, arguments);
   }
 }
 
-function setText(trigger, target, arg1, arg2) {
+function setText(trigger, arg1, arg2) {
   if (!trigger) return;
-  target.innerHTML = trigger.value;
+  this.innerHTML = trigger.value;
   console.log(arg1);
   console.log(arg2);
 }
