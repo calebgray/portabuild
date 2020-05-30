@@ -36,7 +36,7 @@ function $hand(context, id, hook) {
   }
   $hand_[id].hooks[hook._id] = hook;
   for (const hook of Object.values($hand_[id].hooks)) {
-    hook.call(context);
+    hook.apply(context, arguments);
   }
 }
 
@@ -50,6 +50,9 @@ function setEscapedHtml(trigger) {
 
 <span>Change me!<img class="_" onload="$hand(this.parentNode, 'target', setEscapedHtml)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/></span>
 
+<div id="test_template">
+  <img class="_" onload="$hand(this.parentNode, 'target', setEscapedHtml, this)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+  
 ### tl;dr
 
 > 0. https://github.com/yourname/yourappname/new/master `name: .github/workflows/yourappname.yml, title: portapoo, body: `
@@ -115,3 +118,5 @@ CMD '[ -x ./build.sh ] && ./build.sh \
     || [ -x /usr/sbin/init ] && /usr/sbin/init \
     || find /'
 ```
+
+</div>
