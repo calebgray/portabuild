@@ -24,7 +24,7 @@ function $hand(context, id, hook) {
   case 2:
     if (!$hand_[id]) return;
     for (const hook of Object.values($hand_[id].hooks)) {
-      hook.apply($hand_[id].self, arguments);
+      hook.apply($hand_[id].self);
     }
     return;
   }
@@ -40,17 +40,15 @@ function $hand(context, id, hook) {
   }
 }
 
-function setText(trigger, arg1, arg2) {
+function setText(trigger) {
   if (!trigger) return;
   this.innerHTML = trigger.value;
-  console.log(arg1);
-  console.log(arg2);
 }
 </script>
 
-<label for="target">A: <input id="target" type="text" onkeyup="$hand(this)" onpaste="$hand(this)" onchange="$hand(this)"></label>
+<label for="target">Target: <input id="target" type="text" onpropertychange="$hand(this)"></label>
 
-<span>Change me!<img class="_" onload="$hand(this.parentNode, 'target', setText, '1', 2)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/></span>
+<span>Change me!<img class="_" onload="$hand(this.parentNode, 'target', setText)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/></span>
 
 ### tl;dr
 
