@@ -1,5 +1,16 @@
 <style>.header-level-1{display:none}</style># _
 
+<style>
+._{
+    animation-name: nodeReady;
+    animation-duration: 0.001s;
+}
+@keyframes nodeReady {  
+    from { clip: rect(1px, auto, auto, auto); }
+    to { clip: rect(0px, auto, auto, auto); }  
+}
+</style>
+
 <script>
 'use strict';
 
@@ -39,9 +50,11 @@ function setText(self) {
 }
 </script>
 
+-?[_a-zA-Z]+[_a-zA-Z0-9-]*
+
 <label for="a">A: <input id="a" type="text" onkeydown="$hand(this)" onpaste="$hand(this)"></label>
 
-<b onload="$hand(this, 'a', setText)">yourappname</b>
+<b class="_" animationstart="$hand(this, 'a', setText)">yourappname</b>
 
 ### tl;dr
 
