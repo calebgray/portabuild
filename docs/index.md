@@ -40,8 +40,9 @@ function $hand(self, key, hook) {
   }
 }
 
-function setText(self) {
-  console.log(arguments);
+function setText(self, trigger) {
+  if (!trigger) return;
+  trigger.parentNode.innerHTML = self.innerHTML; 
 }
 </script>
 
