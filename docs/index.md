@@ -1,4 +1,6 @@
-<style>img._{display:none};.header-level-1{display:none}</style># _
+<style>.header-level-1{display:none}</style># _
+
+<style>img._{display:none}</style>
 
 <script>
 'use strict';
