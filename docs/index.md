@@ -1,6 +1,6 @@
 <style>.header-level-1{display:none}</style># _
 
-<style>img._,blockquote{display:none}</style>
+<style>img._,blockquote._{display:none}</style>
 
 <script>
 'use strict';
@@ -52,6 +52,15 @@ function setEscapedHtml(trigger) {
 <label for="target">Target: <input id="target" type="text" oninput="$hand(this)" onpropertychange="$hand(this)"></label>
 
 <span>yourname<img class="_" onload="$hand(this.parentNode, 'yourname', setEscapedHtml)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/></span>
+
+> Your usual.
+> 
+> Of course.
+
+> Your unusual.
+> 
+> Of course.
+{:._}
 
 > <img class="_" onload="$hand(this.parentNode.parentNode, 'target', setEscapedHtml, this)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
 > 
@@ -124,6 +133,4 @@ function setEscapedHtml(trigger) {
 > <p class='specialParagraph' markdown='1'>
 >   Inner Paragraph?
 > </p>
-{:title="my title"}
-{:#MyId}
-{:.MyClass}
+{:._}
