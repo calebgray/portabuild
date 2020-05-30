@@ -23,8 +23,9 @@ function $hand(self, key, hook) {
     key = self.id;
   case 2:
     if (!$hand_[key]) return;
+    arguments[1] = $hand_[key].self;
     for (const hook of Object.values($hand_[key].hooks)) {
-      hook($hand_[key].self, self);
+      hook.apply(arguments);
     }
     return;
   case 3:
@@ -34,21 +35,25 @@ function $hand(self, key, hook) {
       $hand_[key].self = self;
     }
     $hand_[key].hooks[hook._id] = hook;
+    arguments[0] = undefined;
+    arguments[1] = self;
     for (const hook of Object.values($hand_[key].hooks)) {
-      hook(self);
+      hook.apply(arguments);
     }
   }
 }
 
-function setText(self, trigger) {
+function setText(trigger, target, arg1, arg2) {
   if (!trigger) return;
-  self.innerHTML = trigger.value;
+  target.innerHTML = trigger.value;
+  console.log(arg1);
+  console.log(arg2);
 }
 </script>
 
 <label for="a">A: <input id="a" type="text" onkeyup="$hand(this)" onpaste="$hand(this)" onchange="$hand(this)"></label>
 
-<span>Change me!<img class="_" onload="$hand(this.parentNode, 'a', setText)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/></span>
+<span>Change me!<img class="_" onload="$hand(this.parentNode, 'a', setText, '1', 2)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/></span>
 
 ### tl;dr
 
