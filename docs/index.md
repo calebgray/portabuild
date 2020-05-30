@@ -7,14 +7,15 @@ const $hand_ = {};
 function $hand(self, key, hook) {
   if (!key) {
     if (!$hand_[self.id]) {
-      $hand_[self.id] = {self: self, hooks: {}};
+      $hand_[self.id] = { self: self, hooks: {} };
     } else {
       $hand_[self.id].self = self;
     }
   } else if (!$hand_[key]) {
+    
     $hand_[key] = { hooks: {} };
   }
-  if (hook) $hand_[key][hook] = hook;
+  if (hook) $hand_[key].hooks[hook] = hook;
   for (const hook of $hand_[key].hooks) {
     console.log(hook);
   }
