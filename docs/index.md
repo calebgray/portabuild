@@ -1,6 +1,6 @@
 <style>.header-level-1{display:none}</style># _
 
-<style>._{display:none}</style>
+<style>img._{display:none}</style>
 
 <script>
 'use strict';
@@ -43,9 +43,9 @@ function setText(self) {
 }
 </script>
 
-<label for="a">A: <input id="a" type="text" onchange="$hand(this)"></label>
+<label for="a">A: <input id="a" type="text" onkeydown="$hand(this)" onpaste="$hand(this)" onchange="$hand(this)"></label>
 
-<img class="_" onload="$hand(this, 'a', setText)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+<span>Change me!<img class="_" onload="$hand(this, 'a', setText)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/></span>
 
 ### tl;dr
 
