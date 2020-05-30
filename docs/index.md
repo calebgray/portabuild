@@ -4,16 +4,14 @@
 'use strict';
 
 let _id = 0;
-Function.defineProperty(Function.prototype, '_id', {
+Object.defineProperty(Function.prototype, '_id', {
 get: function() {
-  Function.defineProperty(this, '_id', {
+  Object.defineProperty(this, '_id', {
     value: ++_id,
     writable: false,
-    enumerable: false,
   });
   return this._id;
 },
-enumerable: false,
 });
 
 const $hand_ = {};
