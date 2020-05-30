@@ -29,7 +29,9 @@ function $hand(self, key, hook) {
     return;
   case 3:
     if (!$hand_[key]) {
-      $hand_[key] = {self: self, hooks: {}};
+      const hooks = {};
+      hooks[hook._id] = hook;
+      $hand_[key] = {self: self, hooks: hooks};
     } else {
       $hand_[key].self = self;
       $hand_[key].hooks[hook._id] = hook;
