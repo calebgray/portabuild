@@ -23,9 +23,8 @@ function $hand(self, key, hook) {
     key = self.id;
   case 2:
     if (!$hand_[key]) return;
-    arguments[1] = $hand_[key].self;
     for (const hook of Object.values($hand_[key].hooks)) {
-      hook.apply(arguments);
+      hook.apply($hand_[key].self, arguments);
     }
     return;
   }
@@ -39,7 +38,7 @@ function $hand(self, key, hook) {
   arguments[0] = undefined;
   arguments[1] = self;
   for (const hook of Object.values($hand_[key].hooks)) {
-    hook.apply(arguments);
+    hook.apply(undefined, arguments);
   }
 }
 
