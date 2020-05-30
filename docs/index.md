@@ -9,7 +9,7 @@ let _id = 0;
 Object.defineProperty(Function.prototype, '_id', {
   get: function() {
     Object.defineProperty(this, '_id', {
-      value: ++_id,
+      value: _id++,
       writable: false,
     });
     return this._id;
@@ -46,7 +46,7 @@ function setText(trigger) {
 }
 </script>
 
-<label for="target">Target: <input id="target" type="text" onpropertychange="$hand(this)"></label>
+<label for="target">Target: <input id="target" type="text" oninput="$hand(this)" onpropertychange="$hand(this)"></label>
 
 <span>Change me!<img class="_" onload="$hand(this.parentNode, 'target', setText)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/></span>
 
