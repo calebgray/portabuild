@@ -53,15 +53,15 @@ function renderTemplate(trigger) {
 
 ### Port a Poo!
 
-<form>
-<label for="yourname">Your Name: <input id="yourname" type="text" oninput="$hand(this)" onpropertychange="$hand(this)" placeholder="yourname"></label>
+<label for="username">User Name: <input id="username" type="text" oninput="$hand(this)" onpropertychange="$hand(this)" placeholder="username"></label>
 
-<label for="appname">App Name: <input id="appname" type="text" oninput="$hand(this)" onpropertychange="$hand(this)" placeholder="appname"></label>
-</form>
+<label for="reponame">Repo Name: <input id="reponame" type="text" oninput="$hand(this)" onpropertychange="$hand(this)" placeholder="reponame"></label>
+
+<label for="useremail">Email: <input id="useremail" type="email" oninput="$hand(this)" onpropertychange="$hand(this)" placeholder="your@e.mail"></label>
 
 > ### tl;dr
 > 
-> 0. https://github.com/<span>yourname<img class="_" onload="$hand(this.parentNode, 'yourname', setEscapedUri)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/></span>/<span>appname<img class="_" onload="$hand(this.parentNode, 'appname', setEscapedUri)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/></span>/new/master `name: .github/workflows/appname.yml, title: portapoo, body: `
+> 0. https://github.com/<span>username<img class="_" onload="$hand(this.parentNode, 'username', setEscapedUri)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/></span>/<span>reponame<img class="_" onload="$hand(this.parentNode, 'reponame', setEscapedUri)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/></span>/new/master `name: .github/workflows/reponame.yml, title: portapoo, body: `
 > 
 > ```yaml
 > on: [ push, pull_request ]
@@ -80,15 +80,15 @@ function renderTemplate(trigger) {
 > 
 > ### Upload
 > 
-> 0. _<sub><sup>[optional]</sup></sub>_ [CreateRepo](https://github.com/new) `name: appname-builds, type: private, readme: true`
+> 0. _<sub><sup>[optional]</sup></sub>_ [CreateRepo](https://github.com/new) `name: reponame-builds, type: private, readme: true`
 > 
-> 0. https://github.com/yourname/appname-builds/settings/keys/new `title: portapoo, write: true, key: ssh-keygen -t rsa -b 4096 -C "your@e.mail" -f portapoo -P '' && cat portapoo.pub | xclip || cat portapoo.pub | clip.exe`
+> 0. https://github.com/<span>username<img class="_" onload="$hand(this.parentNode, 'username', setEscapedUri)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/></span>/reponame-builds/settings/keys/new `title: portapoo, write: true, key: ssh-keygen -t rsa -b 4096 -C "useremail" -f portapoo -P '' && cat portapoo.pub | xclip || cat portapoo.pub | clip.exe`
 > 
-> 0. https://github.com/yourname/appname/settings/secrets
+> 0. https://github.com/username/reponame/settings/secrets
 > 
 > 0. `UPLOAD_KEY` `cat portapoo | xclip || cat portapoo | clip.exe`
 > 
-> 0. `UPLOAD_GIT` git@github.com:yourname/appname-builds.git
+> 0. `UPLOAD_GIT` git@github.com:username/reponame-builds.git
 > 
 > 0. `UPLOADER_EMAIL` your@e.mail
 > 
