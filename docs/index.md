@@ -33,13 +33,11 @@ function $hand(self, key, hook) {
     return;
   case 3: // $hand(this, 'a', function(){})
     if (!$hand_[key]) $hand_[key] = { hooks: {} };
-      if (hook) {
-        $hand_[key].hooks[hook._id] = hook;
+    $hand_[key].hooks[hook._id] = hook;
+    if ($hand_[key].self !== undefined) {
+      for (const hook of Object.values($hand_[key].hooks)) {
+        hook(self);
       }
-      self = $hand_[key].self;
-    }
-    for (const hook of Object.values($hand_[key].hooks)) {
-      hook(self);
     }
     return;
   }
