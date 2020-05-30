@@ -18,23 +18,30 @@ Object.defineProperty(Function.prototype, '_id', {
 
 const $hand_ = {};
 function $hand(self, key, hook) {
-  if (!key) {
+  switch (arguments.length) {
+  case 1: // $hand(this)
     key = self.id;
+  case 2: // $hand(this, 'a')
     if (!$hand_[key]) {
       $hand_[key] = { self: self, hooks: {} };
-      self = $hand_[key].self;
     } else {
       $hand_[key].self = self;
+      for (const hook of Object.values($hand_[key].hooks)) {
+        hook(self);
+      }
     }
-  } else {
+    return;
+  case 3: // $hand(this, 'a', function(){})
     if (!$hand_[key]) $hand_[key] = { hooks: {} };
-    if (hook) {
-      $hand_[key].hooks[hook._id] = hook;
+      if (hook) {
+        $hand_[key].hooks[hook._id] = hook;
+      }
+      self = $hand_[key].self;
     }
-    self = $hand_[key].self;
-  }
-  for (const hook of Object.values($hand_[key].hooks)) {
-    hook(self);
+    for (const hook of Object.values($hand_[key].hooks)) {
+      hook(self);
+    }
+    return;
   }
 }
 
@@ -49,7 +56,7 @@ function setText(self) {
 
 ### tl;dr
 
-> 0. https://github.com/yourname/yourappname/new/master `name: .github/workflows/<b onready="$hand()">yourappname</b>.yml, title: portapoo, body: `
+> 0. https://github.com/yourname/yourappname/new/master `name: .github/workflows/yourappname.yml, title: portapoo, body: `
 > 
 > ```yaml
 > on: [ push, pull_request ]
