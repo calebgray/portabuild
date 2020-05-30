@@ -1,11 +1,8 @@
-# 
+# The Most Generic Dockerfile. ACHTUNG: Lists Filesystem on Execution Failure Because This is... For Development Only!!!
 FROM ubuntu
 COPY . .
-CMD ./build.sh || ./build/ubuntu.sh || ./build/linux.sh || /usr/sbin/init
-
-
-
-
-[ -x ./build.sh ] && ./build.sh \
-	|| [ -x ./run.sh ] && ./run.sh \
-	|| echo "Couldn't execute "
+CMD '[ -x ./build.sh ] && ./build.sh \
+    || [ -x ./build/ubuntu.sh ] && ./build/ubuntu.sh \
+    || [ -x ./build/linux.sh ] && ./build/linux.sh \
+    || [ -x /usr/sbin/init ] && /usr/sbin/init \
+    || find /'
