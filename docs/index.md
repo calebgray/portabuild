@@ -1,16 +1,37 @@
 <style>.header-level-1{display:none}</style># _
 
 <script>
-function a(b) {
-  console.log(arguments)
+'use strict';
+
+const $hand_ = {};
+function $hand(self, key, hook) {
+  if (!key) {
+    if (!$hand_[self.id]) {
+      $hand_[self.id] = {self: self, hooks: {}};
+    } else {
+      $hand_[self.id].self = self;
+    }
+  } else if (!$hand_[key]) {
+    $hand_[key] = { hooks: {} };
+  }
+  if (hook) $hand_[key][hook] = hook;
+  for (const hook of $hand_[key].hooks) {
+    console.log(hook);
+  }
+}
+
+function setText(self) {
+  console.log(arguments);
 }
 </script>
 
-<label for="sdf">sdf: <input id="sdf" type="text" onkeydown="a(this)" onpaste="a(this)"></label>
+<label for="a">A: <input id="a" type="text" onkeydown="$hand(this)" onpaste="$hand(this)"></label>
+
+<b onload="$hand(this, 'a', setText)">yourappname</b>
 
 ### tl;dr
 
-> 0. https://github.com/yourname/yourappname/new/master `name: .github/workflows/yourappname.yml, title: portapoo, body: `
+> 0. https://github.com/yourname/yourappname/new/master `name: .github/workflows/<b onready="$hand()">yourappname</b>.yml, title: portapoo, body: `
 > 
 > ```yaml
 > on: [ push, pull_request ]
