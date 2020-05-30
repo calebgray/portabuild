@@ -24,7 +24,7 @@ function $hand(context, id, hook) {
   case 2:
     if (!$hand_[id]) return;
     for (const hook of Object.values($hand_[id].hooks)) {
-      hook.apply($hand_[id].self);
+      hook.call($hand_[id].self);
     }
     return;
   }
@@ -36,7 +36,7 @@ function $hand(context, id, hook) {
   }
   $hand_[id].hooks[hook._id] = hook;
   for (const hook of Object.values($hand_[id].hooks)) {
-    hook.apply(context);
+    hook.call(context);
   }
 }
 
