@@ -39,6 +39,11 @@ function setEscapedHtml(trigger) {
   if (!trigger) return;
   this.innerHTML = trigger.value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
 }
+
+function renderTemplate(trigger) {
+  if (!trigger) return;
+  this.innerHTML = trigger.value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
 </script>
 
 <label for="yourname">Your Name: <input id="yourname" type="text" oninput="$hand(this)" onpropertychange="$hand(this)" placeholder="yourname"></label>
@@ -116,4 +121,4 @@ function setEscapedHtml(trigger) {
 > </p>
 > 
 > <img class="_" onload="$hand(this.parentNode.parentNode, '_', renderTemplate)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
-{:._ .template}
+{:._}
