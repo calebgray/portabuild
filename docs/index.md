@@ -52,7 +52,7 @@ function setText(self) {
 
 <label for="a">A: <input id="a" type="text" onkeydown="$hand(this)" onpaste="$hand(this)"></label>
 
-<b class="_" animationstart="$hand(this, 'a', setText)">yourappname</b>
+<b class="_" onanimationstart="$hand(this, 'a', setText)">yourappname</b>
 
 ### tl;dr
 
