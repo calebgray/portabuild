@@ -36,7 +36,8 @@ function $hand(self, key, hook) {
   }
   $hand_[key].hooks[hook._id] = hook;
   for (const hook of Object.values($hand_[key].hooks)) {
-    hook.apply(undefined, arguments);
+    arguments[0] = undefined;
+    hook.apply(self, arguments);
   }
 }
 
