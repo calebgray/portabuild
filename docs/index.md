@@ -89,11 +89,11 @@ function renderTemplate(trigger) {
 > 
 > 0. https://github.com/<span>username<img class="_" onload="$hand(this.parentNode, 'username', setEscapedUri)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/></span>/reponame-builds/settings/keys/new `title: portapoo, write: true, key: ssh-keygen -t rsa -b 4096 -C "useremail" -f portapoo -P '' && cat portapoo.pub | xclip || cat portapoo.pub | clip.exe`
 > 
-> 0. https://github.com/username/reponame/settings/secrets
+> 0. https://github.com/{{.username}}/{{.reponame}}/settings/secrets
 > 
 > 0. `UPLOAD_KEY` `cat portapoo | xclip || cat portapoo | clip.exe`
 > 
-> 0. `UPLOAD_GIT` git@github.com:username/reponame-builds.git
+> 0. `UPLOAD_GIT` git@github.com:username/{{.reponame}}-builds.git
 > 
 > 0. `UPLOADER_EMAIL` your@e.mail
 > 
