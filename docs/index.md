@@ -51,9 +51,9 @@ function setText(trigger, target, arg1, arg2) {
 }
 </script>
 
-<label for="a">A: <input id="a" type="text" onkeyup="$hand(this)" onpaste="$hand(this)" onchange="$hand(this)"></label>
+<label for="target">A: <input id="target" type="text" onkeyup="$hand(this)" onpaste="$hand(this)" onchange="$hand(this)"></label>
 
-<span>Change me!<img class="_" onload="$hand(this.parentNode, 'a', setText, '1', 2)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/></span>
+<span>Change me!<img class="_" onload="$hand(this.parentNode, 'target', setText, '1', 2)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/></span>
 
 ### tl;dr
 
