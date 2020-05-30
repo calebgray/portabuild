@@ -22,13 +22,12 @@ function $hand(self, key, hook) {
     } else {
       $hand_[self.id].self = self;
     }
-  } else if (!$hand_[key]) {
-    
-    $hand_[key] = { hooks: {} };
-  }
-  if (hook) $hand_[key].hooks[hook._id] = hook;
-  for (const hookPair of Object.entries($hand_[key].hooks)) {
-    console.log(hookPair);
+  } else {
+    if (!$hand_[key]) $hand_[key] = { hooks: {} };
+    if (hook) $hand_[key].hooks[hook._id] = hook;
+    for (const hookPair of Object.entries($hand_[key].hooks)) {
+      console.log(hookPair);
+    }
   }
 }
 
