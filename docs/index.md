@@ -18,14 +18,16 @@ const $hand_ = {};
 function $hand(self, key, hook) {
   if (!key) {
     key = self.id;
-    if (!$hand_[self.id]) {
-      $hand_[self.id] = { self: self, hooks: {} };
+    if (!$hand_[key]) {
+      $hand_[key] = { self: self, hooks: {} };
     } else {
-      $hand_[self.id].self = self;
+      $hand_[key].self = self;
     }
   } else {
     if (!$hand_[key]) $hand_[key] = { hooks: {} };
-    if (hook) $hand_[key].hooks[hook._id] = hook;
+    if (hook) {
+      $hand_[key].hooks[hook._id] = hook;
+    }
   }
   for (const hookPair of Object.entries($hand_[key].hooks)) {
     console.log(hookPair);
