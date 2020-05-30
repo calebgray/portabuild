@@ -42,7 +42,7 @@ function $hand(self, key, hook) {
 
 function setText(self, trigger) {
   if (!trigger) return;
-  trigger.parentNode.innerHTML = self.innerHTML; 
+  self.parentNode.innerHTML = trigger.innerHTML; 
 }
 </script>
 
