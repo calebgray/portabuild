@@ -53,7 +53,7 @@ function setEscapedHtml(trigger) {
 
 <span>yourname<img class="_" onload="$hand(this.parentNode, 'yourname', setEscapedHtml)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/></span>
 
->{.someClassName}{#someId}<img class="_" onload="$hand(this.parentNode.parentNode, 'target', setEscapedHtml, this)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+> <img class="_" onload="$hand(this.parentNode.parentNode, 'target', setEscapedHtml, this)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
 > 
 > ### tl;dr
 > 
@@ -124,3 +124,6 @@ function setEscapedHtml(trigger) {
 > <p class='specialParagraph' markdown='1'>
 >   Inner Paragraph?
 > </p>
+{:title="my title"}
+{:#MyId}
+{:.MyClass}
