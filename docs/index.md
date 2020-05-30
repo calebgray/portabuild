@@ -1,16 +1,5 @@
 <style>.header-level-1{display:none}</style># _
 
-<style>
-._{
-    animation-name: nodeReady;
-    animation-duration: 0.001s;
-}
-@keyframes nodeReady {  
-    from { clip: rect(1px, auto, auto, auto); }
-    to { clip: rect(0px, auto, auto, auto); }  
-}
-</style>
-
 <script>
 'use strict';
 
@@ -52,7 +41,7 @@ function setText(self) {
 
 <label for="a">A: <input id="a" type="text" onkeydown="$hand(this)" onpaste="$hand(this)"></label>
 
-<b class="_" onanimationstart="$hand(this, 'a', setText)">yourappname</b>
+<img onload="$hand(this, 'a', setText)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
 
 ### tl;dr
 
