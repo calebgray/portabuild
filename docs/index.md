@@ -17,10 +17,10 @@ Object.defineProperty(Function.prototype, '_id', {
 });
 
 const $hand_ = {};
-function $hand(self, key, hook) {
+function $hand(context, key, hook) {
   switch (arguments.length) {
   case 1:
-    key = self.id;
+    key = context.id;
   case 2:
     if (!$hand_[key]) return;
     for (const hook of Object.values($hand_[key].hooks)) {
@@ -30,14 +30,13 @@ function $hand(self, key, hook) {
   }
 
   if (!$hand_[key]) {
-    $hand_[key] = {self: self, hooks: {}};
+    $hand_[key] = {self: context, hooks: {}};
   } else {
-    $hand_[key].self = self;
+    $hand_[key].self = context;
   }
   $hand_[key].hooks[hook._id] = hook;
   for (const hook of Object.values($hand_[key].hooks)) {
-    arguments[0] = undefined;
-    hook.apply(self, arguments);
+    hook.apply(context);
   }
 }
 
