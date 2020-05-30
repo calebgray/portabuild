@@ -54,11 +54,9 @@ function renderTemplate(trigger) {
 ### Port a Poo!
 
 <form>
+<label for="yourname">Your Name: <input id="yourname" type="text" oninput="$hand(this)" onpropertychange="$hand(this)" placeholder="yourname"></label>
 
-  <label for="yourname">Your Name: <input id="yourname" type="text" oninput="$hand(this)" onpropertychange="$hand(this)" placeholder="yourname"></label>
-
-  <label for="appname">App Name: <input id="appname" type="text" oninput="$hand(this)" onpropertychange="$hand(this)" placeholder="appname"></label>
-
+<label for="appname">App Name: <input id="appname" type="text" oninput="$hand(this)" onpropertychange="$hand(this)" placeholder="appname"></label>
 </form>
 
 > ### tl;dr
