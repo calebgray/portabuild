@@ -46,7 +46,7 @@ function setText(self, trigger) {
 }
 </script>
 
-<label for="a">A: <input id="a" type="text" onkeydown="$hand(this)" onpaste="$hand(this)" onchange="$hand(this)"></label>
+<label for="a">A: <input id="a" type="text" onkeyup="$hand(this)" onpaste="$hand(this)" onchange="$hand(this)"></label>
 
 <span>Change me!<img class="_" onload="$hand(this.parentNode, 'a', setText)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/></span>
 
