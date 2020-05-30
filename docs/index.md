@@ -48,7 +48,7 @@ function setEscapedHtml(trigger) {
 
 <label for="target">Target: <input id="target" type="text" oninput="$hand(this)" onpropertychange="$hand(this)"></label>
 
-<span>Change me!<img class="_" onload="$hand(this.parentNode, 'target', setText)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/></span>
+<span>Change me!<img class="_" onload="$hand(this.parentNode, 'target', setEscapedHtml)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/></span>
 
 ### tl;dr
 
