@@ -30,7 +30,6 @@ function $hand(context, id, hook) {
     $hand_[id].self = context;
   }
   $hand_[id].hooks[hook._id] = hook;
-  arguments[0] = undefined;
   for (const hook of Object.values($hand_[id].hooks)) {
     hook.call(context);
   }
@@ -44,24 +43,11 @@ function setEscapedHtml(trigger) {
 
 <label for="yourname">Your Name: <input id="yourname" type="text" oninput="$hand(this)" onpropertychange="$hand(this)" placeholder="yourname"></label>
 
-<label for="target">Target: <input id="target" type="text" oninput="$hand(this)" onpropertychange="$hand(this)"></label>
+<label for="appname">App Name: <input id="appname" type="text" oninput="$hand(this)" onpropertychange="$hand(this)" placeholder="yourname"></label>
 
-<span>yourname<img class="_" onload="$hand(this.parentNode, 'yourname', setEscapedHtml)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/></span>
-
-> Your usual.
-> 
-> Of course.
-
-> Your unusual.
-> 
-> Of course.
-{:._}
-
-> <img class="_" onload="$hand(this.parentNode.parentNode, 'target', setEscapedHtml, this)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
-> 
 > ### tl;dr
 > 
-> 0. https://github.com/yourname/yourappname/new/master `name: .github/workflows/yourappname.yml, title: portapoo, body: `
+> 0. https://github.com/<span>yourname<img class="_" onload="$hand(this.parentNode, 'yourname', setEscapedHtml)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/></span>/<span>appname<img class="_" onload="$hand(this.parentNode, 'appname', setEscapedHtml)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/></span>/new/master `name: .github/workflows/appname.yml, title: portapoo, body: `
 > 
 > ```yaml
 > on: [ push, pull_request ]
@@ -80,15 +66,15 @@ function setEscapedHtml(trigger) {
 > 
 > ### Upload
 > 
-> 0. _<sub><sup>[optional]</sup></sub>_ [CreateRepo](https://github.com/new) `name: yourappname-builds, type: private, readme: true`
+> 0. _<sub><sup>[optional]</sup></sub>_ [CreateRepo](https://github.com/new) `name: appname-builds, type: private, readme: true`
 > 
-> 0. https://github.com/yourname/yourappname-builds/settings/keys/new `title: portapoo, write: true, key: ssh-keygen -t rsa -b 4096 -C "your@e.mail" -f portapoo -P '' && cat portapoo.pub | xclip || cat portapoo.pub | clip.exe`
+> 0. https://github.com/yourname/appname-builds/settings/keys/new `title: portapoo, write: true, key: ssh-keygen -t rsa -b 4096 -C "your@e.mail" -f portapoo -P '' && cat portapoo.pub | xclip || cat portapoo.pub | clip.exe`
 > 
-> 0. https://github.com/yourname/yourappname/settings/secrets
+> 0. https://github.com/yourname/appname/settings/secrets
 > 
 > 0. `UPLOAD_KEY` `cat portapoo | xclip || cat portapoo | clip.exe`
 > 
-> 0. `UPLOAD_GIT` git@github.com:yourname/yourappname-builds.git
+> 0. `UPLOAD_GIT` git@github.com:yourname/appname-builds.git
 > 
 > 0. `UPLOADER_EMAIL` your@e.mail
 > 
@@ -128,4 +114,6 @@ function setEscapedHtml(trigger) {
 > <p class='specialParagraph' markdown='1'>
 >   Inner Paragraph?
 > </p>
-{:._}
+> 
+> <img class="_" onload="$hand(this.parentNode.parentNode, '_', renderTemplate)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+{:._ .template}
