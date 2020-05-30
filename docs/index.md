@@ -17,6 +17,7 @@ Object.defineProperty(Function.prototype, '_id', {
 const $hand_ = {};
 function $hand(self, key, hook) {
   if (!key) {
+    key = self.id;
     if (!$hand_[self.id]) {
       $hand_[self.id] = { self: self, hooks: {} };
     } else {
@@ -25,13 +26,11 @@ function $hand(self, key, hook) {
   } else {
     if (!$hand_[key]) $hand_[key] = { hooks: {} };
     if (hook) $hand_[key].hooks[hook._id] = hook;
-    for (const hookPair of Object.entries($hand_[key].hooks)) {
-      console.log(hookPair);
-    }
+  }
+  for (const hookPair of Object.entries($hand_[key].hooks)) {
+    console.log(hookPair);
   }
 }
-
-console.log(typeof $hand);
 
 function setText(self) {
   console.log(arguments);
