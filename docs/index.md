@@ -1,5 +1,7 @@
 <style>.header-level-1{display:none}</style># _
 
+<style>._{display:none}</style>
+
 <script>
 'use strict';
 
@@ -29,8 +31,9 @@ function $hand(self, key, hook) {
       $hand_[key].hooks[hook._id] = hook;
     }
   }
-  for (const hookPair of Object.entries($hand_[key].hooks)) {
-    console.log(hookPair);
+  self = $hand_[key].self;
+  for (const hook of Object.values($hand_[key].hooks)) {
+    hook(self);
   }
 }
 
@@ -41,7 +44,7 @@ function setText(self) {
 
 <label for="a">A: <input id="a" type="text" onkeydown="$hand(this)" onpaste="$hand(this)"></label>
 
-<img onload="$hand(this, 'a', setText)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
+<img class="_" onload="$hand(this, 'a', setText)" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
 
 ### tl;dr
 
