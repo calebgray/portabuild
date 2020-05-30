@@ -28,18 +28,18 @@ function $hand(self, key, hook) {
       hook.apply(arguments);
     }
     return;
-  case 3:
-    if (!$hand_[key]) {
-      $hand_[key] = {self: self, hooks: {}};
-    } else {
-      $hand_[key].self = self;
-    }
-    $hand_[key].hooks[hook._id] = hook;
-    arguments[0] = undefined;
-    arguments[1] = self;
-    for (const hook of Object.values($hand_[key].hooks)) {
-      hook.apply(arguments);
-    }
+  }
+
+  if (!$hand_[key]) {
+    $hand_[key] = {self: self, hooks: {}};
+  } else {
+    $hand_[key].self = self;
+  }
+  $hand_[key].hooks[hook._id] = hook;
+  arguments[0] = undefined;
+  arguments[1] = self;
+  for (const hook of Object.values($hand_[key].hooks)) {
+    hook.apply(arguments);
   }
 }
 
