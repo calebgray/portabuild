@@ -1,6 +1,4 @@
-<style>.header-level-1{display:none}</style># _
-
-<style>img._{display:none}</style>
+<style>img._{display:none};.header-level-1{display:none}</style># _
 
 <script>
 'use strict';
@@ -19,9 +17,9 @@ Object.defineProperty(Function.prototype, '_id', {
 const $hand_ = {};
 function $hand(self, key, hook) {
   switch (arguments.length) {
-  case 1: // $hand(this)
+  case 1:
     key = self.id;
-  case 2: // $hand(this, 'a')
+  case 2:
     if (!$hand_[key]) {
       $hand_[key] = { self: self, hooks: {} };
     } else {
@@ -31,7 +29,7 @@ function $hand(self, key, hook) {
       }
     }
     return;
-  case 3: // $hand(this, 'a', function(){})
+  case 3:
     if (!$hand_[key]) $hand_[key] = { hooks: {} };
     $hand_[key].hooks[hook._id] = hook;
     if ($hand_[key].self !== undefined) {
