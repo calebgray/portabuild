@@ -1,17 +1,12 @@
 <style>.header-level-1{display:none}</style># _
-
 <style>img._,blockquote._{display:none}</style>
-
 <script>
 'use strict';
 
-let _id = 0;
+let $hand_id = 0;
 Object.defineProperty(Function.prototype, '_id', {
   get: function() {
-    Object.defineProperty(this, '_id', {
-      value: _id++,
-      writable: false,
-    });
+    Object.defineProperty(this, '_id', { value: $hand_id++, writable: false });
     return this._id;
   }
 });
@@ -37,7 +32,7 @@ function $hand(context, id, hook) {
   $hand_[id].hooks[hook._id] = hook;
   arguments[0] = undefined;
   for (const hook of Object.values($hand_[id].hooks)) {
-    hook.apply(context, arguments);
+    hook.call(context);
   }
 }
 
