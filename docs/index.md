@@ -46,8 +46,13 @@ function setEscapedUri(trigger) {
 }
 
 function renderTemplate(trigger) {
-  if (!this._template) this._template = this.innerHTML;
-  this.innerHTML = this._template.replace(/\(\(\s*\.(.*?)\s*\)\)/g, function(match, $1) { return $1; });
+  if (!this._template) {
+    this._template = this.innerHTML;
+    this.innerHTML = this._template.replace(/\(\(\s*\.(.*?)\s*\)\)/g, function(match, $1) {
+      $hand(this, $1, setEscapedUri);
+      return $1;
+    });
+  }
 }
 </script>
 
