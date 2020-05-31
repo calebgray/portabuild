@@ -37,12 +37,12 @@ function $hand(context, id, hook) {
 
 function setEscapedHtml(trigger) {
   if (!trigger) return;
-  this.innerHTML = trigger.value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+  this.innerHTML = (typeof trigger === typeof "" ? trigger : trigger.value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
 }
 
 function setEscapedUri(trigger) {
   if (!trigger) return;
-  this.innerHTML = encodeURI(trigger.value);
+  this.innerHTML = encodeURI(typeof trigger === typeof "" ? trigger : trigger.value);
 }
 
 function renderTemplate(trigger) {
