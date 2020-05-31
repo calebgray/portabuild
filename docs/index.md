@@ -22,17 +22,37 @@ function $hand(context, id, hook) {
       hook.call($hand_[id].self, context);
     }
     return;
+  default:
+    if (!$hand_[id]) {
+      $hand_[id] = {self: context, hooks: {}};
+    } else {
+      $hand_[id].self = context;
+    }
+    $hand_[id].hooks[hook._id] = hook;
+    for (const hook of Object.values($hand_[id].hooks)) {
+      hook.call(context);
+    }
   }
+}
 
-  if (!$hand_[id]) {
-    $hand_[id] = {self: context, hooks: {}};
-  } else {
-    $hand_[id].self = context;
+function $unhook(context, hook, id) {
+  switch (arguments.length) {
+  case 2:
+    id = context.id;
+  case 3:
+    delete $hand_[id].hooks[hook._id];
+    return;
+  default:
+    delete $hand_[context.id];
   }
-  $hand_[id].hooks[hook._id] = hook;
-  for (const hook of Object.values($hand_[id].hooks)) {
-    hook.call(context);
-  }
+}
+
+function $hand_once(context, id, hook) {
+  const unhook = function(trigger) {
+    $unhook(this, unhook);
+    hook.call(this, trigger);
+  };
+  $hand(context, id, unhook);
 }
 
 function setEscapedHtml(trigger) {
@@ -46,8 +66,10 @@ function setEscapedUri(trigger) {
 }
 
 function compileTemplate(trigger) {
+  $unhook(this, compileTemplate);
   const self = this;
   this.innerHTML = this.innerHTML.replace(/\(\(\.(.*?)\)\)/g, function(match, $1) {
+    
     $hand(self, $1, setEscapedUri);
     return $1;
   });
@@ -132,4 +154,4 @@ function compileTemplate(trigger) {
 >   Inner Paragraph?
 > </p>
 > 
-> <img class="_" onload="$hand(this.parentNode.parentNode, '_', compileTemplate)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
+> <img class="_" onload="$hand_once(this.parentNode.parentNode, '_', compileTemplate)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
