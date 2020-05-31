@@ -50,9 +50,7 @@ function renderTemplate(trigger) {
     Object.defineProperty(this, '_template', { value: this.innerHTML });    
     return;
   }
-  if (trigger._template) this.innerHTML = trigger._template.replace(/{{\s*\.(.*?)\s*}}/g, function(match, $1, $2){
-    console.log(arguments);
-  });
+  if (trigger._template) this.innerHTML = trigger._template.replace(/{{\s*\.(.*?)\s*}}/g, '$1');
 }
 </script>
 
