@@ -47,10 +47,10 @@ function setEscapedUri(trigger) {
 
 function renderTemplate(trigger) {
   if (!trigger) {
-    Object.defineProperty(this, '_template', { value: this.innerHTML });    
-    return;
+    Object.defineProperty(this, '_template', { value: this.innerHTML });
+  } else if (trigger._template) {
+    this.innerHTML = trigger._template.replace(/\(\(\s*\.(.*?)\s*\)\)/g, '$1');
   }
-  if (trigger._template) this.innerHTML = trigger._template.replace(/{{\s*\.(.*?)\s*}}/g, '$1');
 }
 </script>
 
@@ -64,7 +64,7 @@ function renderTemplate(trigger) {
 
 > ### tl;dr
 > 
-> 0. [Create New Repo](https://github.com/{{.username}}/{{.reponame}}/new/master) `name: .github/workflows/{{.reponame}}.yml, title: portapoo, body: `
+> 0. [Create New Repo](https://github.com/((.username))/((.reponame))/new/master) `name: .github/workflows/((.reponame)).yml, title: portapoo, body: `
 > 
 > ```yaml
 > on: [ push, pull_request ]
@@ -87,11 +87,11 @@ function renderTemplate(trigger) {
 > 
 > 0. https://github.com/<span>username<img class="_" onload="$hand(this.parentNode, 'username', setEscapedUri)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/></span>/reponame-builds/settings/keys/new `title: portapoo, write: true, key: ssh-keygen -t rsa -b 4096 -C "useremail" -f portapoo -P '' && cat portapoo.pub | xclip || cat portapoo.pub | clip.exe`
 > 
-> 0. https://github.com/{{.username}}/{{.reponame}}/settings/secrets
+> 0. https://github.com/((.username))/((.reponame))/settings/secrets
 > 
 > 0. `UPLOAD_KEY` `cat portapoo | xclip || cat portapoo | clip.exe`
 > 
-> 0. `UPLOAD_GIT` git@github.com:{{.username}}/{{.reponame}}-builds.git
+> 0. `UPLOAD_GIT` git@github.com:((.username))/((.reponame))-builds.git
 > 
 > 0. `UPLOADER_EMAIL` your@e.mail
 > 
