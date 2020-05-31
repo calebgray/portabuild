@@ -49,7 +49,7 @@ function renderTemplate(trigger) {
   if (!trigger) {
     Object.defineProperty(this, '_template', { value: this.innerHTML });
   } else if (trigger._template) {
-    this.innerHTML = trigger._template.replace(/\(\(\s*\.(.*?)\s*\)\)/g, '$1');
+    this.innerHTML = trigger._template.replace(/\(\(\s*\.(.*?)\s*\)\)/g, function(match, $1) { return $1; });
   }
 }
 </script>
