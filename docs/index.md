@@ -66,10 +66,8 @@ function setEscapedUri(trigger) {
 }
 
 function compileTemplate(trigger) {
-  $unhook(this, compileTemplate);
   const self = this;
   this.innerHTML = this.innerHTML.replace(/\(\(\.(.*?)\)\)/g, function(match, $1) {
-    
     $hand(self, $1, setEscapedUri);
     return $1;
   });
