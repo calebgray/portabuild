@@ -66,7 +66,7 @@ function renderTemplate(trigger) {
 
 > ### tl;dr
 > 
-> 0. https://github.com/<span>username<img class="_" onload="$hand(this.parentNode, 'username', setEscapedUri)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/></span>/<span>reponame<img class="_" onload="$hand(this.parentNode, 'reponame', setEscapedUri)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/></span>/new/master `name: .github/workflows/reponame.yml, title: portapoo, body: `
+> 0. [Create New Repo](https://github.com/{{.username}}/{{.reponame}}/new/master) `name: .github/workflows/{{.reponame}}.yml, title: portapoo, body: `
 > 
 > ```yaml
 > on: [ push, pull_request ]
@@ -93,7 +93,7 @@ function renderTemplate(trigger) {
 > 
 > 0. `UPLOAD_KEY` `cat portapoo | xclip || cat portapoo | clip.exe`
 > 
-> 0. `UPLOAD_GIT` git@github.com:username/{{.reponame}}-builds.git
+> 0. `UPLOAD_GIT` git@github.com:{{.username}}/{{.reponame}}-builds.git
 > 
 > 0. `UPLOADER_EMAIL` your@e.mail
 > 
