@@ -48,9 +48,8 @@ function setEscapedUri(trigger) {
 function renderTemplate(trigger) {
   if (!trigger) {
     Object.defineProperty(this, '_template', { value: this.innerHTML });
-  } else if (trigger._template) {
-    this.innerHTML = trigger._template.replace(/\(\(\s*\.(.*?)\s*\)\)/g, function(match, $1) { return $1; });
   }
+this.innerHTML = this._template.replace(/\(\(\s*\.(.*?)\s*\)\)/g, function(match, $1) { return $1; });
 }
 </script>
 
@@ -85,7 +84,7 @@ function renderTemplate(trigger) {
 > 
 > 0. _<sub><sup>[optional]</sup></sub>_ [CreateRepo](https://github.com/new) `name: reponame-builds, type: private, readme: true`
 > 
-> 0. https://github.com/<span>username<img class="_" onload="$hand(this.parentNode, 'username', setEscapedUri)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/></span>/reponame-builds/settings/keys/new `title: portapoo, write: true, key: ssh-keygen -t rsa -b 4096 -C "useremail" -f portapoo -P '' && cat portapoo.pub | xclip || cat portapoo.pub | clip.exe`
+> 0. https://github.com/((.username))/((.reponame))-builds/settings/keys/new `title: portapoo, write: true, key: ssh-keygen -t rsa -b 4096 -C "useremail" -f portapoo -P '' && cat portapoo.pub | xclip || cat portapoo.pub | clip.exe`
 > 
 > 0. https://github.com/((.username))/((.reponame))/settings/secrets
 > 
