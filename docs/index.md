@@ -1,5 +1,5 @@
 <style>.header-level-1{display:none}</style># _
-<style>img._,blockquote._a{display:none}</style>
+<style>img._,blockquote._{display:none}</style>
 <script>
 'use strict';
 
@@ -45,14 +45,12 @@ function setEscapedUri(trigger) {
   this.innerHTML = encodeURI(typeof trigger === typeof "" ? trigger : trigger.value);
 }
 
-function renderTemplate(trigger) {
-  if (!this._template) {
-    this._template = this.innerHTML;
-    this.innerHTML = this._template.replace(/\(\(\s*\.(.*?)\s*\)\)/g, function(match, $1) {
-      $hand(this, $1, setEscapedUri);
-      return $1;
-    });
-  }
+function compileTemplate(trigger) {
+  const self = this;
+  this.innerHTML = this.innerHTML.replace(/\(\(\.(.*?)\)\)/g, function(match, $1) {
+    $hand(self, $1, setEscapedUri);
+    return $1;
+  });
 }
 </script>
 
@@ -134,5 +132,4 @@ function renderTemplate(trigger) {
 >   Inner Paragraph?
 > </p>
 > 
-> <img class="_" onload="$hand(this.parentNode.parentNode, '_', renderTemplate)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
-{:._}
+> <img class="_" onload="$hand(this.parentNode.parentNode, '_', compileTemplate)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
