@@ -6,11 +6,14 @@
 <script>
 'use strict';
 
+const $hand_prefix = '_';
+const $hand_key = $hand_prefix+'id';
+
 let $hand_id = 0;
-Object.defineProperty(Object.prototype, '_id', {
+Object.defineProperty(Object.prototype, $hand_key, {
   get: function() {
-    Object.defineProperty(this, '_id', { value: $hand_id++, writable: false });
-    return this._id;
+    Object.defineProperty(this, $hand_key, { value: $hand_id++, writable: false });
+    return this[$hand_key];
   }
 });
 
@@ -30,12 +33,12 @@ function $hand(context, id, hook) {
   default:
     if (!$hand_[id]) {
       $hand_[id] = {
-        triggers: { '${context._id}': context },
-        hooks: { '${hook._id}': hook },
+        triggers: { '${context[$hand_key]}': context },
+        hooks: { '${hook[$hand_key]}': hook },
       };
     } else {
-      $hand_[id].triggers[context._id] = context;
-      $hand_[id].hooks[hook._id] = hook;
+      $hand_[id].triggers[context[$hand_key]] = context;
+      $hand_[id].hooks[hook[$hand_key]] = hook;
     }
     for (const hook of Object.values($hand_[id].hooks)) {
       hook.call(context);
@@ -48,7 +51,7 @@ function $unhook(context, hook, id) {
   case 2:
     id = context.id;
   case 3:
-    delete $hand_[id].hooks[hook._id];
+    delete $hand_[id].hooks[hook[$hand_key]];
     return;
   default:
     delete $hand_[context.id];
@@ -76,13 +79,18 @@ function setEscapedUri(trigger) {
 const $hand_template_variable = /\(\(\.(.*?)\)\)/g;
 function compileTemplate(source) {
   if (!source) return;
-  for (const childNode of source.childNodes) {
+  source.innerHTML = source.innerHTML.replace($hand_template_variable, function(asdf, $1) {
+    console.log('_'+$hand_id++);
+    return $1;
+  });
+
+  /*for (const childNode of source.childNodes) {
     let template = childNode.innerHTML || childNode.textContent;
     if (!template) continue;
 
     let match, last = 0;
     while ((match = $hand_template_variable.exec(template)) !== null) {
-      /*childNode.innerHTML = template.substring(last, match.index);*/
+      /!*childNode.innerHTML = template.substring(last, match.index);*!/
       for (let i = match.index; i < match.length; ++i) {
         childNode.innerHTML[i] = ' ';
       }
@@ -95,7 +103,7 @@ function compileTemplate(source) {
     }
     
     
-  }
+  }*/
 }
 
 let passPhrase = "";
