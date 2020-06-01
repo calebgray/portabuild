@@ -69,7 +69,7 @@ function compileTemplate(trigger) {
   this.innerHTML = this.innerHTML.replace(/\(\(\.(.*?)\)\)/g, function(match, $1) {
     let span = document.createElement('span');
     span.innerHTML = $1;
-    $hand(this.parentNode, $1, setEscapedHtml);
+    $hand(span, $1, setEscapedHtml);
     return span;
   });
 }
