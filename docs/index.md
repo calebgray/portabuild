@@ -179,4 +179,4 @@ function compileTemplate(source) {
 >     || find /'
 > ```
 > 
-> <img class="_" onload="this.parentNode.remove();compileTemplate(this.parentNode.parentNode)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
+> <img class="_" onload="compileTemplate(this.parentNode.parentNode);this.parentNode.remove()" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
