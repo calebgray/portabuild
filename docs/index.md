@@ -132,10 +132,11 @@ console.log(publicKey);
 
 <label for="useremail">Email: <input id="useremail" type="email" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="your@e.mail"></label>
 
-> ### tl;dr
+> ### Building
 > 
-> 0. [Create New Repo](https://github.com/$({.username})/$({.reponame})/new/master) `name: .github/workflows/$({.reponame}).yml, title: portapoo, body: `
+> 0. Create Builder in `$({.username})/$({.reponame})`: `./build.sh || ./build/ubuntu.sh || ./build/linux.sh || /usr/sbin/init`
 > 
+> 0. Copy:
 > ```yaml
 > on: [ push, pull_request ]
 > 
@@ -151,7 +152,9 @@ console.log(publicKey);
 >       uses: calebgray/portapoo.action@master
 > ```
 > 
-> ### Upload
+> 0. Paste into [github.com/$({.username})/$({.reponame})](https://github.com/$({.username})/$({.reponame})/new/master)/.github/workflows/$({.reponame}).yml
+> 
+> ### Uploading
 > 
 > 0. _<sub><sup>[optional]</sup></sub>_ [CreateRepo](https://github.com/new) `name: reponame-builds, type: private, readme: true`
 > 
