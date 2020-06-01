@@ -82,7 +82,7 @@ function compileTemplate(source) {
   const template = source.innerHTML;
   if (!template) return;
 
-  let render = 'function(){return `', variables = [], last = 0, arg = 0, match;
+  let render = 'function _(){return `', variables = [], last = 0, arg = 0, match;
   while ((match = $hand_template_variable.exec(template)) !== null) {
     render += template.substring(last, match.index).replace(/`/g, '\\`');
     render += 'arguments[' + arg++ + ']';
