@@ -65,7 +65,7 @@ function setEscapedUri(trigger) {
   this.innerHTML = encodeURI(typeof trigger === typeof "" ? trigger : trigger.value);
 }
 
-const $hand_template_variable = RegExp('\(\(\.(.*?)\)\)', 'g');
+const $hand_template_variable = /\(\(\.(.*?)\)\)/g;
 function compileTemplate(trigger) {
     let html = this.innerHTML;
     
