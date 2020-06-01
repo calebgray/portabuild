@@ -18,7 +18,7 @@ Object.defineProperty(Object.prototype, $hand_key, {
 });
 
 const $hand_ = {};
-function $hand(context, id, hook) {
+function $hook(context, id, hook) {
   switch (arguments.length) {
   case 1:
     id = context.id;
@@ -63,7 +63,7 @@ function $hand_once(context, id, hook) {
     $unhook(this, unhook);
     hook.call(this, trigger);
   };
-  $hand(context, id, unhook);
+  $hook(context, id, unhook);
 }
 
 function setEscapedHtml(trigger) {
@@ -88,9 +88,27 @@ function compileTemplate(trigger) {
   if (!templateSource) return;
   const templateRaw = templateSource.innerHTML;
   if (!templateRaw) return;
-  const templateReplaced = templateRaw.split($hand_template_variable);
-  for (let templateReplace of templateReplaced) {
-    console.log(templateReplace);
+
+  const variables = {};
+  let templateHtml = '';
+
+  const templateParts = templateRaw.split($hand_template_variable);
+  let partType = templateParts[0] === '$' && templateParts.length > 0 ? 0 : 2;
+  for (let templatePart of templateParts) {
+    switch (partType) {
+    case 0: continue;
+    case 1:
+      variables[templatePart] = '';
+      partType = 2;
+      continue;
+    case 2:
+      templateHtml += templatePart;
+      partType = 0;
+    }
+  }
+
+  for (const variable of Object.keys(variables)) {
+    $hook(trigger, variable, renderTemplate`${templateHtml}`.bind(variables));
   }
 }
 
