@@ -152,5 +152,5 @@ function compileTemplate(trigger) {
 >   Inner Paragraph?
 > </p>
 > 
-> <img class="_" onload="$hand_once(this.parentNode.parentNode, '_', compileTemplate)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
+> <img class="_" onload="$hand_once(this.parentNode.parentNode, 'instructions', compileTemplate)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
 {:#instructions}
