@@ -77,13 +77,13 @@ const $hand_template_variable = /\(\(\.(.*?)\)\)/g;
 function compileTemplate(source) {
   if (!source) return;
   for (const childNode of source.childNodes) {
-    let template = childNode.innerHTML;
+    let template = childNode.innerHTML || childNode.textContent;
     if (!template) continue;
 
     let match, last = 0;
     while ((match = $hand_template_variable.exec(template)) !== null) {
-      childNode.innerHTML = template.substring(last, match.index);
-      for (let i = last; i < match.index; ++i) {
+      /*childNode.innerHTML = template.substring(last, match.index);*/
+      for (let i = match.index; i < match.length; ++i) {
         childNode.innerHTML[i] = ' ';
       }
       last = $hand_template_variable.lastIndex;
@@ -93,9 +93,8 @@ function compileTemplate(source) {
       childNode.appendChild(variable);
       $hand(variable, match[1], setEscapedHtml);
     }
-    let closer = document.createElement('div');
-    closer.innerHTML = template.substring(last);
-    childNode.appendChild(closer);
+    
+    
   }
 }
 
