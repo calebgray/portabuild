@@ -169,5 +169,4 @@ function compileTemplate() {
 >   Inner Paragraph?
 > </p>
 > 
-> <img class="_" onload="$hand_once(this.parentNode.parentNode, 'instructions', compileTemplate)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
-{:#instructions}
+> <img class="_" onload="compileTemplate.call(this.parentNode.parentNode)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
