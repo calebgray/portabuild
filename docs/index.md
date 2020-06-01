@@ -83,7 +83,7 @@ function renderTemplate() {
 const $hand_template_variable = /\(\(\.(.*?)\)\)/g;
 function compileTemplate(source) {
   if (!source) return;
-  const template = source.innerHTML;
+  let template = source.innerHTML;
   if (!template) return;
 
   let match;
