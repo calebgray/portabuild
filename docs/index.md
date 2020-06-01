@@ -4,7 +4,7 @@
 'use strict';
 
 let $hand_id = 0;
-Object.defineProperty(Function.prototype, '_id', {
+Object.defineProperty(Object.prototype, '_id', {
   get: function() {
     Object.defineProperty(this, '_id', { value: $hand_id++, writable: false });
     return this._id;
@@ -19,14 +19,19 @@ function $hand(context, id, hook) {
   case 2:
     if (!$hand_[id]) return;
     for (const hook of Object.values($hand_[id].hooks)) {
-      hook.call($hand_[id].self, context);
+      for (const source of $hand_[id].sources) {
+        hook.call(source, context);
+      }
     }
     return;
   default:
     if (!$hand_[id]) {
-      $hand_[id] = {self: context, hooks: {}};
+      $hand_[id] = {
+        sources: {'${context._id}':context},
+        hooks: {},
+      };
     } else {
-      $hand_[id].self = context;
+      $hand_[id].sources[context._id] = context;
     }
     $hand_[id].hooks[hook._id] = hook;
     for (const hook of Object.values($hand_[id].hooks)) {
