@@ -94,9 +94,9 @@ function compileTemplate(source) {
       
         last = $hand_template_variable.lastIndex;
       }
-      let div = document.createElement('div');
-      div.innerHTML = template.substring(last);
-      childNode.appendChild(div);
+      let closer = document.createElement('div');
+      closer.innerHTML = template.substring(last);
+      childNode.appendChild(closer);
     }
   }
 }
