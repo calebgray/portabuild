@@ -67,12 +67,10 @@ function setEscapedUri(trigger) {
 
 function compileTemplate(trigger) {
   this.innerHTML = this.innerHTML.replace(/\(\(\.(.*?)\)\)/g, function(match, $1) {
-    let trackable = '<span>';
-    trackable += $1;
-    trackable += '<img class="_" onload="$hand(this.parentNode, \'';
-    trackable += $1;
-    trackable += '\', setEscapedHtml)" src="data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\'/>"/></span>'    
-    return trackable;
+    let span = document.createElement('span');
+    span.innerHTML = $1;
+    $hand(this.parentNode, $1, setEscapedHtml);
+    return span;
   });
 }
 </script>
