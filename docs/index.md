@@ -27,13 +27,13 @@ function $hand(context, id, hook) {
   default:
     if (!$hand_[id]) {
       $hand_[id] = {
-        sources: {'${context._id}':context},
-        hooks: {},
+        sources: { '${context._id}': context },
+        hooks: { '${hook._id}': hook },
       };
     } else {
       $hand_[id].sources[context._id] = context;
+      $hand_[id].hooks[hook._id] = hook;
     }
-    $hand_[id].hooks[hook._id] = hook;
     for (const hook of Object.values($hand_[id].hooks)) {
       hook.call(context);
     }
