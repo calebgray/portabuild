@@ -102,7 +102,7 @@ function compileTemplate(trigger) {
     case 1:
       partType = 2;
       variables[templatePart] = '';
-      templateHtml += '${'+templatePart+'}';
+      templateHtml += '${variables.'+templatePart+'}';
       continue;
     case 2:
       partType = 0;
