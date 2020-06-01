@@ -96,14 +96,16 @@ function compileTemplate(trigger) {
   let partType = templateParts[0] === '$' && templateParts.length > 0 ? 0 : 2;
   for (let templatePart of templateParts) {
     switch (partType) {
-    case 0: continue;
+    case 0:
+      partType = 1;
+      continue;
     case 1:
-      variables[templatePart] = '';
       partType = 2;
+      variables[templatePart] = '';
       continue;
     case 2:
-      templateHtml += templatePart;
       partType = 0;
+      templateHtml += templatePart;
     }
   }
 
