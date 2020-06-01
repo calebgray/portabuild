@@ -87,8 +87,8 @@ function compileTemplate(source) {
     render += template.substring(last, match.index).replace(/`/g, '\\`');
     render += 'arguments[' + arg++ + ']';
     last = $hand_template_variable.lastIndex;
+    $hand(source, match[1], eval(render+template.substring($hand_template_variable.lastIndex) + '`}'));
   }
-  return eval(render+template.substring($hand_template_variable.lastIndex) + '`}');
 }
 
 let passPhrase = "";
