@@ -71,10 +71,18 @@ function setEscapedUri(trigger) {
 }
 
 const $hand_template_variable = /\(\(\.(.*?)\)\)/g;
+function _compileTemplate(source) {
+  for (const childNode of source.childNodes) {
+    console.log(childNode);
+    _compileTemplate(childNode);
+  }
+}
+
 function compileTemplate(source) {
-  let template = source.innerHTML;
-  source.innerHTML = '';
-  
+  _compileTemplate(source);
+
+  /*let template = source.innerHTML;
+
   let match, last = 0;
   while ((match = $hand_template_variable.exec(template)) !== null) {
     let variable = document.createElement('b');
@@ -92,7 +100,7 @@ function compileTemplate(source) {
   }
   let div = document.createElement('div');
   div.innerHTML = template.substring(last);
-  source.appendChild(div);  
+  source.appendChild(div);*/  
 }
 </script>
 
