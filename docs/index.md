@@ -15,7 +15,7 @@ const $hand_ = {};
 function $hand(context, id, hook) {
   switch (arguments.length) {
   case 1:
-    id = context.id;
+    id = !context.id ? '_'+$hand_id++ : context.id;
   case 2:
     if (!$hand_[id]) return;
     for (const hook of Object.values($hand_[id].hooks)) {
@@ -38,7 +38,7 @@ function $hand(context, id, hook) {
 function $unhook(context, hook, id) {
   switch (arguments.length) {
   case 2:
-    id = context.id;
+    id = !context.id ? '_'+$hand_id++ : context.id;
   case 3:
     delete $hand_[id].hooks[hook._id];
     return;
@@ -73,7 +73,6 @@ function compileTemplate() {
   let match, last = 0;
   while ((match = $hand_template_variable.exec(template)) !== null) {
     let variable = document.createElement('b');
-    variable.id = '_'+$hand_id++;
     variable.innerHTML = match[1];
 
     let div = document.createElement('div');
