@@ -76,40 +76,27 @@ function setEscapedUri(trigger) {
   this.innerHTML = encodeURI(typeof trigger === typeof "" ? trigger : trigger.value);
 }
 
-function renderTemplate() {
+function renderTemplate(trigger) {
   console.log(arguments);
 }
 
-const $hand_template_variable = /\(\(\.(.*?)\)\)/g;
-function compileTemplate(source) {
-  if (!source) return;
-  let template = source.innerHTML;
+const $hand_template_variable = /\$\(\(\.(.*?)\)\)/g;
+function compileTemplate(trigger) {
+  const template = trigger.parentNode.parentNode;
+  trigger.parentNode.remove();
+
   if (!template) return;
+  const html = template.innerHTML;
+  if (!html) return;
 
   let match;
-  while ((match = $hand_template_variable.exec(template)) !== null) {
-    template[match.index] = '$';
-    template[match.index+1] = '{';
-    template[match.index+2] = ' ';
-    template[$hand_template_variable.lastIndex-1] = '}';
-    
-    $hand(source, match[1], renderTemplate);
+  while ((match = $hand_template_variable.exec(html)) !== null) {
+    template.innerHTML[match.index] = '$';
+    template.innerHTML[match.index+1] = '{';
+    template.innerHTML[match.index+2] = ' ';
+    template.innerHTML[$hand_template_variable.lastIndex-1] = '}';
+    $hand(template, match[1], function(){return renderTemplate`${html}`});
   }
-  
-  /*template.replace($hand_template_variable, '\${$1}');*/
-  
-
-  /*let render = 'function _(){return `', variables = [], last = 0, arg = 0, match;
-  while ((match = $hand_template_variable.exec(template)) !== null) {
-    render += template.substring(last, match.index).replace(/`/g, '\\`');
-    render += '`+arguments[' + arg++ + ']+`';
-    last = $hand_template_variable.lastIndex;
-    variables.push(match[1]);
-  }
-  render = eval(render+template.substring($hand_template_variable.lastIndex) + '`}');
-  for (const variable of variables) {
-    $hand(source, variable, render);
-  }*/
 }
 
 let passPhrase = "";
@@ -129,7 +116,7 @@ console.log(publicKey);
 
 > ### tl;dr
 > 
-> 0. [Create New Repo](https://github.com/((.username))/((.reponame))/new/master) `name: .github/workflows/((.reponame)).yml, title: portapoo, body: `
+> 0. [Create New Repo](https://github.com/$((.username))/$((.reponame))/new/master) `name: .github/workflows/$((.reponame)).yml, title: portapoo, body: `
 > 
 > ```yaml
 > on: [ push, pull_request ]
@@ -150,13 +137,13 @@ console.log(publicKey);
 > 
 > 0. _<sub><sup>[optional]</sup></sub>_ [CreateRepo](https://github.com/new) `name: reponame-builds, type: private, readme: true`
 > 
-> 0. https://github.com/((.username))/((.reponame))-builds/settings/keys/new `title: portapoo, write: true, key: ssh-keygen -t rsa -b 4096 -C "useremail" -f portapoo -P '' && cat portapoo.pub | xclip || cat portapoo.pub | clip.exe`
+> 0. https://github.com/$((.username))/$((.reponame))-builds/settings/keys/new `title: portapoo, write: true, key: ssh-keygen -t rsa -b 4096 -C "useremail" -f portapoo -P '' && cat portapoo.pub | xclip || cat portapoo.pub | clip.exe`
 > 
-> 0. https://github.com/((.username))/((.reponame))/settings/secrets
+> 0. https://github.com/$((.username))/$((.reponame))/settings/secrets
 > 
 > 0. `UPLOAD_KEY` `cat portapoo | xclip || cat portapoo | clip.exe`
 > 
-> 0. `UPLOAD_GIT` git@github.com:((.username))/((.reponame))-builds.git
+> 0. `UPLOAD_GIT` git@github.com:$((.username))/$((.reponame))-builds.git
 > 
 > 0. `UPLOADER_EMAIL` your@e.mail
 > 
@@ -193,4 +180,4 @@ console.log(publicKey);
 >     || find /'
 > ```
 > 
-> <img class="_" onload="let t = this.parentNode.parentNode;this.parentNode.remove();compileTemplate(t)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
+> <img class="_" onload="compileTemplate(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
