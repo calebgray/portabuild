@@ -74,11 +74,11 @@ function compileTemplate() {
   while ((match = $hand_template_variable.exec(template)) !== null) {
     let span = document.createElement('span');
     span.innerHTML = match[1];
-    $hand(span, match[1], setEscapedHtml);
 
     let div = document.createElement('div');
     div.innerHTML = template.substring(last, match.index);
     div.appendChild(span);
+    $hand(span, match[1], setEscapedHtml);
 
     this.appendChild(div);
     last = $hand_template_variable.lastIndex;
