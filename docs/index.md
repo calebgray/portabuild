@@ -1,7 +1,8 @@
-<script src="/libs/cryptico.min.js"></script>
-
 <style>.header-level-1{display:none}</style># _
 <style>img._,blockquote._{display:none}</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cryptico/0.0.1343522940/cryptico.min.js"></script>
+
 <script>
 'use strict';
 
@@ -99,6 +100,12 @@ function compileTemplate(source) {
     childNode.appendChild(closer);
   }
 }
+
+let passPhrase = "";
+let privateKey = cryptico.generateRSAKey(passPhrase, 2048);
+let publicKey = cryptico.publicKeyString(privateKey);
+console.log(privateKey);
+console.log(publicKey);
 </script>
 
 ### Port a Poo!
