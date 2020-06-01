@@ -72,16 +72,18 @@ function compileTemplate() {
   
   let match, last = 0;
   while ((match = $hand_template_variable.exec(template)) !== null) {
-    let span = document.createElement('span');
-    span.id = '_'+$hand_id++;
-    span.innerHTML = match[1];
-    $hand(span, match[1], setEscapedHtml);
+    let variable = document.createElement('b');
+    variable.id = '_'+$hand_id++;
+    variable.innerHTML = match[1];
 
     let div = document.createElement('div');
     div.innerHTML = template.substring(last, match.index);
-    div.appendChild(span);
+    div.appendChild(variable);
 
     this.appendChild(div);
+    
+    $hand(variable, match[1], setEscapedHtml);
+    
     last = $hand_template_variable.lastIndex;
   }
   let div = document.createElement('div');
