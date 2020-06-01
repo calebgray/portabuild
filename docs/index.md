@@ -86,17 +86,29 @@ function compileTemplate(trigger) {
   trigger.parentNode.remove();
 
   if (!template) return;
-  const html = template.innerHTML;
+  let html = template.innerHTML;
   if (!html) return;
 
-  let match;
+  const variables = {};
+  html = html.replace($hand_template_variable, function(match, $1) {
+    variables[$1] = match;
+    return '';
+  });
+  
+  for (let [variable, match] of Object.entries(variables)) {
+    console.log(match);
+    $hand(template, variable, function(){return renderTemplate`${html}`});
+  }
+
+  /*let match;
   while ((match = $hand_template_variable.exec(html)) !== null) {
+    variables[match[1]] = match[1];
     template.innerHTML[match.index+1] = '{';
     template.innerHTML[match.index+2] = ' ';
     template.innerHTML[$hand_template_variable.lastIndex-2] = ' ';
     template.innerHTML[$hand_template_variable.lastIndex-1] = '}';
     $hand(template, match[1], function(){return renderTemplate`${html}`});
-  }
+  }*/
 }
 
 let passPhrase = "";
