@@ -79,10 +79,16 @@ function setEscapedUri(trigger) {
 const $hand_template_variable = /\(\(\.(.*?)\)\)/g;
 function compileTemplate(source) {
   if (!source) return;
-  source.innerHTML = source.innerHTML.replace($hand_template_variable, function(_, variable) {
-    const id = $hand_prefix+$hand_id++;
-    return '<b id="'+id+'">'+variable+'</b>';
-  });
+  const template = source.innerHTML;
+  if (!template) return;
+
+  let render = 'function(){return `', last = 0, arg = 0;
+  while ((let match = $hand_template_variable.exec(template)) !== null) {
+    render += template.substring(last, match.index).replace(/`/g, '\\`');
+    render += 'arguments[' + arg++ + ']';
+    last = $hand_template_variable.lastIndex;
+  }
+  return eval(render+template.substring($hand_template_variable.lastIndex) + '`}');
 }
 
 let passPhrase = "";
