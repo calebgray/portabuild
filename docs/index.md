@@ -76,9 +76,9 @@ function setEscapedUri(trigger) {
   this.innerHTML = encodeURI(typeof trigger === typeof "" ? trigger : trigger.value);
 }
 
-function renderTemplate(variables, trigger) {
-  /*`${templateHtml}`*/
-  console.log(arguments);
+function renderTemplate(templateHtml, variables, trigger) {
+  variables[trigger.id] = typeof trigger === typeof "" ? trigger : trigger.value;
+  this.innerHTML = eval('`'+templateHtml+'`');
 }
 
 const $hook_template_variable = /(\$)\({\.(.*?)}\)/g;
@@ -112,7 +112,7 @@ function compileTemplate(trigger) {
   }
 
   for (const variable of Object.keys(variables)) {
-    $hook(templateSource, variable, renderTemplate.bind(templateSource, variables));
+    $hook(templateSource, variable, renderTemplate.bind(templateSource, templateHtml, variables));
   }
 }
 
