@@ -76,7 +76,8 @@ function setEscapedUri(trigger) {
   this.innerHTML = encodeURI(typeof trigger === typeof "" ? trigger : trigger.value);
 }
 
-function renderTemplate(trigger) {
+function renderTemplate() {
+  /*`${templateHtml}`*/
   console.log(arguments);
 }
 
@@ -111,10 +112,7 @@ function compileTemplate(trigger) {
   }
 
   for (const variable of variables) {
-    $hook(templateSource, variable, function(){
-      const v = variables;
-      renderTemplate`${templateHtml}`;
-    });
+    $hook(templateSource, variable, renderTemplate.bind(templateSource, variables));
   }
 }
 
