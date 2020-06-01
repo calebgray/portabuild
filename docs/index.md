@@ -82,12 +82,16 @@ function compileTemplate(source) {
   const template = source.innerHTML;
   if (!template) return;
 
-  let render = 'function(){return `', last = 0, arg = 0;
+  let render = 'function(){return `', variables = [], last = 0, arg = 0;
   while ((let match = $hand_template_variable.exec(template)) !== null) {
     render += template.substring(last, match.index).replace(/`/g, '\\`');
     render += 'arguments[' + arg++ + ']';
     last = $hand_template_variable.lastIndex;
-    $hand(source, match[1], eval(render+template.substring($hand_template_variable.lastIndex) + '`}'));
+    variables.push(match[1]);
+  }
+  render = eval(render+template.substring($hand_template_variable.lastIndex) + '`}');
+  for (const variable of variables) {
+    $hand(source, variable, render);
   }
 }
 
