@@ -90,7 +90,7 @@ function compileTemplate(trigger) {
   const templateRaw = templateSource.innerHTML;
   if (!templateRaw) return;
 
-  const variables = [];
+  const variableMap = {};
   let templateHtml = '';
 
   const templateParts = templateRaw.split($hook_template_variable);
@@ -102,7 +102,7 @@ function compileTemplate(trigger) {
       continue;
     case 1:
       partType = 2;
-      variables.push(templatePart);
+      variableMap[templatePart] = '';
       templateHtml += '${v.'+templatePart+'}';
       continue;
     case 2:
@@ -111,6 +111,7 @@ function compileTemplate(trigger) {
     }
   }
 
+  const variables = Object.keys(variableMap);
   for (const variable of variables) {
     $hook(templateSource, variable, renderTemplate.bind(templateSource, variables));
   }
