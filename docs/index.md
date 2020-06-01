@@ -33,8 +33,8 @@ function $hand(context, id, hook) {
   default:
     if (!$hand_[id]) {
       $hand_[id] = {
-        triggers: { '${context[$hand_key]}': context },
-        hooks: { '${hook[$hand_key]}': hook },
+        triggers: { [context[$hand_key]]: context },
+        hooks: { [hook[$hand_key]]: hook },
       };
     } else {
       $hand_[id].triggers[context[$hand_key]] = context;
@@ -81,7 +81,7 @@ function compileTemplate(source) {
   if (!source) return;
   source.innerHTML = source.innerHTML.replace($hand_template_variable, function(_, variable) {
     const id = $hand_prefix+$hand_id++;
-    return '<b id="${id}">${variable}</b>';
+    return '<b id="'+id+'">'+variable+'</b>';
   });
 }
 
