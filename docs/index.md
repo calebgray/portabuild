@@ -65,13 +65,21 @@ function setEscapedUri(trigger) {
   this.innerHTML = encodeURI(typeof trigger === typeof "" ? trigger : trigger.value);
 }
 
+const $hand_template_variable = RegExp('\(\(\.(.*?)\)\)', 'g');
 function compileTemplate(trigger) {
-  this.innerHTML = this.innerHTML.replace(/\(\(\.(.*?)\)\)/g, function(match, $1) {
+    let html = this.innerHTML;
+    
+    let match;
+    while ((match = $hand_template_variable.exec(html)) !== null) {
+      console.log(`Found ${match[0]} start=${match.index} end=${$hand_template_variable.lastIndex}.`);
+    }
+    
+  /*this.innerHTML = this.innerHTML.replace(/\(\(\.(.*?)\)\)/g, function(match, $1) {
     let span = document.createElement('span');
     span.innerHTML = $1;
     $hand(span, $1, setEscapedHtml);
     return span;
-  });
+  });*/
 }
 </script>
 
