@@ -80,7 +80,7 @@ function renderTemplate(trigger) {
   console.log(arguments);
 }
 
-const $hand_template_variable = /\$\({\.(.*?)}\)/g;
+const $hand_template_variable = /(\$)\({\.(.*?)}\)/g;
 function compileTemplate(trigger) {
   const templateSource = trigger.parentNode.parentNode;
   trigger.parentNode.remove();
