@@ -84,6 +84,9 @@ function compileTemplate() {
     this.appendChild(div);
     last = $hand_template_variable.lastIndex;
   }
+  let div = document.createElement('div');
+  div.innerHTML = template.substring(last);
+  this.appendChild(div);  
 }
 </script>
 
