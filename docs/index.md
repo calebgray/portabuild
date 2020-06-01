@@ -71,37 +71,34 @@ function setEscapedUri(trigger) {
 }
 
 const $hand_template_variable = /\(\(\.(.*?)\)\)/g;
-function _compileTemplate(source) {
-  if (!source) return;
-  for (const childNode of source.childNodes) {
-    console.log(childNode);
-    _compileTemplate(childNode);
-  }
-}
-
 function compileTemplate(source) {
-  _compileTemplate(source);
-
-  /*let template = source.innerHTML;
-
-  let match, last = 0;
-  while ((match = $hand_template_variable.exec(template)) !== null) {
-    let variable = document.createElement('b');
-    variable.innerHTML = match[1];
-
-    let div = document.createElement('div');
-    div.innerHTML = template.substring(last, match.index);
-    div.appendChild(variable);
-
-    source.appendChild(div);
-    
-    $hand(variable, match[1], setEscapedHtml);
-    
-    last = $hand_template_variable.lastIndex;
+  if (!source) return false;
+  for (const childNode of source.childNodes) {
+    if (compileTemplate(childNode)) {
+      console.log(childNode);
+    } else {
+      let template = childNode.innerHTML;
+  
+      let match, last = 0;
+      while ((match = $hand_template_variable.exec(template)) !== null) {
+        let variable = document.createElement('b');
+        variable.innerHTML = match[1];
+  
+        let div = document.createElement('div');
+        div.innerHTML = template.substring(last, match.index);
+        div.appendChild(variable);
+  
+        childNode.appendChild(div);
+        
+        $hand(variable, match[1], setEscapedHtml);
+      
+        last = $hand_template_variable.lastIndex;
+      }
+      let div = document.createElement('div');
+      div.innerHTML = template.substring(last);
+      childNode.appendChild(div);
+    }
   }
-  let div = document.createElement('div');
-  div.innerHTML = template.substring(last);
-  source.appendChild(div);*/  
 }
 </script>
 
