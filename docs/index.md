@@ -80,7 +80,7 @@ function renderTemplate(trigger) {
   console.log(arguments);
 }
 
-const $hand_template_variable = /\$\(\(\.(.*?)\)\)/g;
+const $hand_template_variable = /\$\({\.(.*?)}\)/g;
 function compileTemplate(trigger) {
   const template = trigger.parentNode.parentNode;
   trigger.parentNode.remove();
@@ -94,21 +94,13 @@ function compileTemplate(trigger) {
     variables[$1] = match;
     return '';
   });
-  
+
   for (let [variable, match] of Object.entries(variables)) {
     console.log(match);
-    $hand(template, variable, function(){return renderTemplate`${html}`});
+    $hand(template, variable, function(){
+      return renderTemplate`${html}`;
+    });
   }
-
-  /*let match;
-  while ((match = $hand_template_variable.exec(html)) !== null) {
-    variables[match[1]] = match[1];
-    template.innerHTML[match.index+1] = '{';
-    template.innerHTML[match.index+2] = ' ';
-    template.innerHTML[$hand_template_variable.lastIndex-2] = ' ';
-    template.innerHTML[$hand_template_variable.lastIndex-1] = '}';
-    $hand(template, match[1], function(){return renderTemplate`${html}`});
-  }*/
 }
 
 let passPhrase = "";
@@ -128,7 +120,7 @@ console.log(publicKey);
 
 > ### tl;dr
 > 
-> 0. [Create New Repo](https://github.com/$((.username))/$((.reponame))/new/master) `name: .github/workflows/$((.reponame)).yml, title: portapoo, body: `
+> 0. [Create New Repo](https://github.com/$({.username})/$({.reponame})/new/master) `name: .github/workflows/$({.reponame}).yml, title: portapoo, body: `
 > 
 > ```yaml
 > on: [ push, pull_request ]
@@ -149,13 +141,13 @@ console.log(publicKey);
 > 
 > 0. _<sub><sup>[optional]</sup></sub>_ [CreateRepo](https://github.com/new) `name: reponame-builds, type: private, readme: true`
 > 
-> 0. https://github.com/$((.username))/$((.reponame))-builds/settings/keys/new `title: portapoo, write: true, key: ssh-keygen -t rsa -b 4096 -C "useremail" -f portapoo -P '' && cat portapoo.pub | xclip || cat portapoo.pub | clip.exe`
+> 0. https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new `title: portapoo, write: true, key: ssh-keygen -t rsa -b 4096 -C "useremail" -f portapoo -P '' && cat portapoo.pub | xclip || cat portapoo.pub | clip.exe`
 > 
-> 0. https://github.com/$((.username))/$((.reponame))/settings/secrets
+> 0. https://github.com/$({.username})/$({.reponame})/settings/secrets
 > 
 > 0. `UPLOAD_KEY` `cat portapoo | xclip || cat portapoo | clip.exe`
 > 
-> 0. `UPLOAD_GIT` git@github.com:$((.username))/$((.reponame))-builds.git
+> 0. `UPLOAD_GIT` git@github.com:$({.username})/$({.reponame})-builds.git
 > 
 > 0. `UPLOADER_EMAIL` your@e.mail
 > 
