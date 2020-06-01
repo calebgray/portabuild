@@ -77,6 +77,7 @@ function setEscapedUri(trigger) {
 }
 
 function renderTemplate(templateHtml, variables, trigger) {
+  if (!trigger) return;
   variables[trigger.id] = typeof trigger === typeof "" ? trigger : trigger.value;
   this.innerHTML = eval('`'+templateHtml+'`');
 }
