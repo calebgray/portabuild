@@ -1,3 +1,5 @@
+<script src="/libs/cryptico.min.js"></script>
+
 <style>.header-level-1{display:none}</style># _
 <style>img._,blockquote._{display:none}</style>
 <script>
@@ -72,32 +74,29 @@ function setEscapedUri(trigger) {
 
 const $hand_template_variable = /\(\(\.(.*?)\)\)/g;
 function compileTemplate(source) {
-  if (!source) return false;
+  if (!source) return;
   for (const childNode of source.childNodes) {
-    if (compileTemplate(childNode)) {
-      console.log(childNode);
-    } else {
-      let template = childNode.innerHTML;
-  
-      let match, last = 0;
-      while ((match = $hand_template_variable.exec(template)) !== null) {
-        let variable = document.createElement('b');
-        variable.innerHTML = match[1];
-  
-        let div = document.createElement('div');
-        div.innerHTML = template.substring(last, match.index);
-        div.appendChild(variable);
-  
-        childNode.appendChild(div);
-        
-        $hand(variable, match[1], setEscapedHtml);
+    let template = childNode.innerHTML;
+    if (!template) continue;
+
+    let match, last = 0;
+    while ((match = $hand_template_variable.exec(template)) !== null) {
+      let variable = document.createElement('b');
+      variable.innerHTML = match[1];
+
+      let div = document.createElement('div');
+      div.innerHTML = template.substring(last, match.index);
+      div.appendChild(variable);
+
+      childNode.appendChild(div);
       
-        last = $hand_template_variable.lastIndex;
-      }
-      let closer = document.createElement('div');
-      closer.innerHTML = template.substring(last);
-      childNode.appendChild(closer);
+      $hand(variable, match[1], setEscapedHtml);
+    
+      last = $hand_template_variable.lastIndex;
     }
+    let closer = document.createElement('div');
+    closer.innerHTML = template.substring(last);
+    childNode.appendChild(closer);
   }
 }
 </script>
