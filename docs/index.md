@@ -82,8 +82,8 @@ function compileTemplate(source) {
   const template = source.innerHTML;
   if (!template) return;
 
-  let render = 'function(){return `', variables = [], last = 0, arg = 0;
-  while ((let match = $hand_template_variable.exec(template)) !== null) {
+  let render = 'function(){return `', variables = [], last = 0, arg = 0, match;
+  while ((match = $hand_template_variable.exec(template)) !== null) {
     render += template.substring(last, match.index).replace(/`/g, '\\`');
     render += 'arguments[' + arg++ + ']';
     last = $hand_template_variable.lastIndex;
