@@ -19,19 +19,19 @@ function $hand(context, id, hook) {
   case 2:
     if (!$hand_[id]) return;
     for (const hook of Object.values($hand_[id].hooks)) {
-      for (const source of $hand_[id].sources) {
-        hook.call(source, context);
+      for (const trigger of Object.values($hand_[id].triggers)) {
+        hook.call(trigger, context);
       }
     }
     return;
   default:
     if (!$hand_[id]) {
       $hand_[id] = {
-        sources: { '${context._id}': context },
+        triggers: { '${context._id}': context },
         hooks: { '${hook._id}': hook },
       };
     } else {
-      $hand_[id].sources[context._id] = context;
+      $hand_[id].triggers[context._id] = context;
       $hand_[id].hooks[hook._id] = hook;
     }
     for (const hook of Object.values($hand_[id].hooks)) {
