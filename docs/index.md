@@ -69,7 +69,7 @@ function compileTemplate(trigger) {
   const self = this;
   this.innerHTML = this.innerHTML.replace(/\(\(\.(.*?)\)\)/g, function(match, $1) {
     $hand(self, $1, setEscapedUri);
-    return $1;
+    return '<span>'+$1+'<img class="_" onload="$hand(this.parentNode, $1, setEscapedHtml)" src="data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\'/>"/></span>';
   });
 }
 </script>
