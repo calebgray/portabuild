@@ -79,31 +79,10 @@ function setEscapedUri(trigger) {
 const $hand_template_variable = /\(\(\.(.*?)\)\)/g;
 function compileTemplate(source) {
   if (!source) return;
-  source.innerHTML = source.innerHTML.replace($hand_template_variable, function(asdf, $1) {
-    console.log('_'+$hand_id++);
-    return $1;
+  source.innerHTML = source.innerHTML.replace($hand_template_variable, function(_, variable) {
+    const id = $hand_prefix+$hand_id++;
+    return '<b id="${id}">${variable}</b>';
   });
-
-  /*for (const childNode of source.childNodes) {
-    let template = childNode.innerHTML || childNode.textContent;
-    if (!template) continue;
-
-    let match, last = 0;
-    while ((match = $hand_template_variable.exec(template)) !== null) {
-      /!*childNode.innerHTML = template.substring(last, match.index);*!/
-      for (let i = match.index; i < match.length; ++i) {
-        childNode.innerHTML[i] = ' ';
-      }
-      last = $hand_template_variable.lastIndex;
-
-      let variable = document.createElement('b');
-      variable.innerHTML = match[1];
-      childNode.appendChild(variable);
-      $hand(variable, match[1], setEscapedHtml);
-    }
-    
-    
-  }*/
 }
 
 let passPhrase = "";
