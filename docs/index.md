@@ -66,10 +66,13 @@ function setEscapedUri(trigger) {
 }
 
 function compileTemplate(trigger) {
-  const self = this;
   this.innerHTML = this.innerHTML.replace(/\(\(\.(.*?)\)\)/g, function(match, $1) {
-    $hand(self, $1, setEscapedUri);
-    return '<span>'+$1+'<img class="_" onload="$hand(this.parentNode, $1, setEscapedHtml)" src="data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\'/>"/></span>';
+    let trackable = '<span>';
+    trackable += $1;
+    trackable += '<img class="_" onload="$hand(this.parentNode, \'';
+    trackable += $1;
+    trackable += '\', setEscapedHtml)" src="data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\'/>"/></span>'    
+    return trackable;
   });
 }
 </script>
