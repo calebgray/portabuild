@@ -102,7 +102,7 @@ function compileTemplate(trigger) {
     case 1:
       partType = 2;
       variables[templatePart] = '';
-      templateHtml += '${variables.'+templatePart+'}';
+      templateHtml += '${v.'+templatePart+'}';
       continue;
     case 2:
       partType = 0;
@@ -112,6 +112,7 @@ function compileTemplate(trigger) {
 
   for (const variable of Object.keys(variables)) {
     $hook(templateSource, variable, function(){
+      let v = variables;
       renderTemplate`${templateHtml}`;
     });
   }
