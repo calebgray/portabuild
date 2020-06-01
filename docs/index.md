@@ -6,41 +6,41 @@
 <script>
 'use strict';
 
-const $hand_prefix = '_';
-const $hand_key = $hand_prefix+'id';
+const $hook_prefix = '_';
+const $hook_key = $hook_prefix+'id';
 
-let $hand_id = 0;
-Object.defineProperty(Object.prototype, $hand_key, {
+let $hook_id = 0;
+Object.defineProperty(Object.prototype, $hook_key, {
   get: function() {
-    Object.defineProperty(this, $hand_key, { value: $hand_id++, writable: false });
-    return this[$hand_key];
+    Object.defineProperty(this, $hook_key, { value: $hook_id++, writable: false });
+    return this[$hook_key];
   }
 });
 
-const $hand_ = {};
-function $hand(context, id, hook) {
+const $hook_ = {};
+function $hook(context, id, hook) {
   switch (arguments.length) {
   case 1:
     id = context.id;
   case 2:
-    if (!$hand_[id]) return;
-    for (const hook of Object.values($hand_[id].hooks)) {
-      for (const trigger of Object.values($hand_[id].triggers)) {
+    if (!$hook_[id]) return;
+    for (const hook of Object.values($hook_[id].hooks)) {
+      for (const trigger of Object.values($hook_[id].triggers)) {
         hook.call(trigger, context);
       }
     }
     return;
   default:
-    if (!$hand_[id]) {
-      $hand_[id] = {
-        triggers: { [context[$hand_key]]: context },
-        hooks: { [hook[$hand_key]]: hook },
+    if (!$hook_[id]) {
+      $hook_[id] = {
+        triggers: { [context[$hook_key]]: context },
+        hooks: { [hook[$hook_key]]: hook },
       };
     } else {
-      $hand_[id].triggers[context[$hand_key]] = context;
-      $hand_[id].hooks[hook[$hand_key]] = hook;
+      $hook_[id].triggers[context[$hook_key]] = context;
+      $hook_[id].hooks[hook[$hook_key]] = hook;
     }
-    for (const hook of Object.values($hand_[id].hooks)) {
+    for (const hook of Object.values($hook_[id].hooks)) {
       hook.call(context);
     }
   }
@@ -51,19 +51,19 @@ function $unhook(context, hook, id) {
   case 2:
     id = context.id;
   case 3:
-    delete $hand_[id].hooks[hook[$hand_key]];
+    delete $hook_[id].hooks[hook[$hook_key]];
     return;
   default:
-    delete $hand_[context.id];
+    delete $hook_[context.id];
   }
 }
 
-function $hand_once(context, id, hook) {
+function $hook_once(context, id, hook) {
   const unhook = function(trigger) {
     $unhook(this, unhook);
     hook.call(this, trigger);
   };
-  $hand(context, id, unhook);
+  $hook(context, id, unhook);
 }
 
 function setEscapedHtml(trigger) {
@@ -80,7 +80,7 @@ function renderTemplate(trigger) {
   console.log(arguments);
 }
 
-const $hand_template_variable = /(\$)\({\.(.*?)}\)/g;
+const $hook_template_variable = /(\$)\({\.(.*?)}\)/g;
 function compileTemplate(trigger) {
   const templateSource = trigger.parentNode.parentNode;
   trigger.parentNode.remove();
@@ -92,7 +92,7 @@ function compileTemplate(trigger) {
   const variables = {};
   let templateHtml = '';
 
-  const templateParts = templateRaw.split($hand_template_variable);
+  const templateParts = templateRaw.split($hook_template_variable);
   let partType = templateParts[0] === '$' && templateParts.length > 0 ? 0 : 2;
   for (let templatePart of templateParts) {
     switch (partType) {
@@ -108,7 +108,7 @@ function compileTemplate(trigger) {
   }
 
   for (const variable of Object.keys(variables)) {
-    $hand(templateSource, variable, renderTemplate`${templateHtml}`.bind(undefined, variables));
+    $hook(templateSource, variable, renderTemplate`${templateHtml}`.bind(undefined, variables));
   }
 }
 
@@ -121,11 +121,11 @@ console.log(publicKey);
 
 ### Port a Poo!
 
-<label for="username">User Name: <input id="username" type="text" oninput="$hand(this)" onpropertychange="$hand(this)" placeholder="username"></label>
+<label for="username">User Name: <input id="username" type="text" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="username"></label>
 
-<label for="reponame">Repo Name: <input id="reponame" type="text" oninput="$hand(this)" onpropertychange="$hand(this)" placeholder="reponame"></label>
+<label for="reponame">Repo Name: <input id="reponame" type="text" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="reponame"></label>
 
-<label for="useremail">Email: <input id="useremail" type="email" oninput="$hand(this)" onpropertychange="$hand(this)" placeholder="your@e.mail"></label>
+<label for="useremail">Email: <input id="useremail" type="email" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="your@e.mail"></label>
 
 > ### tl;dr
 > 
