@@ -72,6 +72,7 @@ function setEscapedUri(trigger) {
 
 const $hand_template_variable = /\(\(\.(.*?)\)\)/g;
 function _compileTemplate(source) {
+  if (!source) return;
   for (const childNode of source.childNodes) {
     console.log(childNode);
     _compileTemplate(childNode);
@@ -177,9 +178,5 @@ function compileTemplate(source) {
 >     || [ -x /usr/sbin/init ] && /usr/sbin/init \
 >     || find /'
 > ```
-> 
-> <p class='specialParagraph' markdown='1'>
-> ### Inner Paragraph?
-> </p>
 > 
 > <img class="_" onload="this.parentNode.remove();compileTemplate(this.parentNode.parentNode)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
