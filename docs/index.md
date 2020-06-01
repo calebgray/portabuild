@@ -66,18 +66,22 @@ function setEscapedUri(trigger) {
 }
 
 const $hand_template_variable = /\(\(\.(.*?)\)\)/g;
-function compileTemplate(trigger) {
+function compileTemplate() {
   let template = this.innerHTML;
   this.innerHTML = '';
   
   let match, last = 0;
   while ((match = $hand_template_variable.exec(template)) !== null) {
-    this.appendChild(template.substring(last, match.index));
-    last = $hand_template_variable.lastIndex;
-    
     let span = document.createElement('span');
     span.innerHTML = match.groups[0];
     $hand(span, match.groups[0], setEscapedHtml);
+
+    let div = document.createElement('div');
+    div.innerHTML = template.substring(last, match.index);
+    div.appendChild(span);
+
+    this.appendChild(div);
+    last = $hand_template_variable.lastIndex;
   }
 }
 </script>
