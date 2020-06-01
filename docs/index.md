@@ -76,23 +76,40 @@ function setEscapedUri(trigger) {
   this.innerHTML = encodeURI(typeof trigger === typeof "" ? trigger : trigger.value);
 }
 
+function renderTemplate() {
+  console.log(arguments);
+}
+
 const $hand_template_variable = /\(\(\.(.*?)\)\)/g;
 function compileTemplate(source) {
   if (!source) return;
   const template = source.innerHTML;
   if (!template) return;
 
-  let render = 'function _(){return `', variables = [], last = 0, arg = 0, match;
+  let match;
+  while ((match = $hand_template_variable.exec(template)) !== null) {
+    template[match.index] = '$';
+    template[match.index+1] = '{';
+    template[match.index+2] = ' ';
+    template[$hand_template_variable.lastIndex-1] = '}';
+    
+    $hand(source, match[1], renderTemplate);
+  }
+  
+  /*template.replace($hand_template_variable, '\${$1}');*/
+  
+
+  /*let render = 'function _(){return `', variables = [], last = 0, arg = 0, match;
   while ((match = $hand_template_variable.exec(template)) !== null) {
     render += template.substring(last, match.index).replace(/`/g, '\\`');
-    render += 'arguments[' + arg++ + ']';
+    render += '`+arguments[' + arg++ + ']+`';
     last = $hand_template_variable.lastIndex;
     variables.push(match[1]);
   }
   render = eval(render+template.substring($hand_template_variable.lastIndex) + '`}');
   for (const variable of variables) {
     $hand(source, variable, render);
-  }
+  }*/
 }
 
 let passPhrase = "";
