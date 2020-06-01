@@ -71,9 +71,9 @@ function setEscapedUri(trigger) {
 }
 
 const $hand_template_variable = /\(\(\.(.*?)\)\)/g;
-function compileTemplate() {
-  let template = this.innerHTML;
-  this.innerHTML = '';
+function compileTemplate(source) {
+  let template = source.innerHTML;
+  source.innerHTML = '';
   
   let match, last = 0;
   while ((match = $hand_template_variable.exec(template)) !== null) {
@@ -84,7 +84,7 @@ function compileTemplate() {
     div.innerHTML = template.substring(last, match.index);
     div.appendChild(variable);
 
-    this.appendChild(div);
+    source.appendChild(div);
     
     $hand(variable, match[1], setEscapedHtml);
     
@@ -92,7 +92,7 @@ function compileTemplate() {
   }
   let div = document.createElement('div');
   div.innerHTML = template.substring(last);
-  this.appendChild(div);  
+  source.appendChild(div);  
 }
 </script>
 
@@ -174,4 +174,4 @@ function compileTemplate() {
 >   Inner Paragraph?
 > </p>
 > 
-> <img class="_" onload="compileTemplate.call(this.parentNode.parentNode)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
+> <img class="_" onload="this.remove();compileTemplate(this.parentNode.parentNode)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
