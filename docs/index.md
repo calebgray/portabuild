@@ -91,9 +91,9 @@ function compileTemplate(trigger) {
 
   let match;
   while ((match = $hand_template_variable.exec(html)) !== null) {
-    template.innerHTML[match.index] = '$';
     template.innerHTML[match.index+1] = '{';
     template.innerHTML[match.index+2] = ' ';
+    template.innerHTML[$hand_template_variable.lastIndex-2] = ' ';
     template.innerHTML[$hand_template_variable.lastIndex-1] = '}';
     $hand(template, match[1], function(){return renderTemplate`${html}`});
   }
