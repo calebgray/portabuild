@@ -18,7 +18,7 @@ Object.defineProperty(Object.prototype, $hand_key, {
 });
 
 const $hand_ = {};
-function $hook(context, id, hook) {
+function $hand(context, id, hook) {
   switch (arguments.length) {
   case 1:
     id = context.id;
@@ -63,7 +63,7 @@ function $hand_once(context, id, hook) {
     $unhook(this, unhook);
     hook.call(this, trigger);
   };
-  $hook(context, id, unhook);
+  $hand(context, id, unhook);
 }
 
 function setEscapedHtml(trigger) {
@@ -108,7 +108,7 @@ function compileTemplate(trigger) {
   }
 
   for (const variable of Object.keys(variables)) {
-    $hook(templateSource, variable, renderTemplate`${templateHtml}`.bind(undefined, variables));
+    $hand(templateSource, variable, renderTemplate`${templateHtml}`.bind(undefined, variables));
   }
 }
 
