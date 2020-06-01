@@ -73,8 +73,8 @@ function compileTemplate() {
   let match, last = 0;
   while ((match = $hand_template_variable.exec(template)) !== null) {
     let span = document.createElement('span');
-    span.innerHTML = match.groups[0];
-    $hand(span, match.groups[0], setEscapedHtml);
+    span.innerHTML = match[1];
+    $hand(span, match[1], setEscapedHtml);
 
     let div = document.createElement('div');
     div.innerHTML = template.substring(last, match.index);
