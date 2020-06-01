@@ -82,18 +82,16 @@ function compileTemplate(source) {
 
     let match, last = 0;
     while ((match = $hand_template_variable.exec(template)) !== null) {
+      childNode.innerHTML = template.substring(last, match.index);
+      for (let i = last; i < match.index; ++i) {
+        childNode.innerHTML[i] = ' ';
+      }
+      last = $hand_template_variable.lastIndex;
+
       let variable = document.createElement('b');
       variable.innerHTML = match[1];
-
-      let div = document.createElement('div');
-      div.innerHTML = template.substring(last, match.index);
-      div.appendChild(variable);
-
-      childNode.appendChild(div);
-      
+      childNode.appendChild(variable);
       $hand(variable, match[1], setEscapedHtml);
-    
-      last = $hand_template_variable.lastIndex;
     }
     let closer = document.createElement('div');
     closer.innerHTML = template.substring(last);
