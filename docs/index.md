@@ -82,24 +82,15 @@ function renderTemplate(trigger) {
 
 const $hand_template_variable = /\$\({\.(.*?)}\)/g;
 function compileTemplate(trigger) {
-  const template = trigger.parentNode.parentNode;
+  const templateSource = trigger.parentNode.parentNode;
   trigger.parentNode.remove();
 
-  if (!template) return;
-  let html = template.innerHTML;
-  if (!html) return;
-
-  const variables = {};
-  html = html.replace($hand_template_variable, function(match, $1) {
-    variables[$1] = match;
-    return '';
-  });
-
-  for (let [variable, match] of Object.entries(variables)) {
-    console.log(match);
-    $hand(template, variable, function(){
-      return renderTemplate`${html}`;
-    });
+  if (!templateSource) return;
+  const templateRaw = templateSource.innerHTML;
+  if (!templateRaw) return;
+  const templateReplaced = templateRaw.split($hand_template_variable);
+  for (let templateReplace of templateReplaced) {
+    console.log(templateReplace);
   }
 }
 
