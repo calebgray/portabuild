@@ -108,7 +108,7 @@ function compileTemplate(trigger) {
   }
 
   for (const variable of Object.keys(variables)) {
-    $hook(trigger, variable, renderTemplate`${templateHtml}`.bind(variables));
+    $hook(templateSource, variable, renderTemplate`${templateHtml}`.bind(undefined, variables));
   }
 }
 
