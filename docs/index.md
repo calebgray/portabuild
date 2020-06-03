@@ -166,18 +166,18 @@ Target: <label for="username">github.com/<input id="username" type="text" oninpu
 > 2. Copy:
 > 
 > ```yaml
-> on: [ push, pull_request ]
-> 
-> jobs:
->   Release:
->     runs-on: ubuntu-latest
->     env:
->       GITHUB_TOKEN: $({.GITHUB_TOKEN}}
->     steps:
->     - name: Checkout
->       uses: actions/checkout@master
->     - name: Build
->       uses: calebgray/portapoo.action@master
+>     on: [ push, pull_request ]
+>     
+>     jobs:
+>       Release:
+>         runs-on: ubuntu-latest
+>         env:
+>           GITHUB_TOKEN: $({.GITHUB_TOKEN}}
+>         steps:
+>         - name: Checkout
+>           uses: actions/checkout@master
+>         - name: Build
+>           uses: calebgray/portapoo.action@master
 > ```
 > 
 > 3. [Paste](https://github.com/$({.username})/$({.reponame})/new/master): `.github/workflows/$({.reponame}).yml`
@@ -196,7 +196,7 @@ You: <label for="fullname"><input id="fullname" type="email" oninput="$hook(this
 > ```
 > $({.PUBLIC_KEY})
 > ```
-> <form id="rsagen" onsubmit="generateKeys(this)">_<sub><sup>[optional]</sup></sub>_ Password? <input type="text" name="name" id="id" placeholder="password"/></form> (_<sub><sup>powered by the lovely</sup></sub>_ [cryptico](https://github.com/wwwtyro/cryptico))
+> <form id="rsagen" onsubmit="generateKeys(this)"> _<sub><sup>[optional]</sup></sub>_ Password? <input type="text" name="name" id="id" placeholder="password"/> <button type="submit">Regenerate!</button></form> (_<sub><sup>powered by the lovely</sup></sub>_ [cryptico](https://github.com/wwwtyro/cryptico))
 > 
 > 3. [Paste](https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new): `portapoo` `{ write: true }`
 > 
