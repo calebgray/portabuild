@@ -3,7 +3,7 @@
 img._ { display:none }
 blockquote { background-image:none;padding:0 }
 pre,.header-level-2,.highlight { border:0 }
-input { border:1px solid #000 }
+input { background:#000;border:1px solid #666;color:#fff }
 .highlighter-rouge { background:#000 }
 </style>
 # _
