@@ -3,6 +3,7 @@
 img._ { display:none }
 blockquote { background-image:none;padding:0 }
 pre,.header-level-2,.highlight { border:0 }
+input { border: 1px solid #000; }
 </style>
 # _
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cryptico/0.0.1343522940/cryptico.min.js"></script>
@@ -141,7 +142,7 @@ See Mark Twain's words of wisdom.
 
 ### Build
 
-<label for="username">*User Name* <input id="username" type="text" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="username"></label> // <label for="reponame">*Repo Name* <input id="reponame" type="text" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="reponame"></label>
+Target: <label for="username">github.com/<input id="username" type="text" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="your username"></label>/<label for="reponame"><input id="reponame" type="text" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="your repo"></label>
 
 > 0. Create `build.sh || build/ubuntu.sh || build/linux.sh` in [github.com/$({.username})/$({.reponame})](https://github.com/$({.username})/$({.reponame})/new/master).
 > 
@@ -169,7 +170,7 @@ See Mark Twain's words of wisdom.
 
 ### Upload _<sub><sup>[optional]</sup></sub>_
 
-<label for="fullname">*Name* <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="Your Name"></label> // <label for="useremail">*Email* <input id="useremail" type="email" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="your@e.mail"></label>
+You: <label for="fullname"><input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="Your Name"></label>/<label for="useremail"><input id="useremail" type="email" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="your@e.mail"></label>
 
 > 0. [Create](https://github.com/new) `$({.reponame})-builds` `{ type: private, readme: true }`
 > 
