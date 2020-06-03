@@ -112,7 +112,7 @@ function compileTemplate(trigger) {
       continue;
     case 1:
       partType = 2;
-      variables[templatePart] = '';
+      variables[templatePart] = templatePart;
       templateHtml += '${v.'+templatePart+'}';
       continue;
     case 2:
@@ -127,20 +127,25 @@ function compileTemplate(trigger) {
   }
 }
 
-let passPhrase = "";
-let privateKey = cryptico.generateRSAKey(passPhrase, 2048);
-let publicKey = cryptico.publicKeyString(privateKey);
+function replaceMarkdown(trigger) {
+  console.log(arguments);
+}
 
+function generateKeys(trigger) {
+    console.log(arguments);
+    let passPhrase = "";
+    let privateKey = cryptico.generateRSAKey(passPhrase, 2048);
+    let publicKey = cryptico.publicKeyString(privateKey);
+    $hook(privateKey, 'PRIVATE_KEY', generateKeys);
+    $hook(publicKey, 'PUBLIC_KEY', generateKeys);
+}
 
-
-
+$hook('$&#123;{secrets.GITHUB_TOKEN}}', 'GITHUB_TOKEN', replaceMarkdown);
+$hook('$&#123;{secrets.UPLOAD_GIT}}', 'UPLOAD_GIT', replaceMarkdown);
+$hook('$&#123;{secrets.UPLOAD_KEY}}', 'UPLOAD_KEY', replaceMarkdown);
+$hook('$&#123;{secrets.UPLOADER_EMAIL}}', 'UPLOADER_EMAIL', replaceMarkdown);
+$hook('$&#123;{secrets.UPLOADER_NAME}}', 'UPLOADER_NAME', replaceMarkdown);
 </script>
-
-<img class="_" onload="$hook(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>" id="GITHUB_TOKEN" data-value="$&#123;{secrets.GITHUB_TOKEN}}"/>
-<img class="_" onload="$hook(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>" id="UPLOAD_GIT" data-value="$&#123;{secrets.UPLOAD_GIT}}"/>
-<img class="_" onload="$hook(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>" id="UPLOAD_KEY" data-value="$&#123;{secrets.UPLOAD_KEY}}"/>
-<img class="_" onload="$hook(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>" id="UPLOADER_EMAIL" data-value="$&#123;{secrets.UPLOADER_EMAIL}}"/>
-<img class="_" onload="$hook(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>" id="UPLOADER_NAME" data-value="$&#123;{secrets.UPLOADER_NAME}}"/>
 
 ### Port a Poo! Ho!
 
@@ -186,17 +191,18 @@ You: <label for="fullname"><input id="fullname" type="email" oninput="$hook(this
 
 > 1. [Create](https://github.com/new) `$({.reponame})-builds` `{ type: private, readme: true }`
 > 
-> 2. Copy: (_<sub><sup>powered by the lovely</sup></sub>_ [cryptico](https://github.com/wwwtyro/cryptico)) <button id="keys" onclick="$hook(this)">Refresh!</button>
+> 2. Copy:
 > 
 > ```
-> $({.publicKey})
+> $({.PUBLIC_KEY})
 > ```
+> <form id="rsagen" onsubmit="generateKeys(this)">_<sub><sup>[optional]</sup></sub>_ Password? <input type="text" name="name" id="id" placeholder="password"/></form> (_<sub><sup>powered by the lovely</sup></sub>_ [cryptico](https://github.com/wwwtyro/cryptico))
 > 
 > 3. [Paste](https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new): `portapoo` `{ write: true }`
 > 
 > 4. [Create](https://github.com/$({.username})/$({.reponame})/settings/secrets):
 > 
-> - `UPLOAD_KEY`: `$({.privateKey})`
+> - `UPLOAD_KEY`: `$({.PRIVATE_KEY})`
 > 
 > - `UPLOAD_GIT`: `git@github.com:$({.username})/$({.reponame})-builds.git`
 > 

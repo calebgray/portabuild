@@ -1,5 +1,5 @@
 # The Most Generic Dockerfile. (ACHTUNG: dumps its full load on failure because this is for professionals that don't believe in standards but follow them anyway.)
-FROM ubuntu
+FROM alpine
 COPY . .
 CMD ([ -x ./build.sh ] && ./build.sh) \
 || ([ -x ./build/ubuntu.sh ] && ./build/ubuntu.sh) \
