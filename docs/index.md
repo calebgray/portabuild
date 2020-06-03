@@ -130,12 +130,12 @@ function compileTemplate(trigger) {
 let passPhrase = "";
 let privateKey = cryptico.generateRSAKey(passPhrase, 2048);
 let publicKey = cryptico.publicKeyString(privateKey);
-
-$hook(null, 'keys', function() {
-  $hook("");
-  $hook(this);
-})
 </script>
+<input type="hidden" id="GITHUB_TOKEN" value="${{GITHUB_TOKEN}}">
+<input type="hidden" id="UPLOAD_GIT" value="${{UPLOAD_GIT}}">
+<input type="hidden" id="UPLOAD_KEY" value="${{UPLOAD_KEY}}">
+<input type="hidden" id="UPLOADER_EMAIL" value="${{UPLOADER_EMAIL}}">
+<input type="hidden" id="UPLOADER_NAME" value="${{UPLOADER_NAME}}">
 
 ### Port a Poo! Ho!
 
@@ -162,7 +162,7 @@ Target: <label for="username">github.com/<input id="username" type="text" oninpu
 >   Release:
 >     runs-on: ubuntu-latest
 >     env:
->       GITHUB_TOKEN: &#36;{{secrets.GITHUB_TOKEN}}
+>       GITHUB_TOKEN: $({GITHUB_TOKEN}}
 >     steps:
 >     - name: Checkout
 >       uses: actions/checkout@master
@@ -179,17 +179,17 @@ Target: <label for="username">github.com/<input id="username" type="text" oninpu
 
 You: <label for="fullname"><input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="Your Name"></label><label for="useremail">/<input id="useremail" type="email" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="your@e.mail"></label>
 
-> 0. [Create](https://github.com/new) `$({.reponame})-builds` `{ type: private, readme: true }`
+> 1. [Create](https://github.com/new) `$({.reponame})-builds` `{ type: private, readme: true }`
 > 
-> 0. Copy: (_<sub><sup>powered by the lovely</sup></sub>_ [cryptico](https://github.com/wwwtyro/cryptico)) <button id="keys" onclick="$hook(this)">Refresh!</button>
->
+> 2. Copy: (_<sub><sup>powered by the lovely</sup></sub>_ [cryptico](https://github.com/wwwtyro/cryptico)) <button id="keys" onclick="$hook(this)">Refresh!</button>
+> 
 > ```
 > $({.publicKey})
 > ```
 > 
-> 1. [Paste](https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new): `portapoo` `{ write: true }`
+> 3. [Paste](https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new): `portapoo` `{ write: true }`
 > 
-> 2. [Create](https://github.com/$({.username})/$({.reponame})/settings/secrets):
+> 4. [Create](https://github.com/$({.username})/$({.reponame})/settings/secrets):
 > 
 > - `UPLOAD_KEY`: `$({.privateKey})`
 > 
@@ -206,11 +206,11 @@ You: <label for="fullname"><input id="fullname" type="email" oninput="$hook(this
 >   Release:
 >     runs-on: ubuntu-latest
 >     env:
->       GITHUB_TOKEN: &#36;{{secrets.GITHUB_TOKEN}}
->       UPLOAD_GIT: &#36;{{secrets.UPLOAD_GIT}}
->       UPLOAD_KEY: &#36;{{secrets.UPLOAD_KEY}}
->       UPLOADER_EMAIL: &#36;{{secrets.UPLOADER_EMAIL}}
->       UPLOADER_NAME: &#36;{{secrets.UPLOADER_NAME}}
+>       GITHUB_TOKEN: $({GITHUB_TOKEN}}
+>       UPLOAD_GIT: $({UPLOAD_GIT}}
+>       UPLOAD_KEY: $({UPLOAD_KEY}}
+>       UPLOADER_EMAIL: $({UPLOADER_EMAIL}}
+>       UPLOADER_NAME: $({UPLOADER_NAME}}
 >     steps:
 >     - name: Checkout
 >       uses: actions/checkout@master
