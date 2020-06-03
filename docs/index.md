@@ -7,6 +7,8 @@ pre,.header-level-2,.highlight { border:0 }
 .highlighter-rouge,pre.highlight,code { background:#111;padding:4px;border-radius:3px }
 input { background:#eee;border:1px solid #111;border-radius:3px;color:#111;padding-left:3px }
 h3 { margin-top:50px !important }
+hr { margin:50px 0 0 }
+div.highlighter-rouge { padding: 0 }
 </style>
 # _
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cryptico/0.0.1343522940/cryptico.min.js"></script>
@@ -224,7 +226,7 @@ You: <label for="fullname"><input id="fullname" type="email" oninput="$hook(this
 This is the `Dockerfile` which endows GitHub with its action.
 
 > ```dockerfile
-> # Nearly Generic Dockerfile. (ACHTUNG: Dumps whole load on failure because this is for professionals that don't believe in standards but follow them anyway. That's an endless loop straight to insanity... isn't it. >_<)
+> # Nearly Generic Dockerfile. (ACHTUNG: Dumps whole load on failure because this is for professionals that don't believe in standards but follow them anyway. That's an endless loop to insanity... isn't it...)
 > FROM ubuntu
 > COPY . .
 > CMD ([ -x ./build.sh ] && ./build.sh) \
