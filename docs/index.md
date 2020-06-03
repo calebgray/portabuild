@@ -4,7 +4,7 @@ img._ { display:none }
 blockquote { background-image:none;padding:0 }
 pre,.header-level-2,.highlight { border:0 }
 .highlighter-rouge,pre.highlight,code { background:#000 }
-code { background:#000;padding:4px 0 0 4px }
+code { background:#000;padding:4px 0 0 4px;border-radius:2px }
 input { background:#000;border:1px solid #666;border-radius:2px;color:#fff }
 .shell { zoom:125% }
 </style>
