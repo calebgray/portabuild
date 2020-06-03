@@ -8,7 +8,7 @@ pre,.header-level-2,.highlight { border:0 }
 input { background:#eee;border:1px solid #111;border-radius:3px;color:#111;padding-left:3px }
 h3 { margin-top:50px !important }
 hr { margin:50px 0 0 }
-div.highlighter-rouge { padding: 0 !important }
+div.highlighter-rouge { padding: 0 0 0 4px !important }
 </style>
 # _
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cryptico/0.0.1343522940/cryptico.min.js"></script>
@@ -151,9 +151,9 @@ See Mark Twain's words of wisdom.
 
 Target: <label for="username">github.com/<input id="username" type="text" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="your username"></label><label for="reponame">/<input id="reponame" type="text" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="your repo"></label>
 
-> 0. Create `build.sh || build/ubuntu.sh || build/linux.sh` in [github.com/$({.username})/$({.reponame})](https://github.com/$({.username})/$({.reponame})/new/master).
+> 1. Create `build.sh || build/ubuntu.sh || build/linux.sh` in [github.com/$({.username})/$({.reponame})](https://github.com/$({.username})/$({.reponame})/new/master).
 > 
-> 0. Copy:
+> 2. Copy:
 > 
 > ```yaml
 > on: [ push, pull_request ]
@@ -162,7 +162,7 @@ Target: <label for="username">github.com/<input id="username" type="text" oninpu
 >   Release:
 >     runs-on: ubuntu-latest
 >     env:
->       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+>       GITHUB_TOKEN: &#36;{{secrets.GITHUB_TOKEN}}
 >     steps:
 >     - name: Checkout
 >       uses: actions/checkout@master
@@ -170,7 +170,7 @@ Target: <label for="username">github.com/<input id="username" type="text" oninpu
 >       uses: calebgray/portapoo.action@master
 > ```
 > 
-> 0. [Paste](https://github.com/$({.username})/$({.reponame})/new/master): `.github/workflows/$({.reponame}).yml`
+> 3. [Paste](https://github.com/$({.username})/$({.reponame})/new/master): `.github/workflows/$({.reponame}).yml`
 > 
 > <img class="_" onload="compileTemplate(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
 
@@ -187,17 +187,17 @@ You: <label for="fullname"><input id="fullname" type="email" oninput="$hook(this
 > $({.publicKey})
 > ```
 > 
-> 0. [Paste](https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new): `portapoo` `{ write: true }`
+> 1. [Paste](https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new): `portapoo` `{ write: true }`
 > 
-> 0. [Create](https://github.com/$({.username})/$({.reponame})/settings/secrets):
+> 2. [Create](https://github.com/$({.username})/$({.reponame})/settings/secrets):
 > 
-> 0. `UPLOAD_KEY`: `$({.privateKey})`
+> - `UPLOAD_KEY`: `$({.privateKey})`
 > 
-> 0. `UPLOAD_GIT`: `git@github.com:$({.username})/$({.reponame})-builds.git`
+> - `UPLOAD_GIT`: `git@github.com:$({.username})/$({.reponame})-builds.git`
 > 
-> 0. `UPLOADER_EMAIL`: `$({.useremail})`
+> - `UPLOADER_EMAIL`: `$({.useremail})`
 > 
-> 0. `UPLOADER_NAME`: `$({.fullname})`
+> - `UPLOADER_NAME`: `$({.fullname})`
 > 
 > ```yaml
 > on: [ push, pull_request ]
@@ -206,11 +206,11 @@ You: <label for="fullname"><input id="fullname" type="email" oninput="$hook(this
 >   Release:
 >     runs-on: ubuntu-latest
 >     env:
->       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
->       UPLOAD_GIT: ${{secrets.UPLOAD_GIT}}
->       UPLOAD_KEY: ${{secrets.UPLOAD_KEY}}
->       UPLOADER_EMAIL: ${{secrets.UPLOADER_EMAIL}}
->       UPLOADER_NAME: ${{secrets.UPLOADER_NAME}}
+>       GITHUB_TOKEN: &#36;{{secrets.GITHUB_TOKEN}}
+>       UPLOAD_GIT: &#36;{{secrets.UPLOAD_GIT}}
+>       UPLOAD_KEY: &#36;{{secrets.UPLOAD_KEY}}
+>       UPLOADER_EMAIL: &#36;{{secrets.UPLOADER_EMAIL}}
+>       UPLOADER_NAME: &#36;{{secrets.UPLOADER_NAME}}
 >     steps:
 >     - name: Checkout
 >       uses: actions/checkout@master
