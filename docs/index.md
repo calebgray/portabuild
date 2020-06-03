@@ -133,7 +133,7 @@ function replaceMarkdown(trigger) {
 
 function generateKeys(trigger) {
     let passPhrase = trigger[0].value;
-    let privateKey = cryptico.generateRSAKey(passPhrase, 2048);
+    let privateKey = cryptico.generateRSAKey(passPhrase, trigger[1].value);
     let publicKey = cryptico.publicKeyString(privateKey);
     $hook(privateKey, 'PRIVATE_KEY', setEscapedHtml);
     $hook(publicKey, 'PUBLIC_KEY', setEscapedHtml);
@@ -197,11 +197,11 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > $({.PUBLIC_KEY})
 > ```
 > 
-> (_<sub><sup>powered by the perfect-for-this-purpose-thank-you-so-much and lovely</sup></sub>_ [cryptico](https://github.com/wwwtyro/cryptico){:target="_blank"})
+> (_<sub><sup>powered by the lovely</sup></sub>_ [cryptico](https://github.com/wwwtyro/cryptico){:target="_blank"})
 > 
-> <form id="rsagen" onsubmit="return generateKeys(this)"><sub><sup><em>[optional]</em></sup></sub> Password? <input type="text" placeholder="password"/> <button type="submit">Regenerate!</button>
+> <form id="rsagen" onsubmit="return generateKeys(this)"><p><sub><sup><em>[optional]</em></sup></sub> Password? <input type="text" placeholder="password"/> <button type="submit">Regenerate!</button></p>
 > 
-> Strength: <label><input type="radio" id="rsabits[]" value="1024">1024</label> <label><input type="radio" id="rsabits[]" value="2048" checked="checked">2048</label> <label><input type="radio" id="rsabits[]" value="4096">4096</label></form>
+> <p>Strength: <label><input type="radio" name="rsabits" value="1024">1024</label> <label><input type="radio" name="rsabits" value="2048" checked="checked">2048</label> <label><input type="radio" name="rsabits" value="4096">4096</label></p></form>
 > 
 > C. [Paste](https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new){:target="_blank"}: `portapoo` `{ write: true }`
 > 
