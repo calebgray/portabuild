@@ -136,11 +136,11 @@ let publicKey = cryptico.publicKeyString(privateKey);
 
 </script>
 
-<img class="_" onload="$hook(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>" id="GITHUB_TOKEN" data-value="&#36;{{secrets.GITHUB_TOKEN}}"/>
-<img class="_" onload="$hook(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>" id="UPLOAD_GIT" data-value="&#36;{{secrets.UPLOAD_GIT}}"/>
-<img class="_" onload="$hook(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>" id="UPLOAD_KEY" data-value="&#36;{{secrets.UPLOAD_KEY}}"/>
-<img class="_" onload="$hook(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>" id="UPLOADER_EMAIL" data-value="&#36;{{secrets.UPLOADER_EMAIL}}"/>
-<img class="_" onload="$hook(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>" id="UPLOADER_NAME" data-value="&#36;{{secrets.UPLOADER_NAME}}"/>
+<img class="_" onload="$hook(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>" id="GITHUB_TOKEN" data-value="$&#123;{secrets.GITHUB_TOKEN}}"/>
+<img class="_" onload="$hook(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>" id="UPLOAD_GIT" data-value="$&#123;{secrets.UPLOAD_GIT}}"/>
+<img class="_" onload="$hook(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>" id="UPLOAD_KEY" data-value="$&#123;{secrets.UPLOAD_KEY}}"/>
+<img class="_" onload="$hook(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>" id="UPLOADER_EMAIL" data-value="$&#123;{secrets.UPLOADER_EMAIL}}"/>
+<img class="_" onload="$hook(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>" id="UPLOADER_NAME" data-value="$&#123;{secrets.UPLOADER_NAME}}"/>
 
 ### Port a Poo! Ho!
 
