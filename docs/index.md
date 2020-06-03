@@ -1,8 +1,10 @@
-<style>.header-level-1{display:none}</style># _
-<style>img._,blockquote._{display:none}</style>
-
+<style>
+.header-level-1 { display:none }
+img._ { display:none }
+blockquote { background-image:none;padding:0 }
+</style>
+# _
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cryptico/0.0.1343522940/cryptico.min.js"></script>
-
 <script>
 'use strict';
 
@@ -112,6 +114,7 @@ function compileTemplate(trigger) {
     }
   }
 
+  renderTemplate.bind(templateSource, templateHtml, variables);
   for (const variable of Object.keys(variables)) {
     $hook(templateSource, variable, renderTemplate.bind(templateSource, templateHtml, variables));
   }
@@ -120,21 +123,20 @@ function compileTemplate(trigger) {
 let passPhrase = "";
 let privateKey = cryptico.generateRSAKey(passPhrase, 2048);
 let publicKey = cryptico.publicKeyString(privateKey);
-console.log(privateKey);
-console.log(publicKey);
+
+$hook(null, 'keys', function() {
+  $hook("");
+  $hook(this);
+})
 </script>
 
 ### Port a Poo!
 
-<label for="username">User Name: <input id="username" type="text" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="username"></label>
+<label for="username">*User Name* <input id="username" type="text" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="username"></label> // <label for="reponame">*Repo Name* <input id="reponame" type="text" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="reponame"></label>
 
-<label for="reponame">Repo Name: <input id="reponame" type="text" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="reponame"></label>
+### Build
 
-<label for="useremail">Email: <input id="useremail" type="email" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="your@e.mail"></label>
-
-> ### Building
-> 
-> 0. Create Builder in `$({.username})/$({.reponame})`: `./build.sh || ./build/ubuntu.sh || ./build/linux.sh || /usr/sbin/init`
+> 0. Create `build.sh || build/ubuntu.sh || build/linux.sh` in [github.com/$({.username})/$({.reponame})](https://github.com/$({.username})/$({.reponame})/new/master).
 > 
 > 0. Copy:
 > 
@@ -153,23 +155,34 @@ console.log(publicKey);
 >       uses: calebgray/portapoo.action@master
 > ```
 > 
-> 0. Paste into [github.com/$({.username})/$({.reponame})](https://github.com/$({.username})/$({.reponame})/new/master)/.github/workflows/$({.reponame}).yml
+> 0. [Paste](https://github.com/$({.username})/$({.reponame})/new/master): `.github/workflows/$({.reponame}).yml`
 > 
-> ### Uploading
+> <img class="_" onload="compileTemplate(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
+
+
+### Upload _<sub><sup>[optional]</sup></sub>_
+
+<label for="fullname">*Name* <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="Your Name"></label> // <label for="useremail">*Email* <input id="useremail" type="email" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="your@e.mail"></label>
+
+> 0. [Create](https://github.com/new) `$({.reponame})-builds` `{ type: private, readme: true }`
 > 
-> 0. _<sub><sup>[optional]</sup></sub>_ [CreateRepo](https://github.com/new) `name: reponame-builds, type: private, readme: true`
+> 0. Copy: (_<sub><sup>powered by the lovely</sup></sub>_ [cryptico](https://github.com/wwwtyro/cryptico)) <button id="keys" onclick="$hook(this)">Refresh!</button>
+>
+> ```
+> $({.publicKey})
+> ```
 > 
-> 0. https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new `title: portapoo, write: true, key: ssh-keygen -t rsa -b 4096 -C "useremail" -f portapoo -P '' && cat portapoo.pub | xclip || cat portapoo.pub | clip.exe`
+> 0. [Paste](https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new): `portapoo` `{ write: true }`
 > 
-> 0. https://github.com/$({.username})/$({.reponame})/settings/secrets
+> 0. [Create](https://github.com/$({.username})/$({.reponame})/settings/secrets):
 > 
-> 0. `UPLOAD_KEY` `cat portapoo | xclip || cat portapoo | clip.exe`
+> 0. `UPLOAD_KEY`: `$({.privateKey})`
 > 
-> 0. `UPLOAD_GIT` git@github.com:$({.username})/$({.reponame})-builds.git
+> 0. `UPLOAD_GIT`: `git@github.com:$({.username})/$({.reponame})-builds.git`
 > 
-> 0. `UPLOADER_EMAIL` your@e.mail
+> 0. `UPLOADER_EMAIL`: `$({.useremail})`
 > 
-> 0. `UPLOADER_NAME` Your Name
+> 0. `UPLOADER_NAME`: `$({.fullname})`
 > 
 > ```yaml
 > on: [ push, pull_request ]
@@ -190,16 +203,19 @@ console.log(publicKey);
 >       uses: calebgray/portapoo.action@master
 > ```
 > 
-> # The Dockerfile
-> ```dockerfile
-> # The Most Generic Dockerfile. ACHTUNG: Lists Filesystem on Execution Failure Because This is... For Development Only!!!
-> FROM ubuntu
-> COPY .. .
-> CMD '[ -x ./build.sh ] && ./build.sh \
->     || [ -x ./build/ubuntu.sh ] && ./build/ubuntu.sh \
->     || [ -x ./build/linux.sh ] && ./build/linux.sh \
->     || [ -x /usr/sbin/init ] && /usr/sbin/init \
->     || find /'
-> ```
-> 
 > <img class="_" onload="compileTemplate(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
+
+> # The Most Generic Dockerfile
+> 
+> This is the `Dockerfile` which powers this GitHub action.
+> 
+> ```dockerfile
+> # The Most Generic Dockerfile. ACHTUNG: Dumps Its Load on Execution Failure Because This is... For Development Only!!!
+> FROM ubuntu
+> COPY . .
+> CMD ([ -x ./build.sh ] && ./build.sh) \
+> || ([ -x ./build/ubuntu.sh ] && ./build/ubuntu.sh) \
+> || ([ -x ./build/linux.sh ] && ./build/linux.sh) \
+> || ([ -x /usr/sbin/init ] && /usr/sbin/init) \
+> || (env && find /)
+> ```
