@@ -140,11 +140,11 @@ function generateKeys(trigger) {
     return false;
 }
 
-$hook(undefined, 'GITHUB_TOKEN', replaceMarkdown.bind('$&#123;{secrets.GITHUB_TOKEN}}'));
-$hook(undefined, 'UPLOAD_GIT', replaceMarkdown.bind('$&#123;{secrets.UPLOAD_GIT}}'));
-$hook(undefined, 'UPLOAD_KEY', replaceMarkdown.bind('$&#123;{secrets.UPLOAD_KEY}}'));
-$hook(undefined, 'UPLOADER_EMAIL', replaceMarkdown.bind('$&#123;{secrets.UPLOADER_EMAIL}}'));
-$hook(undefined, 'UPLOADER_NAME', replaceMarkdown.bind('$&#123;{secrets.UPLOADER_NAME}}'));
+$hook('', 'GITHUB_TOKEN', replaceMarkdown.bind('$&#123;{secrets.GITHUB_TOKEN}}'));
+$hook('', 'UPLOAD_GIT', replaceMarkdown.bind('$&#123;{secrets.UPLOAD_GIT}}'));
+$hook('', 'UPLOAD_KEY', replaceMarkdown.bind('$&#123;{secrets.UPLOAD_KEY}}'));
+$hook('', 'UPLOADER_EMAIL', replaceMarkdown.bind('$&#123;{secrets.UPLOADER_EMAIL}}'));
+$hook('', 'UPLOADER_NAME', '$&#123;{secrets.UPLOADER_NAME}}');
 </script>
 
 ### Port a Poo! Ho!
@@ -197,11 +197,11 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > $({.PUBLIC_KEY})
 > ```
 > 
-> (_<sub><sup>powered by the lovely</sup></sub>_ [cryptico](https://github.com/wwwtyro/cryptico){:target="_blank"})
-> 
 > <form id="rsagen" onsubmit="return generateKeys(this)"><p><sub><sup><em>[optional]</em></sup></sub> Password? <input type="text" placeholder="password"/> <button type="submit">Regenerate!</button></p>
 > 
 > <p>Strength: <label><input type="radio" name="rsabits" value="1024">1024</label> <label><input type="radio" name="rsabits" value="2048" checked="checked">2048</label> <label><input type="radio" name="rsabits" value="4096">4096</label></p></form>
+> 
+> (_<sub><sup>powered by the lovely</sup></sub>_ [cryptico](https://github.com/wwwtyro/cryptico){:target="_blank"})
 > 
 > C. [Paste](https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new){:target="_blank"}: `portapoo` `{ write: true }`
 > 
