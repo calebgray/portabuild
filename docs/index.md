@@ -134,7 +134,7 @@ function replaceMarkdown(trigger) {
 
 function generateKeys(trigger) {
     let passPhrase = trigger[0].value;
-    let privateKey = cryptico.generateRSAKey(passPhrase, trigger[1].value);
+    let privateKey = cryptico.generateRSAKey(passPhrase, trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value || trigger[4].checked && trigger[4].value);
     let publicKey = cryptico.publicKeyString(privateKey);
     $hook(privateKey, 'PRIVATE_KEY', setEscapedHtml);
     $hook(publicKey, 'PUBLIC_KEY', setEscapedHtml);
