@@ -3,9 +3,8 @@
 img._ { display:none }
 blockquote { background-image:none;padding:0 }
 pre,.header-level-2,.highlight { border:0 }
-.highlighter-rouge,pre.highlight,code { background:#111 }
-code { background:#111;padding:4px;border-radius:2px }
-input { background:#111;border:1px solid #666;border-radius:2px;color:#fff;padding-left:2px }
+.highlighter-rouge,pre.highlight,code { background:#111;padding:4px;border-radius:3px }
+input { background:#111;border:1px solid #666;border-radius:3px;color:#fff;padding-left:2px }
 .shell { zoom:125% }
 </style>
 # _
