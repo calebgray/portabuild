@@ -140,11 +140,11 @@ function generateKeys(trigger) {
     return false;
 }
 
-$hook('$&#123;{secrets.GITHUB_TOKEN}}', 'GITHUB_TOKEN', replaceMarkdown);
-$hook('$&#123;{secrets.UPLOAD_GIT}}', 'UPLOAD_GIT', replaceMarkdown);
-$hook('$&#123;{secrets.UPLOAD_KEY}}', 'UPLOAD_KEY', replaceMarkdown);
-$hook('$&#123;{secrets.UPLOADER_EMAIL}}', 'UPLOADER_EMAIL', replaceMarkdown);
-$hook('$&#123;{secrets.UPLOADER_NAME}}', 'UPLOADER_NAME', replaceMarkdown);
+$hook(undefined, 'GITHUB_TOKEN', replaceMarkdown.bind('$&#123;{secrets.GITHUB_TOKEN}}'));
+$hook(undefined, 'UPLOAD_GIT', replaceMarkdown.bind('$&#123;{secrets.UPLOAD_GIT}}'));
+$hook(undefined, 'UPLOAD_KEY', replaceMarkdown.bind('$&#123;{secrets.UPLOAD_KEY}}'));
+$hook(undefined, 'UPLOADER_EMAIL', replaceMarkdown.bind('$&#123;{secrets.UPLOADER_EMAIL}}'));
+$hook(undefined, 'UPLOADER_NAME', replaceMarkdown.bind('$&#123;{secrets.UPLOADER_NAME}}'));
 </script>
 
 ### Port a Poo! Ho!
@@ -161,7 +161,7 @@ See Mark Twain's aforementioned words of wisdom.
 
 Target: <label for="username">github.com/<input id="username" type="text" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="your username"></label><label for="reponame">/<input id="reponame" type="text" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="your repo"></label>
 
-> A. Create `build.sh || build/ubuntu.sh || build/linux.sh` in [github.com/$({.username})/$({.reponame})](https://github.com/$({.username})/$({.reponame})/new/master).
+> A. Create `build.sh || build/ubuntu.sh || build/linux.sh` in [github.com/$({.username})/$({.reponame})](https://github.com/$({.username})/$({.reponame})/new/master){:target="_blank"}.
 > 
 > B. Copy:
 > 
@@ -180,16 +180,16 @@ Target: <label for="username">github.com/<input id="username" type="text" oninpu
 >       uses: calebgray/portapoo.action@master
 > ```
 > 
-> C. [Paste](https://github.com/$({.username})/$({.reponame})/new/master): `.github/workflows/$({.reponame}).yml`
+> C. [Paste](https://github.com/$({.username})/$({.reponame})/new/master){:target="_blank"}: `.github/workflows/$({.reponame}).yml`
 > 
 > <img class="_" onload="compileTemplate(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
 
 
 ### Upload <sub><sup><em>[optional]</em></sup></sub>
 
-You: <label for="fullname"><input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="Your Name"></label><label for="useremail">/<input id="useremail" type="email" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="your@e.mail"></label>
+You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="Your Name">/<input id="useremail" type="email" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="your@e.mail">
 
-> A. [Create](https://github.com/new) `$({.reponame})-builds` `{ type: private, readme: true }`
+> A. [Create](https://github.com/new){:target="_blank"} `$({.reponame})-builds` `{ type: private, readme: true }`
 > 
 > B. Copy:
 > 
@@ -197,13 +197,15 @@ You: <label for="fullname"><input id="fullname" type="email" oninput="$hook(this
 > $({.PUBLIC_KEY})
 > ```
 > 
-> (_<sub><sup>powered by the perfect-for-this-purpose-thank-you-so-much and lovely</sup></sub>_ [cryptico](https://github.com/wwwtyro/cryptico))
+> (_<sub><sup>powered by the perfect-for-this-purpose-thank-you-so-much and lovely</sup></sub>_ [cryptico](https://github.com/wwwtyro/cryptico){:target="_blank"})
 > 
-> <form id="rsagen" onsubmit="return generateKeys(this)"><sub><sup><em>[optional]</em></sup></sub> Password? <input type="text" placeholder="password"/> <button type="submit">Regenerate!</button> <input type="radio" id="rsabits[]" value="4096"><label for="rsabits[]">4096</label> <input type="radio" id="rsabits[]" value="2048" checked="checked"><label for="rsabits">2048</label> <input type="radio" id="rsabits[]" value="1024"><label for="rsabits[]">1024</label></form>
+> <form id="rsagen" onsubmit="return generateKeys(this)"><sub><sup><em>[optional]</em></sup></sub> Password? <input type="text" placeholder="password"/> <button type="submit">Regenerate!</button>
 > 
-> C. [Paste](https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new): `portapoo` `{ write: true }`
+> Strength: <label><input type="radio" id="rsabits[]" value="1024">1024</label> <label><input type="radio" id="rsabits[]" value="2048" checked="checked">2048</label> <label><input type="radio" id="rsabits[]" value="4096">4096</label></form>
 > 
-> D. [Set](https://github.com/$({.username})/$({.reponame})/settings/secrets):
+> C. [Paste](https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new){:target="_blank"}: `portapoo` `{ write: true }`
+> 
+> D. [Set](https://github.com/$({.username})/$({.reponame})/settings/secrets){:target="_blank"}:
 > 
 > - `UPLOAD_KEY`: `$({.PRIVATE_KEY})`
 > 
