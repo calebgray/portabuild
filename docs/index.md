@@ -144,7 +144,7 @@ $hook('', 'GITHUB_TOKEN', replaceMarkdown.bind('$&#123;{secrets.GITHUB_TOKEN}}')
 $hook('', 'UPLOAD_GIT', replaceMarkdown.bind('$&#123;{secrets.UPLOAD_GIT}}'));
 $hook('', 'UPLOAD_KEY', replaceMarkdown.bind('$&#123;{secrets.UPLOAD_KEY}}'));
 $hook('', 'UPLOADER_EMAIL', replaceMarkdown.bind('$&#123;{secrets.UPLOADER_EMAIL}}'));
-$hook('', 'UPLOADER_NAME', '$&#123;{secrets.UPLOADER_NAME}}');
+$hook('$&#123;{secrets.UPLOADER_NAME}}', 'UPLOADER_NAME', replaceMarkdown);
 </script>
 
 ### Port a Poo! Ho!
