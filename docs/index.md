@@ -3,7 +3,8 @@
 img._ { display:none }
 blockquote { background-image:none;padding:0 }
 pre,.header-level-2,.highlight { border:0 }
-input { border: 1px solid #000; }
+input { border:1px solid #000 }
+.highlighter-rouge { background:#000 }
 </style>
 # _
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cryptico/0.0.1343522940/cryptico.min.js"></script>
@@ -136,7 +137,7 @@ $hook(null, 'keys', function() {
 
 > "Never learn to do anything: if you don't learn, you'll always find someone else to do it for you." - Dead Asshole That Knew Some Shit
 
-### What is this?
+### What's This?
 
 See Mark Twain's words of wisdom.
 
