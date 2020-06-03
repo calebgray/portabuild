@@ -131,11 +131,11 @@ let passPhrase = "";
 let privateKey = cryptico.generateRSAKey(passPhrase, 2048);
 let publicKey = cryptico.publicKeyString(privateKey);
 </script>
-<input type="hidden" id="GITHUB_TOKEN" value="${{GITHUB_TOKEN}}">
-<input type="hidden" id="UPLOAD_GIT" value="${{UPLOAD_GIT}}">
-<input type="hidden" id="UPLOAD_KEY" value="${{UPLOAD_KEY}}">
-<input type="hidden" id="UPLOADER_EMAIL" value="${{UPLOADER_EMAIL}}">
-<input type="hidden" id="UPLOADER_NAME" value="${{UPLOADER_NAME}}">
+<input type="hidden" id="GITHUB_TOKEN" value="&#36;{{GITHUB_TOKEN}}">
+<input type="hidden" id="UPLOAD_GIT" value="&#36;{{UPLOAD_GIT}}">
+<input type="hidden" id="UPLOAD_KEY" value="&#36;{{UPLOAD_KEY}}">
+<input type="hidden" id="UPLOADER_EMAIL" value="&#36;{{UPLOADER_EMAIL}}">
+<input type="hidden" id="UPLOADER_NAME" value="&#36;{{UPLOADER_NAME}}">
 
 ### Port a Poo! Ho!
 
