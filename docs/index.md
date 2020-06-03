@@ -6,7 +6,7 @@ blockquote { background-image:none;padding:0 }
 pre,.header-level-2,.highlight { border:0 }
 .highlighter-rouge,pre.highlight,code { background:#111;padding:4px;border-radius:3px }
 input { background:#eee;border:1px solid #111;border-radius:3px;color:#111;padding-left:3px }
-h3 { margin-top:50px }
+h3 { margin-top:50px !important }
 </style>
 # _
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cryptico/0.0.1343522940/cryptico.min.js"></script>
