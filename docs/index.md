@@ -132,8 +132,7 @@ function replaceMarkdown(trigger) {
 }
 
 function generateKeys(trigger) {
-    console.log(arguments);
-    let passPhrase = "";
+    let passPhrase = trigger[0].value;
     let privateKey = cryptico.generateRSAKey(passPhrase, 2048);
     let publicKey = cryptico.publicKeyString(privateKey);
     $hook(privateKey, 'PRIVATE_KEY', setEscapedHtml);
@@ -162,46 +161,49 @@ See Mark Twain's aforementioned words of wisdom.
 
 Target: <label for="username">github.com/<input id="username" type="text" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="your username"></label><label for="reponame">/<input id="reponame" type="text" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="your repo"></label>
 
-> 1. Create `build.sh || build/ubuntu.sh || build/linux.sh` in [github.com/$({.username})/$({.reponame})](https://github.com/$({.username})/$({.reponame})/new/master).
+> A. Create `build.sh || build/ubuntu.sh || build/linux.sh` in [github.com/$({.username})/$({.reponame})](https://github.com/$({.username})/$({.reponame})/new/master).
 > 
-> 2. Copy:
+> B. Copy:
 > 
 > ```yaml
->     on: [ push, pull_request ]
->     
->     jobs:
->       Release:
->         runs-on: ubuntu-latest
->         env:
->           GITHUB_TOKEN: $({.GITHUB_TOKEN}}
->         steps:
->         - name: Checkout
->           uses: actions/checkout@master
->         - name: Build
->           uses: calebgray/portapoo.action@master
+> on: [ push, pull_request ]
+> 
+> jobs:
+>   Release:
+>     runs-on: ubuntu-latest
+>     env:
+>       GITHUB_TOKEN: $({.GITHUB_TOKEN}}
+>     steps:
+>     - name: Checkout
+>       uses: actions/checkout@master
+>     - name: Build
+>       uses: calebgray/portapoo.action@master
 > ```
 > 
-> 3. [Paste](https://github.com/$({.username})/$({.reponame})/new/master): `.github/workflows/$({.reponame}).yml`
+> C. [Paste](https://github.com/$({.username})/$({.reponame})/new/master): `.github/workflows/$({.reponame}).yml`
 > 
 > <img class="_" onload="compileTemplate(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
 
 
-### Upload _<sub><sup>[optional]</sup></sub>_
+### Upload <sub><sup><em>[optional]</em></sup></sub>
 
 You: <label for="fullname"><input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="Your Name"></label><label for="useremail">/<input id="useremail" type="email" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="your@e.mail"></label>
 
-> 1. [Create](https://github.com/new) `$({.reponame})-builds` `{ type: private, readme: true }`
+> A. [Create](https://github.com/new) `$({.reponame})-builds` `{ type: private, readme: true }`
 > 
-> 2. Copy:
+> B. Copy:
 > 
 > ```
 > $({.PUBLIC_KEY})
 > ```
-> <form id="rsagen" onsubmit="return generateKeys(this)"><sub><sup><i>[optional]</i></sup></sub>Password? <input type="text" name="name" id="id" placeholder="password"/> <button type="submit">Regenerate!</button></form> (_<sub><sup>powered by the lovely</sup></sub>_ [cryptico](https://github.com/wwwtyro/cryptico))
 > 
-> 3. [Paste](https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new): `portapoo` `{ write: true }`
+> (_<sub><sup>powered by the perfect-for-this-purpose-thank-you-so-much and lovely</sup></sub>_ [cryptico](https://github.com/wwwtyro/cryptico))
 > 
-> 4. [Create](https://github.com/$({.username})/$({.reponame})/settings/secrets):
+> <form id="rsagen" onsubmit="return generateKeys(this)"><sub><sup><em>[optional]</em></sup></sub> Password? <input type="text" placeholder="password"/> <button type="submit">Regenerate!</button> <input type="radio" id="rsabits[]" value="4096"><label for="rsabits[]">4096</label> <input type="radio" id="rsabits[]" value="2048" checked="checked"><label for="rsabits">2048</label> <input type="radio" id="rsabits[]" value="1024"><label for="rsabits[]">1024</label></form>
+> 
+> C. [Paste](https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new): `portapoo` `{ write: true }`
+> 
+> D. [Set](https://github.com/$({.username})/$({.reponame})/settings/secrets):
 > 
 > - `UPLOAD_KEY`: `$({.PRIVATE_KEY})`
 > 
