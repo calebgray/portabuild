@@ -87,7 +87,7 @@ function setEscapedUri(trigger) {
 
 function renderTemplate(templateHtml, v, trigger) {
   if (!trigger) return;
-  v[trigger.id] = typeof trigger === typeof "" ? trigger : trigger.value;
+  v[trigger.id] = trigger.value || trigger.dataset.value;
   this.innerHTML = eval('`'+templateHtml.replace(/`/g, "\\`")+'`');
 }
 
@@ -121,7 +121,7 @@ function compileTemplate(trigger) {
     }
   }
 
-  renderTemplate.call(templateSource, templateHtml, variables);
+  renderTemplate.call(templateSource, templateHtml, variables, templateSource);
   for (const variable of Object.keys(variables)) {
     $hook(templateSource, variable, renderTemplate.bind(templateSource, templateHtml, variables));
   }
@@ -130,12 +130,17 @@ function compileTemplate(trigger) {
 let passPhrase = "";
 let privateKey = cryptico.generateRSAKey(passPhrase, 2048);
 let publicKey = cryptico.publicKeyString(privateKey);
+
+
+
+
 </script>
-<input type="hidden" id="GITHUB_TOKEN" value="&#36;{{GITHUB_TOKEN}}">
-<input type="hidden" id="UPLOAD_GIT" value="&#36;{{UPLOAD_GIT}}">
-<input type="hidden" id="UPLOAD_KEY" value="&#36;{{UPLOAD_KEY}}">
-<input type="hidden" id="UPLOADER_EMAIL" value="&#36;{{UPLOADER_EMAIL}}">
-<input type="hidden" id="UPLOADER_NAME" value="&#36;{{UPLOADER_NAME}}">
+
+<img class="_" onload="$hook(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>" id="GITHUB_TOKEN" data-value="&#36;{{secrets.GITHUB_TOKEN}}"/>
+<img class="_" onload="$hook(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>" id="UPLOAD_GIT" data-value="&#36;{{secrets.UPLOAD_GIT}}"/>
+<img class="_" onload="$hook(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>" id="UPLOAD_KEY" data-value="&#36;{{secrets.UPLOAD_KEY}}"/>
+<img class="_" onload="$hook(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>" id="UPLOADER_EMAIL" data-value="&#36;{{secrets.UPLOADER_EMAIL}}"/>
+<img class="_" onload="$hook(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>" id="UPLOADER_NAME" data-value="&#36;{{secrets.UPLOADER_NAME}}"/>
 
 ### Port a Poo! Ho!
 
@@ -144,7 +149,7 @@ let publicKey = cryptico.publicKeyString(privateKey);
 
 ### What's This?
 
-See Mark Twain's words of wisdom.
+See Mark Twain's aforementioned words of wisdom.
 
 
 ### Build
