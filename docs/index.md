@@ -196,7 +196,7 @@ You: <label for="fullname"><input id="fullname" type="email" oninput="$hook(this
 > ```
 > $({.PUBLIC_KEY})
 > ```
-> <form id="rsagen" onsubmit="generateKeys(this)"> _<sub><sup>[optional]</sup></sub>_ Password? <input type="text" name="name" id="id" placeholder="password"/> <button type="submit">Regenerate!</button></form> (_<sub><sup>powered by the lovely</sup></sub>_ [cryptico](https://github.com/wwwtyro/cryptico))
+> <form id="rsagen" onsubmit="generateKeys(this)"><sub><sup><i>[optional]</i></sup></sub>Password? <input type="text" name="name" id="id" placeholder="password"/> <button type="submit">Regenerate!</button></form> (_<sub><sup>powered by the lovely</sup></sub>_ [cryptico](https://github.com/wwwtyro/cryptico))
 > 
 > 3. [Paste](https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new): `portapoo` `{ write: true }`
 > 
@@ -206,9 +206,9 @@ You: <label for="fullname"><input id="fullname" type="email" oninput="$hook(this
 > 
 > - `UPLOAD_GIT`: `git@github.com:$({.username})/$({.reponame})-builds.git`
 > 
-> - `UPLOADER_EMAIL`: `$({.useremail})`
-> 
 > - `UPLOADER_NAME`: `$({.fullname})`
+> 
+> - `UPLOADER_EMAIL`: `$({.useremail})`
 > 
 > ```yaml
 > on: [ push, pull_request ]
