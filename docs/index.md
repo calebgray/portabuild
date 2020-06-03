@@ -127,11 +127,6 @@ function compileTemplate(trigger) {
   }
 }
 
-function replaceMarkdown(trigger) {
-  console.log(this);
-  console.log(arguments);
-}
-
 function generateKeys(trigger) {
     let passPhrase = trigger[0].value;
     let keyStrength = Math.round(trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value || trigger[4].checked && trigger[4].value);
@@ -142,11 +137,16 @@ function generateKeys(trigger) {
     return false;
 }
 
-$hook('$&#123;{secrets.GITHUB_TOKEN})', 'GITHUB_TOKEN', replaceMarkdown);
-$hook('$&#123;{secrets.UPLOAD_GIT})', 'UPLOAD_GIT', replaceMarkdown);
-$hook('$&#123;{secrets.UPLOAD_KEY})', 'UPLOAD_KEY', replaceMarkdown);
-$hook('$&#123;{secrets.UPLOADER_EMAIL})', 'UPLOADER_EMAIL', replaceMarkdown);
-$hook('$&#123;{secrets.UPLOADER_NAME})', 'UPLOADER_NAME', replaceMarkdown);
+function replaceMarkdown(trigger) {
+  console.log(this);
+  console.log(arguments);
+}
+
+$hook(undefined, 'GITHUB_TOKEN', replaceMarkdown.bind('$&#123;{secrets.GITHUB_TOKEN})'));
+$hook(undefined, 'UPLOAD_GIT', replaceMarkdown.bind('$&#123;{secrets.UPLOAD_GIT})'));
+$hook(undefined, 'UPLOAD_KEY', replaceMarkdown.bind('$&#123;{secrets.UPLOAD_KEY})'));
+$hook(undefined, 'UPLOADER_EMAIL', replaceMarkdown.bind('$&#123;{secrets.UPLOADER_EMAIL})'));
+$hook(undefined, 'UPLOADER_NAME', replaceMarkdown.bind('$&#123;{secrets.UPLOADER_NAME})'));
 </script>
 
 ### Port a Poo! Ho!
