@@ -19,7 +19,7 @@ const $hook_prefix = '_';
 const $hook_key = $hook_prefix+'id';
 
 let $hook_id = 0;
-Object.defineProperty(Object.prototype, $hook_key, {
+Object.defineProperty(Function.prototype, $hook_key, {
   get: function() {
     Object.defineProperty(this, $hook_key, { value: $hook_id++, writable: false });
     return this[$hook_key];
