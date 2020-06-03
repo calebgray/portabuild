@@ -128,6 +128,7 @@ function compileTemplate(trigger) {
 }
 
 function replaceMarkdown(trigger) {
+  console.log(this);
   console.log(arguments);
 }
 
@@ -140,11 +141,11 @@ function generateKeys(trigger) {
     return false;
 }
 
-$hook('', 'GITHUB_TOKEN', replaceMarkdown.bind('$&#123;{secrets.GITHUB_TOKEN}}'));
-$hook('', 'UPLOAD_GIT', replaceMarkdown.bind('$&#123;{secrets.UPLOAD_GIT}}'));
-$hook('', 'UPLOAD_KEY', replaceMarkdown.bind('$&#123;{secrets.UPLOAD_KEY}}'));
-$hook('', 'UPLOADER_EMAIL', replaceMarkdown.bind('$&#123;{secrets.UPLOADER_EMAIL}}'));
-$hook('$&#123;{secrets.UPLOADER_NAME}}', 'UPLOADER_NAME', replaceMarkdown);
+$hook('$&#123;{secrets.GITHUB_TOKEN})', 'GITHUB_TOKEN', replaceMarkdown);
+$hook('$&#123;{secrets.UPLOAD_GIT})', 'UPLOAD_GIT', replaceMarkdown);
+$hook('$&#123;{secrets.UPLOAD_KEY})', 'UPLOAD_KEY', replaceMarkdown);
+$hook('$&#123;{secrets.UPLOADER_EMAIL})', 'UPLOADER_EMAIL', replaceMarkdown);
+$hook('$&#123;{secrets.UPLOADER_NAME})', 'UPLOADER_NAME', replaceMarkdown);
 </script>
 
 ### Port a Poo! Ho!
