@@ -4,11 +4,12 @@
 img._ { display:none }
 blockquote { background-image:none;padding:0 }
 pre,.header-level-2,.highlight { border:0 }
-.highlighter-rouge,pre.highlight,code { background:#111;padding:4px;border-radius:3px }
+.highlighter-rouge,pre.highlight,code { background:#111;border-radius:3px }
+code { padding:4px }
 input { background:#eee;border:1px solid #111;border-radius:3px;color:#111;padding-left:3px }
 h3 { margin-top:50px !important }
 hr { margin:50px 0 0 }
-pre.highlight { padding: 0 0 0 8px }
+pre.highlight { padding:4px 8px 4px }
 </style>
 # _
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cryptico/0.0.1343522940/cryptico.min.js"></script>
