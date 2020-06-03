@@ -136,8 +136,9 @@ function generateKeys(trigger) {
     let passPhrase = "";
     let privateKey = cryptico.generateRSAKey(passPhrase, 2048);
     let publicKey = cryptico.publicKeyString(privateKey);
-    $hook(privateKey, 'PRIVATE_KEY', generateKeys);
-    $hook(publicKey, 'PUBLIC_KEY', generateKeys);
+    $hook(privateKey, 'PRIVATE_KEY', setEscapedHtml);
+    $hook(publicKey, 'PUBLIC_KEY', setEscapedHtml);
+    return false;
 }
 
 $hook('$&#123;{secrets.GITHUB_TOKEN}}', 'GITHUB_TOKEN', replaceMarkdown);
@@ -196,7 +197,7 @@ You: <label for="fullname"><input id="fullname" type="email" oninput="$hook(this
 > ```
 > $({.PUBLIC_KEY})
 > ```
-> <form id="rsagen" onsubmit="generateKeys(this)"><sub><sup><i>[optional]</i></sup></sub>Password? <input type="text" name="name" id="id" placeholder="password"/> <button type="submit">Regenerate!</button></form> (_<sub><sup>powered by the lovely</sup></sub>_ [cryptico](https://github.com/wwwtyro/cryptico))
+> <form id="rsagen" onsubmit="return generateKeys(this)"><sub><sup><i>[optional]</i></sup></sub>Password? <input type="text" name="name" id="id" placeholder="password"/> <button type="submit">Regenerate!</button></form> (_<sub><sup>powered by the lovely</sup></sub>_ [cryptico](https://github.com/wwwtyro/cryptico))
 > 
 > 3. [Paste](https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new): `portapoo` `{ write: true }`
 > 
