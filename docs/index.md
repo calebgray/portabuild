@@ -1,11 +1,12 @@
 <style>
+.shell { zoom:125% }
 .header-level-1 { display:none }
 img._ { display:none }
 blockquote { background-image:none;padding:0 }
 pre,.header-level-2,.highlight { border:0 }
 .highlighter-rouge,pre.highlight,code { background:#111;padding:4px;border-radius:3px }
 input { background:#eee;border:1px solid #111;border-radius:3px;color:#111;padding-left:3px }
-.shell { zoom:125% }
+h3 { margin-top:50px }
 </style>
 # _
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cryptico/0.0.1343522940/cryptico.min.js"></script>
