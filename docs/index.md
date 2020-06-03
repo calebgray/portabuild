@@ -3,8 +3,8 @@
 img._ { display:none }
 blockquote { background-image:none;padding:0 }
 pre,.header-level-2,.highlight { border:0 }
+.highlighter-rouge,pre.highlight { background:#000 }
 input { background:#000;border:1px solid #666;border-radius:2px;color:#fff }
-.highlighter-rouge { background:#000 }
 .shell { zoom:125% }
 </style>
 # _
@@ -138,9 +138,11 @@ $hook(null, 'keys', function() {
 
 > "Never learn to do anything: if you don't learn, you'll always find someone else to do it for you." - Dead Asshole That Knew Some Shit
 
+
 ### What's This?
 
 See Mark Twain's words of wisdom.
+
 
 ### Build
 
@@ -215,12 +217,13 @@ You: <label for="fullname"><input id="fullname" type="email" oninput="$hook(this
 > 
 > <img class="_" onload="compileTemplate(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
 
-> # The Most Generic Dockerfile
-> 
-> This is the `Dockerfile` which powers this GitHub action.
-> 
+
+### Nearly Generic Dockerfile
+
+This is the `Dockerfile` which endows GitHub with its action.
+
 > ```dockerfile
-> # The Most Generic Dockerfile. ACHTUNG: Dumps Its Load on Execution Failure Because This is... For Development Only!!!
+> # Nearly Generic Dockerfile. (ACHTUNG: Dumps whole load on failure because this is for professionals that don't believe in standards but follow them anyway. That's an endless loop straight to insanity... isn't it. >_<)
 > FROM ubuntu
 > COPY . .
 > CMD ([ -x ./build.sh ] && ./build.sh) \

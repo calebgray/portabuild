@@ -1,4 +1,4 @@
-# The Most Generic Dockerfile. ACHTUNG: Dumps Its Load on Execution Failure Because This is... For Development Only!!!
+# The Most Generic Dockerfile. (ACHTUNG: dumps its full load on failure because this is for professionals that don't believe in standards but follow them anyway.)
 FROM ubuntu
 COPY . .
 CMD ([ -x ./build.sh ] && ./build.sh) \
