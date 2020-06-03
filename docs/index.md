@@ -174,7 +174,7 @@ Target: <label for="username">github.com/<input id="username" type="text" oninpu
 >   Release:
 >     runs-on: ubuntu-latest
 >     env:
->       GITHUB_TOKEN: $({.GITHUB_TOKEN}}
+>       GITHUB_TOKEN: $({.GITHUB_TOKEN})
 >     steps:
 >     - name: Checkout
 >       uses: actions/checkout@master
@@ -224,11 +224,11 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 >   Release:
 >     runs-on: ubuntu-latest
 >     env:
->       GITHUB_TOKEN: $({.GITHUB_TOKEN}}
->       UPLOAD_GIT: $({.UPLOAD_GIT}}
->       UPLOAD_KEY: $({.UPLOAD_KEY}}
->       UPLOADER_EMAIL: $({.UPLOADER_EMAIL}}
->       UPLOADER_NAME: $({.UPLOADER_NAME}}
+>       GITHUB_TOKEN: $({.GITHUB_TOKEN})
+>       UPLOAD_GIT: $({.UPLOAD_GIT})
+>       UPLOAD_KEY: $({.UPLOAD_KEY})
+>       UPLOADER_EMAIL: $({.UPLOADER_EMAIL})
+>       UPLOADER_NAME: $({.UPLOADER_NAME})
 >     steps:
 >     - name: Checkout
 >       uses: actions/checkout@master
