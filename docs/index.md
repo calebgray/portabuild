@@ -119,7 +119,7 @@ function compileTemplate(trigger) {
     }
   }
 
-  renderTemplate.bind(templateSource, templateHtml, variables)();
+  renderTemplate.call(templateSource, templateHtml, variables);
   for (const variable of Object.keys(variables)) {
     $hook(templateSource, variable, renderTemplate.bind(templateSource, templateHtml, variables));
   }
