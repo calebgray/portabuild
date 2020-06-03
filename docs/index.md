@@ -8,7 +8,7 @@ pre,.header-level-2,.highlight { border:0 }
 input { background:#eee;border:1px solid #111;border-radius:3px;color:#111;padding-left:3px }
 h3 { margin-top:50px !important }
 hr { margin:50px 0 0 }
-div.highlighter-rouge { padding: 0 0 0 4px !important }
+pre.highlight { padding: 0 0 0 8px }
 </style>
 # _
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cryptico/0.0.1343522940/cryptico.min.js"></script>
