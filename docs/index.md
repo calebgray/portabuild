@@ -2,6 +2,7 @@
 .header-level-1 { display:none }
 img._ { display:none }
 blockquote { background-image:none;padding:0 }
+pre,.header-level-2,.highlight { border:0 }
 </style>
 # _
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cryptico/0.0.1343522940/cryptico.min.js"></script>
@@ -130,11 +131,17 @@ $hook(null, 'keys', function() {
 })
 </script>
 
-### Port a Poo!
+### Port a Poo! Ho!
 
-<label for="username">*User Name* <input id="username" type="text" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="username"></label> // <label for="reponame">*Repo Name* <input id="reponame" type="text" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="reponame"></label>
+> "Never learn to do anything: if you don't learn, you'll always find someone else to do it for you." - Dead Asshole That Knew Some Shit
+
+### What is this?
+
+See Mark Twain's words of wisdom.
 
 ### Build
+
+<label for="username">*User Name* <input id="username" type="text" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="username"></label> // <label for="reponame">*Repo Name* <input id="reponame" type="text" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="reponame"></label>
 
 > 0. Create `build.sh || build/ubuntu.sh || build/linux.sh` in [github.com/$({.username})/$({.reponame})](https://github.com/$({.username})/$({.reponame})/new/master).
 > 
