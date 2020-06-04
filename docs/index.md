@@ -1,10 +1,10 @@
 <style>
 .shell { zoom:125% }
 body,div,p,blockquote { font-size:0.99em;font-family:Tahoma,Geneva,sans-serif !important }
-blockquote { color:#544943 }
+blockquote { color:#544943;margin:0 }
 img._ { display:none }
 blockquote { background-image:none;padding:0 }
-pre,.header-level-1,.highlight { border:0;padding:0;text-align:left;font-style:normal }
+pre,.header-level-1,.highlight { border:0;padding:0;text-align:left;font-style:normal;font-size:1.3em }
 .highlighter-rouge,pre.highlight,code { background:#111;color:#ddd;border-radius:3px }
 code { padding:4px }
 input { background:#eee;border:1px solid #111;border-radius:3px;color:#111;padding-left:3px }
@@ -152,17 +152,7 @@ $hook(undefined, 'UPLOADER_NAME', replaceMarkdown.bind('$&#123;{secrets.UPLOADER
 
 ### Port a Poo! Ho!
 
-> "Never learn to do anything: if you don't learn, you'll always find someone else to do it for you." - Dead Asshole That Knew Some Shit
-
-
-### What's This?
-
-See Mark Twain's aforementioned words of wisdom.
-
-
-### Which Web Framework Are You Using?
-
-I'm not answering anymore of these ridiculous questions, my dudes, see below. <3
+> "Never learn to do anything: if you don't learn, you'll always find someone else to do it for you." - Mark Twain
 
 
 ### Build
