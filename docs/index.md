@@ -144,7 +144,6 @@ function generateKeys(trigger) {
     $hook({ id: 'PUBLIC_KEY', value: publicKey });
     return false;
 }
-generateKeys();
 
 const variableFormats = {
  _: '{0}',
@@ -238,7 +237,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 >       uses: calebgray/portapoo.action@master
 > ```
 > 
-> <img class="_" onload="compileTemplate(this, variableFormats)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
+> <img class="_" onload="compileTemplate(this, variableFormats);generateKeys()" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
 
 
 ### Nearly Generic Dockerfile
