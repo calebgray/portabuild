@@ -130,14 +130,21 @@ function compileTemplate(trigger, formats) {
 }
 
 function generateKeys(trigger) {
-    let passPhrase = trigger[0].value;
-    let keyStrength = Math.round(trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value || trigger[4].checked && trigger[4].value);
+    let passPhrase, keyStrength;
+    if (!trigger) {
+        passPhrase = '';
+        keyStrength = 2048;
+    } else {
+        passPhrase = trigger[0].value;
+        keyStrength = Math.round(trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value || trigger[4].checked && trigger[4].value);
+    }
     let privateKey = cryptico.generateRSAKey(passPhrase, keyStrength);
     let publicKey = cryptico.publicKeyString(privateKey);
-    $hook(trigger, 'PRIVATE_KEY', setEscapedHtml.bind(privateKey));
-    $hook(trigger, 'PUBLIC_KEY', setEscapedHtml.bind(publicKey));
+    $hook({[$hook_key]: 'PRIVATE_KEY', value: privateKey});
+    $hook({[$hook_key]: 'PUBLIC_KEY', value: publicKey});
     return false;
 }
+generateKeys();
 
 const variableFormats = {
  _: '{0}',
