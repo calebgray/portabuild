@@ -264,4 +264,4 @@ This is the `Dockerfile` which endows GitHub with its action.
 
 ---
 
-Zealously cultivated in the supernova of my sadness.
+->Zealously cultivated in the supernova of my sadness.<-
