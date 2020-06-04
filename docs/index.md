@@ -1,11 +1,12 @@
 <style>
 body,div,p,blockquote { font-size:0.99em;font-family:Tahoma,Geneva,sans-serif !important }
+blockquote { color:#000 }
 .shell { zoom:125% }
 .header-level-1 { display:none }
 img._ { display:none }
 blockquote { background-image:none;padding:0 }
 pre,.header-level-2,.highlight { border:0 }
-.highlighter-rouge,pre.highlight,code { background:#111;border-radius:3px }
+.highlighter-rouge,pre.highlight,code { background:#111;color:#ddd;border-radius:3px }
 code { padding:4px }
 input { background:#eee;border:1px solid #111;border-radius:3px;color:#111;padding-left:3px }
 h3 { margin-top:50px !important }
