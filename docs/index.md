@@ -2,10 +2,9 @@
 .shell { zoom:125% }
 body,div,p,blockquote { font-size:0.99em;font-family:Tahoma,Geneva,sans-serif !important }
 blockquote { color:#544943 }
-.header-level-1 { display:none }
 img._ { display:none }
 blockquote { background-image:none;padding:0 }
-pre,.header-level-2,.highlight { border:0 }
+pre,h3,.highlight { border:0 }
 .highlighter-rouge,pre.highlight,code { background:#111;color:#ddd;border-radius:3px }
 code { padding:4px }
 input { background:#eee;border:1px solid #111;border-radius:3px;color:#111;padding-left:3px }
@@ -263,5 +262,4 @@ This is the `Dockerfile` which endows GitHub with its action.
 
 
 ---
-
-->Zealously cultivated in the supernova of my sadness.<-
+<p style="text-align:center">Zealously cultivated in the supernova of my sadness and compassion.</p>
