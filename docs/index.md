@@ -114,7 +114,7 @@ function compileTemplate(trigger, formatter) {
       continue;
     case 1:
       partType = 2;
-      variables[templatePart] = !formatter ? templatePart : formatter.format(templatePart);
+      variables[templatePart] = !formatter ? templatePart : formatter.replace('{0}', templatePart);
       templateHtml += '${v.'+templatePart+'}';
       continue;
     case 2:
