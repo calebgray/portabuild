@@ -1,6 +1,6 @@
 <style>
 body,div,p,blockquote { font-size:0.99em;font-family:Tahoma,Geneva,sans-serif !important }
-blockquote { color:#000 }
+blockquote { color:#544943 }
 .shell { zoom:125% }
 .header-level-1 { display:none }
 img._ { display:none }
