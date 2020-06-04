@@ -1,6 +1,6 @@
 <style>
 .shell { zoom:125% }
-body,div,p,blockquote { font-size:0.99em;font-family:Tahoma,Geneva,sans-serif !important }
+body,div,p,blockquote,pre { font-size:0.99em;font-family:Tahoma,Geneva,sans-serif !important }
 blockquote { color:#544943;margin:0 }
 img._ { display:none }
 blockquote { background-image:none;padding:0 }
