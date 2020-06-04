@@ -1,7 +1,7 @@
 <style>
+.shell { zoom:125% }
 body,div,p,blockquote { font-size:0.99em;font-family:Tahoma,Geneva,sans-serif !important }
 blockquote { color:#544943 }
-.shell { zoom:125% }
 .header-level-1 { display:none }
 img._ { display:none }
 blockquote { background-image:none;padding:0 }
@@ -150,7 +150,6 @@ $hook(undefined, 'UPLOAD_KEY', replaceMarkdown.bind('$&#123;{secrets.UPLOAD_KEY}
 $hook(undefined, 'UPLOADER_EMAIL', replaceMarkdown.bind('$&#123;{secrets.UPLOADER_EMAIL})'));
 $hook(undefined, 'UPLOADER_NAME', replaceMarkdown.bind('$&#123;{secrets.UPLOADER_NAME})'));
 </script>
-# _
 
 ### Port a Poo! Ho!
 
