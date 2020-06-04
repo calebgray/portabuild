@@ -94,7 +94,7 @@ function renderTemplate(templateHtml, v, trigger) {
 }
 
 const $hook_template_variable = /(\$)\({\.(.*?)}\)/g;
-function compileTemplate(trigger, formatter) {
+function compileTemplate(trigger, formats) {
   const templateSource = trigger.parentNode.parentNode;
   trigger.parentNode.remove();
 
@@ -114,7 +114,7 @@ function compileTemplate(trigger, formatter) {
       continue;
     case 1:
       partType = 2;
-      variables[templatePart] = !formatter ? templatePart : formatter.replace('{0}', templatePart);
+      variables[templatePart] = !formats ? templatePart : formats.hasOwnProperty(templatePart) ? formats[templatePart].replace('{0}', templatePart) : formats.hasOwnProperty('_') ? formats._.replace('{0}', templatePart) : formats.replace('{0}', templatePart);
       templateHtml += '${v.'+templatePart+'}';
       continue;
     case 2:
@@ -222,7 +222,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 >       uses: calebgray/portapoo.action@master
 > ```
 > 
-> <img class="_" onload="compileTemplate(this, '$&#123;{secrets.{0}}}')" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
+> <img class="_" onload="compileTemplate(this, { _:'{0}', 'GITHUB_TOKEN':'$&#123;{secrets.{0}}}' })" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
 
 
 ### Nearly Generic Dockerfile
