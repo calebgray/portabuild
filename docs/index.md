@@ -20,7 +20,7 @@ const $hook_prefix = '_';
 const $hook_key = $hook_prefix+'id';
 
 let $hook_id = 0;
-Object.defineProperty(Function.prototype, $hook_key, {
+Object.defineProperty(Object.prototype, $hook_key, {
   get: function() {
     Object.defineProperty(this, $hook_key, { value: $hook_id++, writable: false });
     return this[$hook_key];
@@ -133,8 +133,8 @@ function generateKeys(trigger) {
     let keyStrength = Math.round(trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value || trigger[4].checked && trigger[4].value);
     let privateKey = cryptico.generateRSAKey(passPhrase, keyStrength);
     let publicKey = cryptico.publicKeyString(privateKey);
-    $hook(privateKey, 'PRIVATE_KEY', setEscapedHtml);
-    $hook(publicKey, 'PUBLIC_KEY', setEscapedHtml);
+    $hook(privateKey, 'PRIVATE_KEY', setEscapedHtml.bind(privateKey));
+    $hook(publicKey, 'PUBLIC_KEY', setEscapedHtml.bind(publicKey));
     return false;
 }
 
@@ -143,11 +143,11 @@ function replaceMarkdown(trigger) {
   console.log(arguments);
 }
 
-$hook(undefined, 'GITHUB_TOKEN', replaceMarkdown.bind('$&#123;{secrets.GITHUB_TOKEN})'));
-$hook(undefined, 'UPLOAD_GIT', replaceMarkdown.bind('$&#123;{secrets.UPLOAD_GIT})'));
-$hook(undefined, 'UPLOAD_KEY', replaceMarkdown.bind('$&#123;{secrets.UPLOAD_KEY})'));
-$hook(undefined, 'UPLOADER_EMAIL', replaceMarkdown.bind('$&#123;{secrets.UPLOADER_EMAIL})'));
-$hook(undefined, 'UPLOADER_NAME', replaceMarkdown.bind('$&#123;{secrets.UPLOADER_NAME})'));
+$hook('GITHUB_TOKEN', 'GITHUB_TOKEN', replaceMarkdown.bind('$&#123;{secrets.GITHUB_TOKEN})'));
+$hook('UPLOAD_GIT', 'UPLOAD_GIT', replaceMarkdown.bind('$&#123;{secrets.UPLOAD_GIT})'));
+$hook('UPLOAD_KEY', 'UPLOAD_KEY', replaceMarkdown.bind('$&#123;{secrets.UPLOAD_KEY})'));
+$hook('UPLOADER_EMAIL', 'UPLOADER_EMAIL', replaceMarkdown.bind('$&#123;{secrets.UPLOADER_EMAIL})'));
+$hook('UPLOADER_NAME', 'UPLOADER_NAME', replaceMarkdown.bind('$&#123;{secrets.UPLOADER_NAME})'));
 </script>
 
 ### Port a Poo! Ho!
