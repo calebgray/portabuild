@@ -4,7 +4,7 @@ body,div,p,blockquote { font-size:0.99em;font-family:Tahoma,Geneva,sans-serif !i
 blockquote { color:#544943 }
 img._ { display:none }
 blockquote { background-image:none;padding:0 }
-pre,h3,.highlight { border:0 }
+pre,.header-level-1,.highlight { border:0;padding:0;text-align:left;font-style:normal }
 .highlighter-rouge,pre.highlight,code { background:#111;color:#ddd;border-radius:3px }
 code { padding:4px }
 input { background:#eee;border:1px solid #111;border-radius:3px;color:#111;padding-left:3px }
