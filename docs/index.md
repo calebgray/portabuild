@@ -138,6 +138,15 @@ function generateKeys(trigger) {
     $hook(trigger, 'PUBLIC_KEY', setEscapedHtml.bind(publicKey));
     return false;
 }
+
+const variableFormats = {
+ _: '{0}',
+ GITHUB_TOKEN: '$&#123;{secrets.GITHUB_TOKEN}}',
+ UPLOAD_GIT: '$&#123;{secrets.UPLOAD_GIT}}',
+ UPLOAD_KEY: '$&#123;{secrets.UPLOAD_KEY}}',
+ UPLOADER_EMAIL: '$&#123;{secrets.UPLOADER_EMAIL}}',
+ UPLOADER_NAME: '$&#123;{secrets.UPLOADER_NAME}}',
+};
 </script>
 
 ### Port a Poo! Ho!
@@ -222,7 +231,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 >       uses: calebgray/portapoo.action@master
 > ```
 > 
-> <img class="_" onload="compileTemplate(this, { '_':'{0}', 'GITHUB_TOKEN':'$&#123;{secrets.{0}}}' })" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
+> <img class="_" onload="compileTemplate(this, variableFormats)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
 
 
 ### Nearly Generic Dockerfile
