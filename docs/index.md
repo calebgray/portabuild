@@ -140,8 +140,8 @@ function generateKeys(trigger) {
     }
     let privateKey = cryptico.generateRSAKey(passPhrase, keyStrength);
     let publicKey = cryptico.publicKeyString(privateKey);
-    $hook({[$hook_key]: 'PRIVATE_KEY', value: privateKey});
-    $hook({[$hook_key]: 'PUBLIC_KEY', value: publicKey});
+    $hook(privateKey, 'PRIVATE_KEY');
+    $hook(publicKey, 'PUBLIC_KEY');
     return false;
 }
 generateKeys();
