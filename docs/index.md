@@ -222,7 +222,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 >       uses: calebgray/portapoo.action@master
 > ```
 > 
-> <img class="_" onload="compileTemplate(this, '$&#123;{secrets.{0}})')" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
+> <img class="_" onload="compileTemplate(this, '$&#123;{secrets.{0}}}')" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
 
 
 ### Nearly Generic Dockerfile
