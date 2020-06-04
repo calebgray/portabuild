@@ -94,7 +94,7 @@ function renderTemplate(templateHtml, v, trigger) {
 }
 
 const $hook_template_variable = /(\$)\({\.(.*?)}\)/g;
-function compileTemplate(trigger) {
+function compileTemplate(trigger, formatter) {
   const templateSource = trigger.parentNode.parentNode;
   trigger.parentNode.remove();
 
@@ -114,7 +114,7 @@ function compileTemplate(trigger) {
       continue;
     case 1:
       partType = 2;
-      variables[templatePart] = templatePart;
+      variables[templatePart] = !formatter ? templatePart : formatter.format(templatePart);
       templateHtml += '${v.'+templatePart+'}';
       continue;
     case 2:
@@ -134,21 +134,10 @@ function generateKeys(trigger) {
     let keyStrength = Math.round(trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value || trigger[4].checked && trigger[4].value);
     let privateKey = cryptico.generateRSAKey(passPhrase, keyStrength);
     let publicKey = cryptico.publicKeyString(privateKey);
-    $hook({[$hook_key]: $hook_id++}, 'PRIVATE_KEY', setEscapedHtml.bind(privateKey));
-    $hook({[$hook_key]: $hook_id++}, 'PUBLIC_KEY', setEscapedHtml.bind(publicKey));
+    $hook(trigger, 'PRIVATE_KEY', setEscapedHtml.bind(privateKey));
+    $hook(trigger, 'PUBLIC_KEY', setEscapedHtml.bind(publicKey));
     return false;
 }
-
-function replaceMarkdown(trigger) {
-  console.log(this);
-  console.log(arguments);
-}
-
-$hook({[$hook_key]: $hook_id++}, 'GITHUB_TOKEN', replaceMarkdown.bind('$&#123;{secrets.GITHUB_TOKEN})'));
-$hook({[$hook_key]: $hook_id++}, 'UPLOAD_GIT', replaceMarkdown.bind('$&#123;{secrets.UPLOAD_GIT})'));
-$hook({[$hook_key]: $hook_id++}, 'UPLOAD_KEY', replaceMarkdown.bind('$&#123;{secrets.UPLOAD_KEY})'));
-$hook({[$hook_key]: $hook_id++}, 'UPLOADER_EMAIL', replaceMarkdown.bind('$&#123;{secrets.UPLOADER_EMAIL})'));
-$hook({[$hook_key]: $hook_id++}, 'UPLOADER_NAME', replaceMarkdown.bind('$&#123;{secrets.UPLOADER_NAME})'));
 </script>
 
 ### Port a Poo! Ho!
@@ -196,7 +185,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > $({.PUBLIC_KEY})
 > ```
 > 
-> <form id="rsagen" onsubmit="return generateKeys(this)"><p><sub><sup><em>[optional]</em></sup></sub> Password? <input type="text" placeholder="password"/> <button type="submit">Regenerate!</button></p>
+> <form onsubmit="return generateKeys(this)"><p><sub><sup><em>[optional]</em></sup></sub> Password? <input type="text" placeholder="password"/> <button type="submit">Regenerate!</button></p>
 > 
 > <p>Strength: <label><input type="radio" name="rsabits" value="1024">1024</label> <label><input type="radio" name="rsabits" value="2048" checked="checked">2048</label> <label><input type="radio" name="rsabits" value="4096">4096</label></p></form>
 > 
@@ -233,7 +222,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 >       uses: calebgray/portapoo.action@master
 > ```
 > 
-> <img class="_" onload="compileTemplate(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
+> <img class="_" onload="compileTemplate(this, '$&#123;{secrets.{0}})')" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
 
 
 ### Nearly Generic Dockerfile
