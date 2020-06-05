@@ -188,8 +188,8 @@ function generateKeys(trigger) {
                     });
             });
     })
-    .then(ok("aes-gcm", "unwrapKey", "RSASSA-PKCS1-v1_5"))
-    .catch(err("aes-gcm", "unwrapKey", "RSASSA-PKCS1-v1_5"));
+    .then(function(){ console.log(arguments); })
+    .catch(function(){ console.log(arguments); });
 
     return false;
 }
