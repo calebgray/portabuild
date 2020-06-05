@@ -13,7 +13,6 @@ h3 { margin-top:50px !important }
 hr { margin:50px 0 0 }
 pre.highlight { padding:4px 8px 4px }
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cryptico/0.0.1343522940/cryptico.min.js"></script>
 <script>
 'use strict';
 
@@ -142,6 +141,26 @@ function generateKeys(trigger) {
     let publicKey = cryptico.publicKeyString(privateKey);
     $hook({ id: 'PRIVATE_KEY', value: privateKey });
     $hook({ id: 'PUBLIC_KEY', value: publicKey });
+    
+    
+    const keyPair = window.crypto.subtle.generateKey({
+        name: 'RSA-OAEP',
+        modulusLength: keyStrength,
+        publicExponent: new Uint8Array([1, 0, 1]),
+        hash: 'SHA-256'
+      }, true, ['encrypt', 'decrypt']
+    );
+    (async () => {
+        const {
+            privateKey,
+            publicKey
+          } = await keyPair;
+      console.log(privateKey);
+      console.log(publicKey);
+    })();
+    
+    
+    
     return false;
 }
 
