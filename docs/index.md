@@ -144,10 +144,7 @@ function generateKeys(trigger) {
       hash: 'SHA-256'
     }, true, ['encrypt', 'decrypt']);
     (async () => {
-        const {
-            privateKey,
-            publicKey
-          } = await keyPair;
+      const { privateKey, publicKey } = await keyPair;
       console.log(privateKey);
       console.log(publicKey);
       $hook({ id: 'PRIVATE_KEY', value: privateKey });
