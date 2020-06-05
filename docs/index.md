@@ -137,29 +137,70 @@ function generateKeys(trigger) {
         passPhrase = trigger[0].value;
         keyStrength = Math.round(trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value || trigger[4].checked && trigger[4].value);
     }
-    const keyPair = window.crypto.subtle.generateKey({
-      name: 'RSA-OAEP',
-      modulusLength: keyStrength,
-      publicExponent: new Uint8Array([1, 0, 1]),
-      hash: 'SHA-256'
-    }, true, ['encrypt', 'decrypt']);
-    (async () => {
-      const { privateKey, publicKey } = await keyPair;
-      console.log(privateKey);
-      console.log(publicKey);
-      $hook({ id: 'PRIVATE_KEY', value: privateKey });
-      $hook({ id: 'PUBLIC_KEY', value: publicKey });
-    })();
+
+    window.crypto.subtle.generateKey({name: "AES-GCM", length: 256}, false, ["wrapKey", "unwrapKey"])
+    .then(function(wrappingKey){
+        return window.crypto.subtle.generateKey({
+            name: "RSASSA-PKCS1-v1_5",
+            modulusLength: keyStrength,
+            publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
+            hash: {name: "SHA-256"},
+        }, true, ["sign", "verify"])
+            .then(function(rsaKey){
+                var ivPub = window.crypto.getRandomValues(new Uint8Array(16));
+                return window.crypto.subtle.wrapKey(
+                    "jwk", rsaKey.publicKey, wrappingKey,
+                    {name: "AES-GCM", iv: ivPub}
+                )
+                    .then(function(wrappedPub){
+                        var ivPriv = window.crypto.getRandomValues(new Uint8Array(16));
+                        return window.crypto.subtle.wrapKey(
+                            "jwk", rsaKey.privateKey, wrappingKey,
+                            {name: "AES-GCM", iv: ivPriv}
+                        )
+                            .then(function(wrappedPriv){
+                                return window.crypto.subtle.unwrapKey(
+                                    "jwk", wrappedPub, wrappingKey,
+                                    {name: "AES-GCM", iv: ivPub},
+                                    {
+                                        name: "RSASSA-PKCS1-v1_5",
+                                        modulusLength: 1024,
+                                        publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
+                                        hash: {name: "SHA-256"},
+                                    }, true, ["verify"]
+                                )
+                                    .then(function(unwrappedPub){
+                                        return window.crypto.subtle.unwrapKey(
+                                            "jwk", wrappedPriv, wrappingKey,
+                                            {name: "AES-GCM", iv: ivPriv},
+                                            {
+                                                name: "RSASSA-PKCS1-v1_5",
+                                                modulusLength: 1024,
+                                                publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
+                                                hash: {name: "SHA-256"},
+                                            }, true, ["sign"]
+                                        ).then(function(unwrappedPriv){
+                                          $hook({ id: 'PRIVATE_KEY', value: unwrappedPriv });
+                                          $hook({ id: 'PUBLIC_KEY', value: unwrappedPub });
+                                        });
+                                    });
+                            });
+                    });
+            });
+    })
+    .then(ok("aes-gcm", "unwrapKey", "RSASSA-PKCS1-v1_5"))
+    .catch(err("aes-gcm", "unwrapKey", "RSASSA-PKCS1-v1_5"));
+
     return false;
 }
 
 const variableFormats = {
- _: '{0}',
- GITHUB_TOKEN: '$&#123;{secrets.GITHUB_TOKEN}}',
- UPLOAD_GIT: '$&#123;{secrets.UPLOAD_GIT}}',
- UPLOAD_KEY: '$&#123;{secrets.UPLOAD_KEY}}',
- UPLOADER_EMAIL: '$&#123;{secrets.UPLOADER_EMAIL}}',
- UPLOADER_NAME: '$&#123;{secrets.UPLOADER_NAME}}',
+  _: '{0}',
+  GITHUB_TOKEN: '$&#123;{secrets.GITHUB_TOKEN}}',
+  UPLOAD_GIT: '$&#123;{secrets.UPLOAD_GIT}}',
+  UPLOAD_KEY: '$&#123;{secrets.UPLOAD_KEY}}',
+  UPLOADER_EMAIL: '$&#123;{secrets.UPLOADER_EMAIL}}',
+  UPLOADER_NAME: '$&#123;{secrets.UPLOADER_NAME}}',
 };
 </script>
 
