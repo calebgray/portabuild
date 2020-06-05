@@ -137,19 +137,12 @@ function generateKeys(trigger) {
         passPhrase = trigger[0].value;
         keyStrength = Math.round(trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value || trigger[4].checked && trigger[4].value);
     }
-    let privateKey = cryptico.generateRSAKey(passPhrase, keyStrength);
-    let publicKey = cryptico.publicKeyString(privateKey);
-    $hook({ id: 'PRIVATE_KEY', value: privateKey });
-    $hook({ id: 'PUBLIC_KEY', value: publicKey });
-    
-    
     const keyPair = window.crypto.subtle.generateKey({
-        name: 'RSA-OAEP',
-        modulusLength: keyStrength,
-        publicExponent: new Uint8Array([1, 0, 1]),
-        hash: 'SHA-256'
-      }, true, ['encrypt', 'decrypt']
-    );
+      name: 'RSA-OAEP',
+      modulusLength: keyStrength,
+      publicExponent: new Uint8Array([1, 0, 1]),
+      hash: 'SHA-256'
+    }, true, ['encrypt', 'decrypt']);
     (async () => {
         const {
             privateKey,
@@ -157,10 +150,9 @@ function generateKeys(trigger) {
           } = await keyPair;
       console.log(privateKey);
       console.log(publicKey);
+      $hook({ id: 'PRIVATE_KEY', value: privateKey });
+      $hook({ id: 'PUBLIC_KEY', value: publicKey });
     })();
-    
-    
-    
     return false;
 }
 
@@ -222,8 +214,6 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > <form onsubmit="return generateKeys(this)"><p><sub><sup><em>[optional]</em></sup></sub> Password? <input type="password" placeholder="password"/> <button type="submit">Regenerate!</button></p>
 > 
 > <p>Strength: <label><input type="radio" name="rsabits" value="1024">1024</label> <label><input type="radio" name="rsabits" value="2048" checked="checked">2048</label> <label><input type="radio" name="rsabits" value="4096">4096</label></p></form>
-> 
-> (_<sub><sup>powered by the lovely</sup></sub>_ [cryptico](https://github.com/wwwtyro/cryptico){:target="_blank"})
 > 
 > C. [Paste](https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new){:target="_blank"}: `portapoo` `{ write: true }`
 > 
