@@ -138,58 +138,23 @@ function generateKeys(trigger) {
         keyStrength = Math.round(trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value || trigger[4].checked && trigger[4].value);
     }
 
-    window.crypto.subtle.generateKey({name: "AES-GCM", length: 256}, false, ["wrapKey", "unwrapKey"])
-    .then(function(wrappingKey){
-        return window.crypto.subtle.generateKey({
-            name: "RSASSA-PKCS1-v1_5",
-            modulusLength: keyStrength,
-            publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
-            hash: {name: "SHA-256"},
-        }, true, ["sign", "verify"])
-            .then(function(rsaKey){
-                var ivPub = window.crypto.getRandomValues(new Uint8Array(16));
-                return window.crypto.subtle.wrapKey(
-                    "jwk", rsaKey.publicKey, wrappingKey,
-                    {name: "AES-GCM", iv: ivPub}
-                )
-                    .then(function(wrappedPub){
-                        var ivPriv = window.crypto.getRandomValues(new Uint8Array(16));
-                        return window.crypto.subtle.wrapKey(
-                            "jwk", rsaKey.privateKey, wrappingKey,
-                            {name: "AES-GCM", iv: ivPriv}
-                        )
-                            .then(function(wrappedPriv){
-                                return window.crypto.subtle.unwrapKey(
-                                    "jwk", wrappedPub, wrappingKey,
-                                    {name: "AES-GCM", iv: ivPub},
-                                    {
-                                        name: "RSASSA-PKCS1-v1_5",
-                                        modulusLength: 1024,
-                                        publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
-                                        hash: {name: "SHA-256"},
-                                    }, true, ["verify"]
-                                )
-                                    .then(function(unwrappedPub){
-                                        return window.crypto.subtle.unwrapKey(
-                                            "jwk", wrappedPriv, wrappingKey,
-                                            {name: "AES-GCM", iv: ivPriv},
-                                            {
-                                                name: "RSASSA-PKCS1-v1_5",
-                                                modulusLength: 1024,
-                                                publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
-                                                hash: {name: "SHA-256"},
-                                            }, true, ["sign"]
-                                        ).then(function(unwrappedPriv){
-                                          $hook({ id: 'PRIVATE_KEY', value: unwrappedPriv });
-                                          $hook({ id: 'PUBLIC_KEY', value: unwrappedPub });
-                                        });
-                                    });
-                            });
-                    });
-            });
-    })
-    .then(function(){ console.log(arguments); })
-    .catch(function(){ console.log(arguments); });
+    const isPrime = num => {
+        for (let i = 2, s = Math.sqrt(num); i <= s; i++) {
+            if (num % i === 0) return false;
+        }
+        return num > 1;
+    };
+
+    function *genPrime(count) {
+       for (;;) {
+        if (isPrime(++count)) yield count;
+       }
+    }
+
+    let meh = genPrime(1);
+    while(meh.value < 1000) {
+     console.log(meh.next().value);
+    }
 
     return false;
 }
