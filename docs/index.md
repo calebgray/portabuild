@@ -152,9 +152,10 @@ function generateKeys(trigger) {
     }
 
     let meh = genPrime(1);
-    while(meh.value < 1000) {
-     console.log(meh.next().value);
+    while(meh.next().value < 1000) {
+      /* beep boop */
     }
+    console.log(meh.next().value);
 
     return false;
 }
