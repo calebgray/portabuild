@@ -138,10 +138,14 @@ function generateKeys(trigger) {
         keyStrength = Math.round(trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value || trigger[4].checked && trigger[4].value);
     }
 
-    const go = new Go();
-    WebAssembly.instantiateStreaming(fetch("rsagen.wasm"), go.importObject).then((result) => {
-      go.run(result.instance);
-    });
+    (async () => {
+      const response = await fetch('rsagen.wasm');
+      const buffer = await response.arrayBuffer();
+      const module = await WebAssembly.compile(buffer);
+      const instance = await WebAssembly.instantiate(module);
+      const result = instance.exports;
+      console.log(result);
+    })();
 
     return false;
 }
