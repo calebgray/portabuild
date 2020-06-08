@@ -151,11 +151,17 @@ function generateKeys(trigger) {
        }
     }
 
-    let meh = genPrime(1);
-    while(meh.next().value < 1000) {
-      /* beep boop */
+    let primes = [];
+    for (let i = 0; i < 3; ++i) {
+      let rnd = new BigInt(Math.random() * Number.MAX_SAFE_INTEGER);
+      for (let exp = Math.round(Math.random() * 3); exp > 0; --exp) {
+        rnd *= rnd;
+      }
+      primes.push(genPrime(rnd));
     }
-    console.log(meh.next().value);
+    for (const prime of primes) {
+      console.log(prime.next().value);
+    }
 
     return false;
 }
