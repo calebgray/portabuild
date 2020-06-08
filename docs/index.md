@@ -138,30 +138,10 @@ function generateKeys(trigger) {
         keyStrength = Math.round(trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value || trigger[4].checked && trigger[4].value);
     }
 
-    const isPrime = num => {
-        for (let i = 2, s = Math.sqrt(num); i <= s; i++) {
-            if (num % i === 0) return false;
-        }
-        return num > 1;
-    };
-
-    function *genPrime(count) {
-       for (;;) {
-        if (isPrime(++count)) yield count;
-       }
-    }
-
-    let primes = [];
-    for (let i = 0; i < 3; ++i) {
-      let rnd = BigInt(Math.random() * Number.MAX_SAFE_INTEGER);
-      for (let exp = Math.round(Math.random() * 3); exp > 0; --exp) {
-        rnd *= rnd;
-      }
-      primes.push(genPrime(rnd));
-    }
-    for (const prime of primes) {
-      console.log(prime.next().value);
-    }
+    const go = new Go();
+    WebAssembly.instantiateStreaming(fetch("rsagen.wasm"), go.importObject).then((result) => {
+      go.run(result.instance);
+    });
 
     return false;
 }
