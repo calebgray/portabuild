@@ -129,25 +129,19 @@ function compileTemplate(trigger, formats) {
 }
 
 function generateKeys(trigger) {
-    let passPhrase, keyStrength;
-    if (!trigger) {
-        passPhrase = '';
-        keyStrength = 2048;
-    } else {
-        passPhrase = trigger[0].value;
-        keyStrength = Math.round(trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value || trigger[4].checked && trigger[4].value);
-    }
+  let passPhrase, keyStrength;
+  if (!trigger) {
+    passPhrase = '';
+    keyStrength = 2048;
+  } else {
+    passPhrase = trigger[0].value;
+    keyStrength = Math.round(trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value || trigger[4].checked && trigger[4].value);
+  }
 
-    (async () => {
-      const response = await fetch('rsagen.wasm');
-      const buffer = await response.arrayBuffer();
-      const module = await WebAssembly.compile(buffer);
-      const instance = await WebAssembly.instantiate(module);
-      const result = instance.exports;
-      console.log(result);
-    })();
+  const rsagen = WebAssembly.instantiate(WebAssembly.compile(fetch('rsagen.wasm').arrayBuffer()));
+  console.log(rsagen.exports);
 
-    return false;
+  return false;
 }
 
 const variableFormats = {
