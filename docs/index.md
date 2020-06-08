@@ -138,11 +138,8 @@ function generateKeys(trigger) {
     keyStrength = Math.round(trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value || trigger[4].checked && trigger[4].value);
   }
 
-  (async () => {
-    const fetchPromise = fetch('rsagen.wasm');
-    const { instance } = await WebAssembly.instantiateStreaming(fetchPromise);
-    console.log(instance);
-  })();
+  const rsagen = WebAssembly.instantiateStreaming(fetch('rsagen.wasm'), {});
+  console.log(rsagen);
 
   return false;
 }
