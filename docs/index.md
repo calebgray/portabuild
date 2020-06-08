@@ -136,7 +136,7 @@ if (!WebAssembly.instantiateStreaming) WebAssembly.instantiateStreaming = async 
 
 const go = new Go();
 let mod, inst;
-WebAssembly.instantiateStreaming(fetch("rsagen.wasm"), go.importObject).then((result) => {
+await WebAssembly.instantiateStreaming(fetch("rsagen.wasm"), go.importObject).then((result) => {
   mod = result.module;
   inst = result.instance;
 }).catch((err) => {
