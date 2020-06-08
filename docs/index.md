@@ -153,7 +153,7 @@ function generateKeys(trigger) {
 
     let primes = [];
     for (let i = 0; i < 3; ++i) {
-      let rnd = new BigInt(Math.random() * Number.MAX_SAFE_INTEGER);
+      let rnd = BigInt(Math.random() * Number.MAX_SAFE_INTEGER);
       for (let exp = Math.round(Math.random() * 3); exp > 0; --exp) {
         rnd *= rnd;
       }
