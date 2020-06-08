@@ -135,14 +135,6 @@ if (!WebAssembly.instantiateStreaming) WebAssembly.instantiateStreaming = async 
 };
 
 const go = new Go();
-let mod, inst;
-await WebAssembly.instantiateStreaming(fetch("rsagen.wasm"), go.importObject).then((result) => {
-  mod = result.module;
-  inst = result.instance;
-}).catch((err) => {
-  console.error(err);
-});
-
 async function generateKeys(trigger) {
   let passPhrase, keyStrength;
   if (!trigger) {
@@ -153,9 +145,12 @@ async function generateKeys(trigger) {
     keyStrength = Math.round(trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value || trigger[4].checked && trigger[4].value);
   }
 
-  console.clear();
-  await go.run(inst);
-  inst = await WebAssembly.instantiate(mod, go.importObject);
+  await WebAssembly.instantiateStreaming(fetch("rsagen.wasm"), go.importObject).then((result) => {
+    console.clear();
+    go.run(result.instance)
+  }).catch((err) => {
+    console.error(err);
+  });
 
   return false;
 }
