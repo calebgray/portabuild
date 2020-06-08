@@ -129,30 +129,6 @@ function compileTemplate(trigger, formats) {
   }
 }
 
-function generateKeys(trigger) {
-  let passPhrase, keyStrength;
-  if (!trigger) {
-    passPhrase = '';
-    keyStrength = 2048;
-  } else {
-    passPhrase = trigger[0].value;
-    keyStrength = Math.round(trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value || trigger[4].checked && trigger[4].value);
-  }
-
-  run();
-
-  return false;
-}
-
-const variableFormats = {
-  _: '{0}',
-  GITHUB_TOKEN: '$&#123;{secrets.GITHUB_TOKEN}}',
-  UPLOAD_GIT: '$&#123;{secrets.UPLOAD_GIT}}',
-  UPLOAD_KEY: '$&#123;{secrets.UPLOAD_KEY}}',
-  UPLOADER_EMAIL: '$&#123;{secrets.UPLOADER_EMAIL}}',
-  UPLOADER_NAME: '$&#123;{secrets.UPLOADER_NAME}}',
-};
-
 if (!WebAssembly.instantiateStreaming) WebAssembly.instantiateStreaming = async (resp, importObject) => {
   const source = await (await resp).arrayBuffer();
   return await WebAssembly.instantiate(source, importObject);
@@ -167,11 +143,31 @@ WebAssembly.instantiateStreaming(fetch("rsagen.wasm"), go.importObject).then((re
   console.error(err);
 });
 
-async function run() {
+async function generateKeys(trigger) {
+  let passPhrase, keyStrength;
+  if (!trigger) {
+    passPhrase = '';
+    keyStrength = 2048;
+  } else {
+    passPhrase = trigger[0].value;
+    keyStrength = Math.round(trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value || trigger[4].checked && trigger[4].value);
+  }
+
   console.clear();
   await go.run(inst);
   inst = await WebAssembly.instantiate(mod, go.importObject);
+
+  return false;
 }
+
+const variableFormats = {
+  _: '{0}',
+  GITHUB_TOKEN: '$&#123;{secrets.GITHUB_TOKEN}}',
+  UPLOAD_GIT: '$&#123;{secrets.UPLOAD_GIT}}',
+  UPLOAD_KEY: '$&#123;{secrets.UPLOAD_KEY}}',
+  UPLOADER_EMAIL: '$&#123;{secrets.UPLOADER_EMAIL}}',
+  UPLOADER_NAME: '$&#123;{secrets.UPLOADER_NAME}}',
+};
 </script>
 
 ### Port a Poo! Ho!
