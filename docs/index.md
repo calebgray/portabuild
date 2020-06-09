@@ -151,7 +151,7 @@ async function generateKeys(trigger) {
   }
 
   go.argv = ['rsagen.wasm', keyStrength.toString()];
-  await WebAssembly.instantiateStreaming(fetch('rsagen.wasm'), go.importObject).then((result) => {
+  await WebAssembly.instantiateStreaming(fetch('rsagen.wasm', { cache: 'force-cache' }), go.importObject).then((result) => {
     go.run(result.instance);
   });
 }
