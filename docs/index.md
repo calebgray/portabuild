@@ -149,7 +149,9 @@ let bin;
   });
 })();
 
-async function generateKeys(trigger) {
+function generateKeys(trigger) {
+  if (!bin) return false;
+
   let keyStrength;
   if (!trigger) {
     keyStrength = 2048;
@@ -158,7 +160,7 @@ async function generateKeys(trigger) {
   }
 
   go.argv = ['rsagen.wasm', keyStrength.toString()];
-  await WebAssembly.instantiate(bin, go.importObject).then((result) => {
+  WebAssembly.instantiate(bin, go.importObject).then((result) => {
     go.run(result.instance);
   });
 
