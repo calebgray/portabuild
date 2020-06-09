@@ -129,11 +129,6 @@ function compileTemplate(trigger, formats) {
   }
 }
 
-if (!WebAssembly.instantiateStreaming) WebAssembly.instantiateStreaming = async (resp, importObject) => {
-  const source = await (await resp).arrayBuffer();
-  return await WebAssembly.instantiate(source, importObject);
-};
-
 const go = new Go();
 async function generateKeys(trigger) {
   let keyStrength;
@@ -143,28 +138,24 @@ async function generateKeys(trigger) {
     keyStrength = Math.round(trigger[1].checked && trigger[1].value || trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value);
   }
 
-  const getInt64 = (addr) => {
-    const low = this.mem.getUint32(addr + 0, true);
-    const high = this.mem.getInt32(addr + 4, true);
-    return low + high * 4294967296;
-  };
+  await fetch('rsagen.wasm').then(response => response.arrayBuffer()).then(function(bin) {
+    go.argv = ['one', 'two'];
 
-  let instance;
-  const importObject = go.importObject;
-  importObject.go['runtime.wasmWrite'] = (sp) => {
-    const fd = getInt64.call(this, sp + 8);
-    const p = getInt64.call(this, sp + 16);
-    const n = this.mem.getInt32(sp + 24, true);
-    fs.writeSync(fd, new Uint8Array(this._inst.exports.mem.buffer, p, n));
-  };
+    let outputBuf = '';
+    const decoder = new TextDecoder("utf-8");
+    global.fs.writeSync = function(fd, buf) {
+        outputBuf += decoder.decode(buf);
+        const nl = outputBuf.lastIndexOf("\n");
+        if (nl != -1) {
+            console.log(outputBuf.substr(0, nl + 1));
+            outputBuf = outputBuf.substr(nl + 1);
+        }
+        return buf.length;
+    };
 
-  await WebAssembly.instantiateStreaming(fetch('rsagen.wasm'), importObject).then((result) => {
-    instance = result.instance;
-    go.run(instance);
-    console.log(instance.exports.mem.buffer);
-    /* TODO: finished! */
-  }).catch((err) => {
-    console.error(err);
+    WebAssembly.instantiate(bin, go.importObject).then((result) => {
+        go.run(result.instance);
+    });
   });
 
   return false;
