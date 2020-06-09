@@ -130,10 +130,11 @@ function compileTemplate(trigger, formats) {
 }
 
 const go = new Go();
-const decoder = new TextDecoder("utf-8");
+const decoder = new TextDecoder('utf-8');
+let outputBuf = '';
 global.fs.writeSync = function(fd, buf) {
   outputBuf += decoder.decode(buf);
-  const nl = outputBuf.lastIndexOf("\n");
+  const nl = outputBuf.lastIndexOf('\n');
   if (nl !== -1) {
     console.log(outputBuf.substr(0, nl + 1));
     outputBuf = outputBuf.substr(nl + 1);
