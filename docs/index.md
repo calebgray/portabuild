@@ -144,8 +144,8 @@ async function generateKeys(trigger) {
   }
 
   await WebAssembly.instantiateStreaming(fetch('rsagen.wasm'), go.importObject).then((result) => {
-    console.clear();
-    go.run(result.instance)
+    go.run(result.instance);
+    console.log(result);
   }).catch((err) => {
     console.error(err);
   });
@@ -208,9 +208,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > $({.PUBLIC_KEY})
 > ```
 > 
-> <form onsubmit="return generateKeys(this)"><p><sub><sup><em>[optional]</em></sup></sub> Password? <input type="password" placeholder="password"/> <button type="submit">Regenerate!</button></p>
-> 
-> <p>Strength: <label><input type="radio" name="rsabits" value="1024">1024</label> <label><input type="radio" name="rsabits" value="2048" checked="checked">2048</label> <label><input type="radio" name="rsabits" value="4096">4096</label></p></form>
+> <form onsubmit="return generateKeys(this)">Strength: <label><input type="radio" name="rsabits" value="1024">1024</label> <label><input type="radio" name="rsabits" value="2048" checked="checked">2048</label> <label><input type="radio" name="rsabits" value="4096">4096</label> <button type="submit">Regenerate!</button></form>
 > 
 > C. [Paste](https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new){:target="_blank"}: `portapoo` `{ write: true }`
 > 
