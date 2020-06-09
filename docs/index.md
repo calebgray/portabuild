@@ -139,14 +139,14 @@ async function generateKeys(trigger) {
   }
 
   await fetch('rsagen.wasm').then(response => response.arrayBuffer()).then(function(bin) {
-    go.argv = ['one', 'two'];
+    go.argv = ['rsagen.wasm', keyStrength.toString()];
 
     let outputBuf = '';
     const decoder = new TextDecoder("utf-8");
     global.fs.writeSync = function(fd, buf) {
         outputBuf += decoder.decode(buf);
         const nl = outputBuf.lastIndexOf("\n");
-        if (nl != -1) {
+        if (nl !== -1) {
             console.log(outputBuf.substr(0, nl + 1));
             outputBuf = outputBuf.substr(nl + 1);
         }
