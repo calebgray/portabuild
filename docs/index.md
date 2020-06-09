@@ -134,9 +134,9 @@ const decoder = new TextDecoder('utf-8');
 global.fs.writeSync = function(fd, buf) {
   let output = decoder.decode(buf);
   if (output.startsWith('-----BEGIN PRIVATE KEY-----')) {
-    $hook({id:'PRIVATE_KEY',value:output});
+    $hook({ id: 'PRIVATE_KEY', value: output.trim() });
   } else if (output.startsWith('-----BEGIN PUBLIC KEY-----')) {
-    $hook({id:'PUBLIC_KEY',value:output});
+    $hook({ id: 'PUBLIC_KEY', value: output.trim() });
   }
   return buf.length;
 };
@@ -216,13 +216,13 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > 
 > D. [Set](https://github.com/$({.username})/$({.reponame})/settings/secrets){:target="_blank"}:
 > 
-> - `UPLOAD_KEY`: `$({.PRIVATE_KEY})`
-> 
-> - `UPLOAD_GIT`: `git@github.com:$({.username})/$({.reponame})-builds.git`
-> 
 > - `UPLOADER_NAME`: `$({.fullname})`
 > 
 > - `UPLOADER_EMAIL`: `$({.useremail})`
+> 
+> - `UPLOAD_GIT`: `git@github.com:$({.username})/$({.reponame})-builds.git`
+> 
+> - `UPLOAD_KEY`: ```$({.PRIVATE_KEY})```
 > 
 > ```yaml
 > on: [ push, pull_request ]
