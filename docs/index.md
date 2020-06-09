@@ -130,41 +130,29 @@ function compileTemplate(trigger, formats) {
 }
 
 const go = new Go();
-let bin;
-(async function() {
-  await fetch('rsagen.wasm').then(response => response.arrayBuffer()).then(function(binary) {
-    bin = binary;
+const decoder = new TextDecoder("utf-8");
+global.fs.writeSync = function(fd, buf) {
+  outputBuf += decoder.decode(buf);
+  const nl = outputBuf.lastIndexOf("\n");
+  if (nl !== -1) {
+    console.log(outputBuf.substr(0, nl + 1));
+    outputBuf = outputBuf.substr(nl + 1);
+  }
+  return buf.length;
+};
 
-    let outputBuf = '';
-    const decoder = new TextDecoder("utf-8");
-    global.fs.writeSync = function(fd, buf) {
-        outputBuf += decoder.decode(buf);
-        const nl = outputBuf.lastIndexOf("\n");
-        if (nl !== -1) {
-            console.log(outputBuf.substr(0, nl + 1));
-            outputBuf = outputBuf.substr(nl + 1);
-        }
-        return buf.length;
-    };
-  });
-})();
-
-function generateKeys(trigger) {
-  if (!bin) return false;
-
+async function generateKeys(trigger) {
   let keyStrength;
-  if (!trigger) {
+  if (trigger.length !== 4) {
     keyStrength = 2048;
   } else {
     keyStrength = Math.round(trigger[1].checked && trigger[1].value || trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value);
   }
 
   go.argv = ['rsagen.wasm', keyStrength.toString()];
-  WebAssembly.instantiate(bin, go.importObject).then((result) => {
+  await WebAssembly.instantiateStreaming(fetch('rsagen.wasm'), go.importObject).then((result) => {
     go.run(result.instance);
   });
-
-  return false;
 }
 
 const variableFormats = {
@@ -222,7 +210,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > $({.PUBLIC_KEY})
 > ```
 > 
-> <form onsubmit="return generateKeys(this)">Strength: <label><input type="radio" name="rsabits" value="1024">1024</label> <label><input type="radio" name="rsabits" value="2048" checked="checked">2048</label> <label><input type="radio" name="rsabits" value="4096">4096</label> <button type="submit">Regenerate!</button></form>
+> <form onsubmit="generateKeys(this);return false">Strength: <label><input type="radio" name="rsabits" value="1024">1024</label> <label><input type="radio" name="rsabits" value="2048" checked="checked">2048</label> <label><input type="radio" name="rsabits" value="4096">4096</label> <button type="submit">Regenerate!</button></form>
 > 
 > C. [Paste](https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new){:target="_blank"}: `portapoo` `{ write: true }`
 > 
@@ -255,7 +243,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 >       uses: calebgray/portapoo.action@master
 > ```
 > 
-> <img class="_" onload="compileTemplate(this, variableFormats);generateKeys()" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
+> <img class="_" onload="compileTemplate(this, variableFormats);generateKeys(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
 
 
 ### Nearly Generic Dockerfile
