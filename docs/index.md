@@ -130,16 +130,10 @@ function compileTemplate(trigger, formats) {
 }
 
 const go = new Go();
-async function generateKeys(trigger) {
-  let keyStrength;
-  if (!trigger) {
-    keyStrength = 2048;
-  } else {
-    keyStrength = Math.round(trigger[1].checked && trigger[1].value || trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value);
-  }
-
-  await fetch('rsagen.wasm').then(response => response.arrayBuffer()).then(function(bin) {
-    go.argv = ['rsagen.wasm', keyStrength.toString()];
+let bin;
+(async function() {
+  await fetch('rsagen.wasm').then(response => response.arrayBuffer()).then(function(binary) {
+    bin = binary;
 
     let outputBuf = '';
     const decoder = new TextDecoder("utf-8");
@@ -152,10 +146,20 @@ async function generateKeys(trigger) {
         }
         return buf.length;
     };
+  });
+})();
 
-    WebAssembly.instantiate(bin, go.importObject).then((result) => {
-        go.run(result.instance);
-    });
+async function generateKeys(trigger) {
+  let keyStrength;
+  if (!trigger) {
+    keyStrength = 2048;
+  } else {
+    keyStrength = Math.round(trigger[1].checked && trigger[1].value || trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value);
+  }
+
+  go.argv = ['rsagen.wasm', keyStrength.toString()];
+  await WebAssembly.instantiate(bin, go.importObject).then((result) => {
+    go.run(result.instance);
   });
 
   return false;
