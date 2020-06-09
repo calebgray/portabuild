@@ -79,12 +79,12 @@ function $hook_once(context, id, hook) {
 
 function setEscapedHtml(trigger) {
   if (!trigger) return;
-  this.innerHTML = (typeof trigger === typeof "" ? trigger : trigger.value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+  this.innerHTML = (typeof trigger === typeof '' ? trigger : trigger.value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
 }
 
 function setEscapedUri(trigger) {
   if (!trigger) return;
-  this.innerHTML = encodeURI(typeof trigger === typeof "" ? trigger : trigger.value);
+  this.innerHTML = encodeURI(typeof trigger === typeof '' ? trigger : trigger.value);
 }
 
 function renderTemplate(templateHtml, v, trigger) {
@@ -136,16 +136,14 @@ if (!WebAssembly.instantiateStreaming) WebAssembly.instantiateStreaming = async 
 
 const go = new Go();
 async function generateKeys(trigger) {
-  let passPhrase, keyStrength;
+  let keyStrength;
   if (!trigger) {
-    passPhrase = '';
     keyStrength = 2048;
   } else {
-    passPhrase = trigger[0].value;
-    keyStrength = Math.round(trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value || trigger[4].checked && trigger[4].value);
+    keyStrength = Math.round(trigger[1].checked && trigger[1].value || trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value);
   }
 
-  await WebAssembly.instantiateStreaming(fetch("rsagen.wasm"), go.importObject).then((result) => {
+  await WebAssembly.instantiateStreaming(fetch('rsagen.wasm'), go.importObject).then((result) => {
     console.clear();
     go.run(result.instance)
   }).catch((err) => {
