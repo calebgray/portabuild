@@ -149,6 +149,7 @@ async function generateKeys(trigger) {
     return low + high * 4294967296;
   };
 
+  let instance;
   const importObject = go.importObject;
   importObject.go['runtime.wasmWrite'] = (sp) => {
     const fd = getInt64.call(this, sp + 8);
@@ -158,7 +159,9 @@ async function generateKeys(trigger) {
   };
 
   await WebAssembly.instantiateStreaming(fetch('rsagen.wasm'), importObject).then((result) => {
-    go.run(result.instance);
+    instance = result.instance;
+    go.run(instance);
+    console.log(instance.exports.mem.buffer);
     /* TODO: finished! */
   }).catch((err) => {
     console.error(err);
