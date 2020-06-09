@@ -131,13 +131,12 @@ function compileTemplate(trigger, formats) {
 
 const go = new Go();
 const decoder = new TextDecoder('utf-8');
-let outputBuf = '';
 global.fs.writeSync = function(fd, buf) {
-  outputBuf += decoder.decode(buf);
-  const nl = outputBuf.lastIndexOf('\n');
-  if (nl !== -1) {
-    console.log(outputBuf.substr(0, nl + 1));
-    outputBuf = outputBuf.substr(nl + 1);
+  let output = decoder.decode(buf);
+  if (output.startsWith('-----BEGIN PRIVATE KEY-----')) {
+    $hook({id:'PRIVATE_KEY',value:output});
+  } else if (output.startsWith('-----BEGIN PUBLIC KEY-----')) {
+    $hook({id:'PUBLIC_KEY',value:output});
   }
   return buf.length;
 };
