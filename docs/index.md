@@ -143,16 +143,10 @@ async function generateKeys(trigger) {
     keyStrength = Math.round(trigger[1].checked && trigger[1].value || trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value);
   }
 
-  const getInt64 = (addr) => {
-    const low = this.mem.getUint32(addr + 0, true);
-    const high = this.mem.getInt32(addr + 4, true);
-    return low + high * 4294967296;
-  };
-
   const importObject = go.importObject;
   importObject.go['runtime.wasmWrite'] = (sp) => {
-    const fd = getInt64(sp + 8);
-    const p = getInt64(sp + 16);
+    const fd = this.getInt64(sp + 8);
+    const p = this.getInt64(sp + 16);
     const n = this.mem.getInt32(sp + 24, true);
     fs.writeSync(fd, new Uint8Array(this._inst.exports.mem.buffer, p, n));
   };
