@@ -12,20 +12,8 @@ input { background:#eee;border:1px solid #111;border-radius:3px;color:#111;paddi
 h3 { margin-top:50px !important }
 hr { margin:50px 0 0 }
 pre.highlight { padding:4px 8px 4px }
-.spin {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  width: 32px;
-  height: 32px;
-  margin:-16px 0 0 -16px;
-  -webkit-animation:spin 4s linear infinite;
-  -moz-animation:spin 4s linear infinite;
-  animation:spin 4s linear infinite;
-}
-@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+.spin { animation:spin 2s linear infinite }
+@keyframes spin { 100% { transform:rotate(360deg) } }
 </style>
 <script src="wasm_exec.js"></script>
 <script>
