@@ -150,10 +150,10 @@ rsagen.onmessage = function(e) {
   }
 };
 
-function generateKeys(trigger) {
+function generateKeys(form) {
   if (checkLoading()) return;
   loading.className = 'loading';
-  rsagen.postMessage(trigger[1].checked && trigger[1].value || trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value);
+  rsagen.postMessage(form[0].checked && form[0].value || form[1].checked && form[1].value || form[2].checked && form[2].value);
 }
 
 const variableFormats = {
