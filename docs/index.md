@@ -222,7 +222,11 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > 
 > - `UPLOAD_GIT`: `git@github.com:$({.username})/$({.reponame})-builds.git`
 > 
-> - `UPLOAD_KEY`: ```$({.PRIVATE_KEY})```
+> - `UPLOAD_KEY`:
+> 
+> ```$({.PRIVATE_KEY})```
+> 
+> - [Edit](https://github.com/$({.username})/$({.reponame})/new/master){:target="_blank"}: `.github/workflows/$({.reponame}).yml`
 > 
 > ```yaml
 > on: [ push, pull_request ]
