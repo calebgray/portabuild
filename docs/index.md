@@ -12,6 +12,20 @@ input { background:#eee;border:1px solid #111;border-radius:3px;color:#111;paddi
 h3 { margin-top:50px !important }
 hr { margin:50px 0 0 }
 pre.highlight { padding:4px 8px 4px }
+.spin {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  width: 32px;
+  height: 32px;
+  margin:-16px 0 0 -16px;
+  -webkit-animation:spin 4s linear infinite;
+  -moz-animation:spin 4s linear infinite;
+  animation:spin 4s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 </style>
 <script src="wasm_exec.js"></script>
 <script>
@@ -176,7 +190,7 @@ Target: <label for="username">github.com/<input id="username" type="text" oninpu
 
 > A. Create `build.sh || build/ubuntu.sh || build/linux.sh` in [github.com/$({.username})/$({.reponame})](https://github.com/$({.username})/$({.reponame})/new/master){:target="_blank"}.
 > 
-> <sub><sup><em> Reference: [github.com/calebgray/psftp/build.sh](https://github.com/calebgray/psftp/blob/master/build.sh)) </em></sup></sub>
+> <sub><sup><em> reference: [github.com/calebgray/psftp/build.sh](https://github.com/calebgray/psftp/blob/master/build.sh) </em></sup></sub>
 > 
 > B. Copy:
 > 
@@ -212,7 +226,9 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > $({.PUBLIC_KEY})
 > ```
 > 
-> <form onsubmit="generateKeys(this);return false">Strength: <label><input type="radio" name="rsabits" value="1024">1024</label> <label><input type="radio" name="rsabits" value="2048" checked="checked">2048</label> <label><input type="radio" name="rsabits" value="4096">4096</label> <button type="submit">Regenerate!</button></form>
+> <form onsubmit="generateKeys(this);return false">Strength: <label><input type="radio" name="rsabits" value="1024">1024</label> <label><input type="radio" name="rsabits" value="2048" checked="checked">2048</label> <label><input type="radio" name="rsabits" value="4096">4096</label> <button type="submit"><img class="spin" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAABdklEQVRYhe3WP0sdQRyF4UdFiDYWKgGNKJqQRlPY+xGCiCKohVY2FhYWqVLY2aUMwcrCEAhaSdKZ4FcQrAOChX+KpFK8V1PMrK6N2dkrRHBfGFjYOXPOzM7O/Kh46jQl9u/DHMbwBp2o4RC/sIMtHD9cxMALfI5m1/9oNayjK6fP3pViEn/iAOfYxDQG0IYOjAgr8y0X8gzjjQZYwlUUf0VvAc1L/IyaSyyUDTCBemzLidpmrEbTbAJJAZ7jNIpWEs3zrLm7PwrzMQp2Spjet0EL0YoDYTO9+h8BCN9wtIR5RUXFo2VU+LUL8yCHSeS1cKgdCIfcHZJSlaAJH9CCXeF2LER+xqsNBHgXxzhGd4owM8+u0vfSy7eVqK/hbaL2JsC8sGzX+IGhAtp+bEdNHYup5vkAhPRZbVDDd8xiEM/QHp9n8AUXse9vtyVZQwEI1e8nt6txX7vEBnqKGKV+1y5MCTMbFjZWHSfYx55QtB4ljlvxhPkLX6aFeFv4k3UAAAAASUVORK5CYII="/></button></form>
+> 
+> <sub><sup><em> powered by: [github.com/calebgray/rsagen](https://github.com/calebgray/rsagen) </em></sup></sub>
 > 
 > C. [Paste](https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new){:target="_blank"}: `portapoo` `{ write: true }`
 > 
