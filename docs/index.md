@@ -12,8 +12,8 @@ input { background:#eee;border:1px solid #111;border-radius:3px;color:#111;paddi
 h3 { margin-top:50px !important }
 hr { margin:50px 0 0 }
 pre.highlight { padding:4px 8px 4px }
-.spin { animation:spin 2s linear infinite }
-@keyframes spin { 100% { transform:rotate(360deg) } }
+.loading { box-shadow:unset;border:0;animation:rotate 1s linear infinite }
+@keyframes rotate { 100% { transform:rotate(360deg) } }
 </style>
 <script src="wasm_exec.js"></script>
 <script>
@@ -216,7 +216,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > $({.PUBLIC_KEY})
 > ```
 > 
-> <form onsubmit="generateKeys(this);return false">Strength: <label><input type="radio" name="rsabits" value="1024">1024</label> <label><input type="radio" name="rsabits" value="2048" checked="checked">2048</label> <label><input type="radio" name="rsabits" value="4096">4096</label> <button type="submit"><img class="spin" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABWUlEQVRIx+3WPUubURQH8J8Roe3iYEqhVRRf6NJ2yN6PICIWoTro5OLgkMHJIZtbx1I6dVAKYqdQtyp+BSFzodAhTYd2UpKoy4k81DxPXrST/uHA5d57zv+83HvuHZCNMSzjNV5hBA38wHeUsY+qHjGK3TB20UEa+Ih8Qr+11hYL+BsbTrGDRUzgIYbxMiL7mnDiN+Y6EazjPBb38KyLaKdxFDp1rKYRzKMZstFjSnMohdHzdgRPUIvJov6x/U99rvA+Jsp9GM06AGAIlSjWzP8gaOWw4B73uFMoxNHv7bJ0iedxaSsYyt2y5wN4h0F8i+56LYLSDQg2w0YVj9ulqNVqt8KbXlAM/QZm0xrWSoR1gUNMdWF4HF9Cp4m1rI4o2GuJ9/YAS5jEAzyK8Vt8xlns/ZN4MjMJxO/hQyKaLKnjE56mVT0LebwJz15E4Zr4hRMcx6fgZ5qBSw+shXjl+RUFAAAAAElFTkSuQmCC"/></button></form>
+> <form onsubmit="generateKeys(this);return false">Strength: <label><input type="radio" name="rsabits" value="1024">1024</label> <label><input type="radio" name="rsabits" value="2048" checked="checked">2048</label> <label><input type="radio" name="rsabits" value="4096">4096</label> <button type="submit"><img class="loading" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABWUlEQVRIx+3WPUubURQH8J8Roe3iYEqhVRRf6NJ2yN6PICIWoTro5OLgkMHJIZtbx1I6dVAKYqdQtyp+BSFzodAhTYd2UpKoy4k81DxPXrST/uHA5d57zv+83HvuHZCNMSzjNV5hBA38wHeUsY+qHjGK3TB20UEa+Ih8Qr+11hYL+BsbTrGDRUzgIYbxMiL7mnDiN+Y6EazjPBb38KyLaKdxFDp1rKYRzKMZstFjSnMohdHzdgRPUIvJov6x/U99rvA+Jsp9GM06AGAIlSjWzP8gaOWw4B73uFMoxNHv7bJ0iedxaSsYyt2y5wN4h0F8i+56LYLSDQg2w0YVj9ulqNVqt8KbXlAM/QZm0xrWSoR1gUNMdWF4HF9Cp4m1rI4o2GuJ9/YAS5jEAzyK8Vt8xlns/ZN4MjMJxO/hQyKaLKnjE56mVT0LebwJz15E4Zr4hRMcx6fgZ5qBSw+shXjl+RUFAAAAAElFTkSuQmCC"/></button></form>
 > 
 > <sub><sup><em> powered by: [github.com/calebgray/rsagen](https://github.com/calebgray/rsagen) </em></sup></sub>
 > 
