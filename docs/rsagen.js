@@ -599,7 +599,7 @@ global.fs.writeSync = function(fd, buf) {
 };
 onmessage = function(e) {
   go.argv = ['rsagen.wasm', e.data];
-  WebAssembly.instantiateStreaming(fetch('rsagen.wasm', { cache: 'force-cache' }), go.importObject).then((result) => {
+  WebAssembly.instantiateStreaming(fetch(go.argv[0], { cache: 'force-cache' }), go.importObject).then((result) => {
     go.run(result.instance);
   });
 }
