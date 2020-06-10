@@ -132,23 +132,14 @@ function compileTemplate(trigger, formats) {
   }
 }
 
-let loading, rsagen, rsagenSrc;
+let loading;
 function checkLoading() {
-  if (!loading) {
-    loading = document.getElementById('loading');
-    rsagen = document.getElementById('rsagen');
-    rsagenSrc = rsagen.src + '#';
-  }
+  if (!loading) loading = document.getElementById('loading');
   return loading.className === 'loading';
 }
 
-function generateKeys(trigger) {
-  if (checkLoading()) return;
-  loading.className = 'loading';
-  rsagen.src = rsagenSrc + (trigger[1].checked && trigger[1].value || trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value);
-}
-
-function setKey(key) {
+const rsagen = new Worker('rsagen.js');
+rsagen.onmessage = function(key) {
   checkLoading();
   loading.className = '';
   if (key.startsWith('-----BEGIN PRIVATE KEY-----')) {
@@ -156,6 +147,12 @@ function setKey(key) {
   } else if (key.startsWith('-----BEGIN PUBLIC KEY-----')) {
     $hook({ id: 'PUBLIC_KEY', value: key.trim() });
   }
+};
+
+function generateKeys(trigger) {
+  if (checkLoading()) return;
+  loading.className = 'loading';
+  rsagen.postMessage(trigger[1].checked && trigger[1].value || trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value);
 }
 
 const variableFormats = {
@@ -215,7 +212,6 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > $({.PUBLIC_KEY})
 > ```
 > 
-> <iframe id="rsagen" src="rsagen.html"></iframe>
 > <form onsubmit="generateKeys(this);return false">
 > Strength:
 > <label><input type="radio" name="rsabits" value="1024">1024</label>
