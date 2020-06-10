@@ -273,7 +273,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 >     - name: Build
 >       uses: calebgray/portapoo.action@master
 > ```
-> {:onclick="selectInner(this)"}
+> {:ondblclick="selectInner(this)"}
 > 
 > <img class="_" onload="compileTemplate(this, variableFormats)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
 
