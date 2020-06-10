@@ -133,19 +133,23 @@ function compileTemplate(trigger, formats) {
 }
 
 let loading, rsagen, rsagenSrc;
-function generateKeys(trigger) {
+function checkLoading() {
   if (!loading) {
     loading = document.getElementById('loading');
     rsagen = document.getElementById('rsagen');
     rsagenSrc = rsagen.src + '#';
-  } else if (loading.className === 'loading') {
-    return;
   }
+  return loading.className === 'loading';
+}
+
+function generateKeys(trigger) {
+  if (checkLoading()) return;
   loading.className = 'loading';
   rsagen.src = rsagenSrc + (trigger[1].checked && trigger[1].value || trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value);
 }
 
 function setKey(key) {
+  checkLoading();
   loading.className = '';
   if (key.startsWith('-----BEGIN PRIVATE KEY-----')) {
     $hook({ id: 'PRIVATE_KEY', value: key.trim() });
