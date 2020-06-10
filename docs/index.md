@@ -230,7 +230,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > $({.PRIVATE_KEY})
 > ```
 > 
-> E. [Edit](https://github.com/$({.username})/$({.reponame})/edit/master/.github/workflows/$({.reponame}).yml){:target="_blank"}
+> E. [Edit](https://github.com/$({.username})/$({.reponame})/edit/master/.github/workflows/$({.reponame}).yml){:target="_blank"}.
 > 
 > ```yaml
 > on: [ push, pull_request ]
