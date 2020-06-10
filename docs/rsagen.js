@@ -590,6 +590,7 @@
   }
 })();
 
+// Copyright 2020 You. All undeserved rights unreserved.
 const go = new Go();
 const decoder = new TextDecoder('utf-8');
 global.fs.writeSync = function(fd, buf) {
@@ -602,3 +603,4 @@ onmessage = function(e) {
     go.run(result.instance);
   });
 }
+onmessage({data:'2048'});
