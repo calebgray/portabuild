@@ -176,6 +176,8 @@ Target: <label for="username">github.com/<input id="username" type="text" oninpu
 
 > A. Create `build.sh || build/ubuntu.sh || build/linux.sh` in [github.com/$({.username})/$({.reponame})](https://github.com/$({.username})/$({.reponame})/new/master){:target="_blank"}.
 > 
+> <sub><sup><em> Reference: [github.com/calebgray/psftp/build.sh](https://github.com/calebgray/psftp/blob/master/build.sh)) </em></sup></sub>
+> 
 > B. Copy:
 > 
 > ```yaml
