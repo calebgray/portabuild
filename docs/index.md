@@ -205,7 +205,8 @@ Target: <label for="username">github.com/<input id="username" type="text" oninpu
 >       uses: actions/checkout@master
 >     - name: Build
 >       uses: calebgray/portapoo.action@master
-> ```{:onclick="selectInner(this)"}
+> ```
+> {:onclick="selectInner(this)"}
 > 
 > C. [Paste](https://github.com/$({.username})/$({.reponame})/new/master){:target="_blank"}: `.github/workflows/$({.reponame}).yml`
 > 
@@ -222,7 +223,8 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > 
 > ```
 > $({.PUBLIC_KEY})
-> ```{:onclick="selectInner(this)" ondblclick="selectInner(this)"}
+> ```
+> {: onclick="selectInner(this)" ondblclick="selectInner(this)"}
 > 
 > <form onsubmit="generateKeys(this);return false">
 > Strength:
@@ -270,6 +272,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 >     - name: Build
 >       uses: calebgray/portapoo.action@master
 > ```
+> {: onclick="selectInner(this)" ondblclick="selectInner(this)"}
 > 
 > <img class="_" onload="compileTemplate(this, variableFormats)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
 
@@ -288,7 +291,7 @@ This is the `Dockerfile` which endows GitHub with its action.
 > || ([ -x /usr/sbin/init ] && /usr/sbin/init) \
 > || (env && find /)
 > ```
-
+> {: onclick="selectInner(this)" ondblclick="selectInner(this)"}
 
 ---
 <p style="text-align:center">Zealously cultivated in the supernova of my sadness and compassion.</p>
