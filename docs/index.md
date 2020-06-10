@@ -139,13 +139,14 @@ function checkLoading() {
 }
 
 const rsagen = new Worker('rsagen.js');
-rsagen.onmessage = function(key) {
+rsagen.onmessage = function(e) {
   checkLoading();
   loading.className = '';
+  const key = e.data.trim();
   if (key.startsWith('-----BEGIN PRIVATE KEY-----')) {
-    $hook({ id: 'PRIVATE_KEY', value: key.trim() });
+    $hook({ id: 'PRIVATE_KEY', value: key });
   } else if (key.startsWith('-----BEGIN PUBLIC KEY-----')) {
-    $hook({ id: 'PUBLIC_KEY', value: key.trim() });
+    $hook({ id: 'PUBLIC_KEY', value: key });
   }
 };
 

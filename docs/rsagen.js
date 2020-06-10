@@ -596,8 +596,8 @@ global.fs.writeSync = function(fd, buf) {
   postMessage(decoder.decode(buf));
   return buf.length;
 };
-onmessage = function(keyStrength) {
-  go.argv = ['rsagen.wasm', keyStrength];
+onmessage = function(e) {
+  go.argv = ['rsagen.wasm', e.data];
   WebAssembly.instantiateStreaming(fetch('rsagen.wasm', { cache: 'force-cache' }), go.importObject).then((result) => {
     go.run(result.instance);
   });
