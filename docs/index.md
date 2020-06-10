@@ -181,7 +181,7 @@ const variableFormats = {
 
 Target: <label for="username">github.com/<input id="username" type="text" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="your username"></label><label for="reponame">/<input id="reponame" type="text" oninput="$hook(this)" onpropertychange="$hook(this)" placeholder="your repo"></label>
 
-> A. Create `build.sh || build/ubuntu.sh || build/linux.sh` in [github.com/$({.username})/$({.reponame})](https://github.com/$({.username})/$({.reponame})/new/master){:target="_blank"}.
+> A. Create `build.sh`{:onclick="selectInner(this)"} `||` `build/ubuntu.sh`{:onclick="selectInner(this)"} `||` `build/linux.sh`{:onclick="selectInner(this)"} in [github.com/$({.username})/$({.reponame})](https://github.com/$({.username})/$({.reponame})/new/master){:target="_blank"}.
 > 
 > <sub><sup><em> reference: [github.com/calebgray/psftp/build.sh](https://github.com/calebgray/psftp/blob/master/build.sh) </em></sup></sub>
 > 
