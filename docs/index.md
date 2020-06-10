@@ -132,17 +132,17 @@ function compileTemplate(trigger, formats) {
   }
 }
 
-let loading, rsagen, rsagenUri;
+let loading, rsagen, rsagenSrc;
 function generateKeys(trigger) {
   if (!loading) {
     loading = document.getElementById('loading');
     rsagen = document.getElementById('rsagen');
-    rsagenUri = rsagen.src + '#';
+    rsagenSrc = rsagen.src + '#';
   } else if (loading.className === 'loading') {
     return;
   }
   loading.className = 'loading';
-  rsagen.src = rsagenUri + (trigger[1].checked && trigger[1].value || trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value);
+  rsagen.src = rsagenSrc + (trigger[1].checked && trigger[1].value || trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value);
 }
 
 function setKey(key) {
@@ -211,17 +211,17 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > $({.PUBLIC_KEY})
 > ```
 > 
+> <iframe id="rsagen" src="rsagen.html"></iframe>
 > <form onsubmit="generateKeys(this);return false">
 > Strength:
 > <label><input type="radio" name="rsabits" value="1024">1024</label>
 > <label><input type="radio" name="rsabits" value="2048" checked="checked">2048</label>
 > <label><input type="radio" name="rsabits" value="4096">4096</label>
 > <button type="submit"><img id="loading" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABWUlEQVRIx+3WPUubURQH8J8Roe3iYEqhVRRf6NJ2yN6PICIWoTro5OLgkMHJIZtbx1I6dVAKYqdQtyp+BSFzodAhTYd2UpKoy4k81DxPXrST/uHA5d57zv+83HvuHZCNMSzjNV5hBA38wHeUsY+qHjGK3TB20UEa+Ih8Qr+11hYL+BsbTrGDRUzgIYbxMiL7mnDiN+Y6EazjPBb38KyLaKdxFDp1rKYRzKMZstFjSnMohdHzdgRPUIvJov6x/U99rvA+Jsp9GM06AGAIlSjWzP8gaOWw4B73uFMoxNHv7bJ0iedxaSsYyt2y5wN4h0F8i+56LYLSDQg2w0YVj9ulqNVqt8KbXlAM/QZm0xrWSoR1gUNMdWF4HF9Cp4m1rI4o2GuJ9/YAS5jEAzyK8Vt8xlns/ZN4MjMJxO/hQyKaLKnjE56mVT0LebwJz15E4Zr4hRMcx6fgZ5qBSw+shXjl+RUFAAAAAElFTkSuQmCC"/></button>
-> <iframe id="rsagen" src="rsagen.html"></iframe>
 > </form>
 > 
 > <sub><sup><em> powered by: [github.com/calebgray/rsagen](https://github.com/calebgray/rsagen) </em></sup></sub>
-> 
+>
 > C. [Paste](https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new){:target="_blank"}: `portapoo` `{ write: true }`
 > 
 > D. [Set](https://github.com/$({.username})/$({.reponame})/settings/secrets){:target="_blank"}:
