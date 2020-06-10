@@ -12,7 +12,8 @@ input { background:#eee;border:1px solid #111;border-radius:3px;color:#111;paddi
 h3 { margin-top:50px !important }
 hr { margin:50px 0 0 }
 pre.highlight { padding:4px 8px 4px }
-.loading { width:16px;height:16px;box-shadow:unset;border:0;animation:rotate 1s linear infinite }
+#loading { width:16px;height:16px;box-shadow:unset;border:0 }
+.loading { animation:rotate 1s linear infinite }
 @keyframes rotate { 100% { transform:rotate(360deg) } }
 </style>
 <script src="wasm_exec.js"></script>
