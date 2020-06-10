@@ -220,6 +220,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > <label><input type="radio" name="rsabits" value="2048" checked="checked">2048</label>
 > <label><input type="radio" name="rsabits" value="4096">4096</label>
 > <button type="submit"><img id="loading" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABWUlEQVRIx+3WPUubURQH8J8Roe3iYEqhVRRf6NJ2yN6PICIWoTro5OLgkMHJIZtbx1I6dVAKYqdQtyp+BSFzodAhTYd2UpKoy4k81DxPXrST/uHA5d57zv+83HvuHZCNMSzjNV5hBA38wHeUsY+qHjGK3TB20UEa+Ih8Qr+11hYL+BsbTrGDRUzgIYbxMiL7mnDiN+Y6EazjPBb38KyLaKdxFDp1rKYRzKMZstFjSnMohdHzdgRPUIvJov6x/U99rvA+Jsp9GM06AGAIlSjWzP8gaOWw4B73uFMoxNHv7bJ0iedxaSsYyt2y5wN4h0F8i+56LYLSDQg2w0YVj9ulqNVqt8KbXlAM/QZm0xrWSoR1gUNMdWF4HF9Cp4m1rI4o2GuJ9/YAS5jEAzyK8Vt8xlns/ZN4MjMJxO/hQyKaLKnjE56mVT0LebwJz15E4Zr4hRMcx6fgZ5qBSw+shXjl+RUFAAAAAElFTkSuQmCC"/></button>
+> <iframe src="javascript:generateKeys(this);console.log(window.parent)"></iframe>
 > </form>
 > 
 > <sub><sup><em> powered by: [github.com/calebgray/rsagen](https://github.com/calebgray/rsagen) </em></sup></sub>
