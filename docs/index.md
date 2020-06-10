@@ -12,6 +12,7 @@ input { background:#eee;border:1px solid #111;border-radius:3px;color:#111;paddi
 h3 { margin-top:50px !important }
 hr { margin:50px 0 0 }
 pre.highlight { max-height:30em;padding:4px 8px 4px;font-size:0.8em !important }
+pre.highlight:hover::before,pre.highlight:focus::before { content:'<a href="javascript:selectInner(this)">[X]</a>' }
 #loading { width:16px;height:16px;box-shadow:unset;border:0 }
 .loading { animation:rotate 1s linear infinite }
 @keyframes rotate { 100% { transform:rotate(360deg) } }
@@ -88,6 +89,17 @@ function setEscapedHtml(trigger) {
 function setEscapedUri(trigger) {
   if (!trigger) return;
   this.innerHTML = encodeURI(typeof trigger === typeof '' ? trigger : trigger.value);
+}
+
+function selectInner(target) {
+  if (document.selection) {
+    document.body.createTextRange().moveToElementText(target).select();
+  } else if (window.getSelection) {
+    const range = document.createRange();
+    range.selectNode(target);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+  }
 }
 
 function renderTemplate(templateHtml, v, trigger) {
