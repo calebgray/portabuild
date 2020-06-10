@@ -270,7 +270,7 @@ This is the `Dockerfile` which endows GitHub with its action.
 
 > ```dockerfile
 > # Nearly Generic Dockerfile. (ACHTUNG: Dumps whole load on failure because this is for professionals that don't believe in standards but follow them anyway. That's an endless loop to insanity... isn't it...)
-> FROM ubuntu
+> FROM alpine
 > COPY . .
 > CMD ([ -x ./build.sh ] && ./build.sh) \
 > || ([ -x ./build/ubuntu.sh ] && ./build/ubuntu.sh) \
