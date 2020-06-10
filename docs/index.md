@@ -140,17 +140,12 @@ function generateKeys(trigger) {
     return;
   }
   loading.className = 'loading';
-  
-  rsagen.src
-  window.parent.document.getElementById('target'); 
-
-  
-  loading.className = '';
+  /*loading.className = '';
   if (output.startsWith('-----BEGIN PRIVATE KEY-----')) {
     $hook({ id: 'PRIVATE_KEY', value: output.trim() });
   } else if (output.startsWith('-----BEGIN PUBLIC KEY-----')) {
     $hook({ id: 'PUBLIC_KEY', value: output.trim() });
-  }
+  }*/
 }
 
 function giveKey(key) {
