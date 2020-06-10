@@ -16,7 +16,6 @@ pre.highlight { padding:4px 8px 4px;font-size:0.82em !important }
 .loading { animation:rotate 1s linear infinite }
 @keyframes rotate { 100% { transform:rotate(360deg) } }
 </style>
-<script src="wasm_exec.js"></script>
 <script>
 'use strict';
 
@@ -132,29 +131,30 @@ function compileTemplate(trigger, formats) {
   }
 }
 
-const go = new Go();
-const decoder = new TextDecoder('utf-8');
-global.fs.writeSync = function(fd, buf) {
-  let output = decoder.decode(buf);
+let loading, rsagen;
+function generateKeys(trigger) {
+  if (!loading) {
+    loading = document.getElementById('loading');
+    rsagen = document.getElementById('rsagen');
+  } else if (loading.className === 'loading') {
+    return;
+  }
+  loading.className = 'loading';
+  
+  rsagen.src
+  window.parent.document.getElementById('target'); 
+
+  
+  loading.className = '';
   if (output.startsWith('-----BEGIN PRIVATE KEY-----')) {
     $hook({ id: 'PRIVATE_KEY', value: output.trim() });
   } else if (output.startsWith('-----BEGIN PUBLIC KEY-----')) {
     $hook({ id: 'PUBLIC_KEY', value: output.trim() });
   }
-  return buf.length;
-};
+}
 
-let loading;
-async function generateKeys(trigger) {
-  if (!loading) loading = document.getElementById('loading');
-  if (loading.className === 'loading') return; 
-  loading.className = 'loading';
-  const keyStrength = (trigger.length !== 4) ? 2048 : Math.round(trigger[1].checked && trigger[1].value || trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value);
-  go.argv = ['rsagen.wasm', keyStrength.toString()];
-  await WebAssembly.instantiateStreaming(fetch('rsagen.wasm', { cache: 'force-cache' }), go.importObject).then((result) => {
-    go.run(result.instance);
-    loading.className = '';
-  });
+function giveKey(key) {
+  console.log(key);
 }
 
 const variableFormats = {
@@ -220,7 +220,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > <label><input type="radio" name="rsabits" value="2048" checked="checked">2048</label>
 > <label><input type="radio" name="rsabits" value="4096">4096</label>
 > <button type="submit"><img id="loading" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABWUlEQVRIx+3WPUubURQH8J8Roe3iYEqhVRRf6NJ2yN6PICIWoTro5OLgkMHJIZtbx1I6dVAKYqdQtyp+BSFzodAhTYd2UpKoy4k81DxPXrST/uHA5d57zv+83HvuHZCNMSzjNV5hBA38wHeUsY+qHjGK3TB20UEa+Ih8Qr+11hYL+BsbTrGDRUzgIYbxMiL7mnDiN+Y6EazjPBb38KyLaKdxFDp1rKYRzKMZstFjSnMohdHzdgRPUIvJov6x/U99rvA+Jsp9GM06AGAIlSjWzP8gaOWw4B73uFMoxNHv7bJ0iedxaSsYyt2y5wN4h0F8i+56LYLSDQg2w0YVj9ulqNVqt8KbXlAM/QZm0xrWSoR1gUNMdWF4HF9Cp4m1rI4o2GuJ9/YAS5jEAzyK8Vt8xlns/ZN4MjMJxO/hQyKaLKnjE56mVT0LebwJz15E4Zr4hRMcx6fgZ5qBSw+shXjl+RUFAAAAAElFTkSuQmCC"/></button>
-> <iframe src="javascript:generateKeys(this);console.log(window.parent)"></iframe>
+> <iframe id="rsagen" src="rsagen.html"></iframe>
 > </form>
 > 
 > <sub><sup><em> powered by: [github.com/calebgray/rsagen](https://github.com/calebgray/rsagen) </em></sup></sub>
