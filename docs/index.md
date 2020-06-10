@@ -160,6 +160,8 @@ async function generateKeys(trigger) {
   if (trigger.length !== 4) {
     keyStrength = 2048;
   } else {
+    /*spin*/
+    /*console.log(trigger[4]);*/
     keyStrength = Math.round(trigger[1].checked && trigger[1].value || trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value);
   }
 
@@ -226,7 +228,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > $({.PUBLIC_KEY})
 > ```
 > 
-> <form onsubmit="generateKeys(this);return false">Strength: <label><input type="radio" name="rsabits" value="1024">1024</label> <label><input type="radio" name="rsabits" value="2048" checked="checked">2048</label> <label><input type="radio" name="rsabits" value="4096">4096</label> <button type="submit"><img class="spin" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAABdklEQVRYhe3WP0sdQRyF4UdFiDYWKgGNKJqQRlPY+xGCiCKohVY2FhYWqVLY2aUMwcrCEAhaSdKZ4FcQrAOChX+KpFK8V1PMrK6N2dkrRHBfGFjYOXPOzM7O/Kh46jQl9u/DHMbwBp2o4RC/sIMtHD9cxMALfI5m1/9oNayjK6fP3pViEn/iAOfYxDQG0IYOjAgr8y0X8gzjjQZYwlUUf0VvAc1L/IyaSyyUDTCBemzLidpmrEbTbAJJAZ7jNIpWEs3zrLm7PwrzMQp2Spjet0EL0YoDYTO9+h8BCN9wtIR5RUXFo2VU+LUL8yCHSeS1cKgdCIfcHZJSlaAJH9CCXeF2LER+xqsNBHgXxzhGd4owM8+u0vfSy7eVqK/hbaL2JsC8sGzX+IGhAtp+bEdNHYup5vkAhPRZbVDDd8xiEM/QHp9n8AUXse9vtyVZQwEI1e8nt6txX7vEBnqKGKV+1y5MCTMbFjZWHSfYx55QtB4ljlvxhPkLX6aFeFv4k3UAAAAASUVORK5CYII="/></button></form>
+> <form onsubmit="generateKeys(this);return false">Strength: <label><input type="radio" name="rsabits" value="1024">1024</label> <label><input type="radio" name="rsabits" value="2048" checked="checked">2048</label> <label><input type="radio" name="rsabits" value="4096">4096</label> <button type="submit"><img class="spin" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABWUlEQVRIx+3WPUubURQH8J8Roe3iYEqhVRRf6NJ2yN6PICIWoTro5OLgkMHJIZtbx1I6dVAKYqdQtyp+BSFzodAhTYd2UpKoy4k81DxPXrST/uHA5d57zv+83HvuHZCNMSzjNV5hBA38wHeUsY+qHjGK3TB20UEa+Ih8Qr+11hYL+BsbTrGDRUzgIYbxMiL7mnDiN+Y6EazjPBb38KyLaKdxFDp1rKYRzKMZstFjSnMohdHzdgRPUIvJov6x/U99rvA+Jsp9GM06AGAIlSjWzP8gaOWw4B73uFMoxNHv7bJ0iedxaSsYyt2y5wN4h0F8i+56LYLSDQg2w0YVj9ulqNVqt8KbXlAM/QZm0xrWSoR1gUNMdWF4HF9Cp4m1rI4o2GuJ9/YAS5jEAzyK8Vt8xlns/ZN4MjMJxO/hQyKaLKnjE56mVT0LebwJz15E4Zr4hRMcx6fgZ5qBSw+shXjl+RUFAAAAAElFTkSuQmCC"/></button></form>
 > 
 > <sub><sup><em> powered by: [github.com/calebgray/rsagen](https://github.com/calebgray/rsagen) </em></sup></sub>
 > 
