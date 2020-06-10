@@ -9,20 +9,16 @@
 
 const decoder = new TextDecoder('utf-8');
 global.fs.writeSync = function(fd, buf) {
-  window.parent.giveKey(decoder.decode(buf));
-  document.body.innerHTML += decoder.decode(buf);
+  window.parent.setKey(decoder.decode(buf));
   return buf.length;
 };
 
-function generateKeys(trigger) {
-  const keyStrength = (trigger.length !== 4) ? '2048' : (trigger[1].checked && trigger[1].value) || (trigger[2].checked && trigger[2].value) || (trigger[3].checked && trigger[3].value);
-  const go = new Go();
-  go.argv = ['rsagen.wasm', keyStrength];
-  WebAssembly.instantiateStreaming(fetch('rsagen.wasm', { cache: 'force-cache' }), go.importObject).then((result) => {
-    go.run(result.instance);
-  });
-}
-generateKeys([]);
+const keyStrength = !window.location.hash ? '2048' : window.location.hash.substring(1);
+const go = new Go();
+go.argv = ['rsagen.wasm', keyStrength];
+WebAssembly.instantiateStreaming(fetch('rsagen.wasm', { cache: 'force-cache' }), go.importObject).then((result) => {
+  go.run(result.instance);
+});
 </script>
 </head>
 <body></body>

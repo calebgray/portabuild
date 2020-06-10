@@ -15,6 +15,7 @@ pre.highlight { padding:4px 8px 4px;font-size:0.82em !important }
 #loading { width:16px;height:16px;box-shadow:unset;border:0 }
 .loading { animation:rotate 1s linear infinite }
 @keyframes rotate { 100% { transform:rotate(360deg) } }
+iframe { display:none }
 </style>
 <script>
 'use strict';
@@ -131,25 +132,26 @@ function compileTemplate(trigger, formats) {
   }
 }
 
-let loading, rsagen;
+let loading, rsagen, rsagenUri;
 function generateKeys(trigger) {
   if (!loading) {
     loading = document.getElementById('loading');
     rsagen = document.getElementById('rsagen');
+    rsagenUri = rsagen.src + '#';
   } else if (loading.className === 'loading') {
     return;
   }
   loading.className = 'loading';
-  /*loading.className = '';
-  if (output.startsWith('-----BEGIN PRIVATE KEY-----')) {
-    $hook({ id: 'PRIVATE_KEY', value: output.trim() });
-  } else if (output.startsWith('-----BEGIN PUBLIC KEY-----')) {
-    $hook({ id: 'PUBLIC_KEY', value: output.trim() });
-  }*/
+  rsagen.src = rsagenUri + (trigger[1].checked && trigger[1].value || trigger[2].checked && trigger[2].value || trigger[3].checked && trigger[3].value);
 }
 
-function giveKey(key) {
-  console.log(key);
+function setKey(key) {
+  loading.className = '';
+  if (key.startsWith('-----BEGIN PRIVATE KEY-----')) {
+    $hook({ id: 'PRIVATE_KEY', value: key.trim() });
+  } else if (key.startsWith('-----BEGIN PUBLIC KEY-----')) {
+    $hook({ id: 'PUBLIC_KEY', value: key.trim() });
+  }
 }
 
 const variableFormats = {
@@ -257,7 +259,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 >       uses: calebgray/portapoo.action@master
 > ```
 > 
-> <img class="_" onload="compileTemplate(this, variableFormats);generateKeys(this)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
+> <img class="_" onload="compileTemplate(this, variableFormats)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
 
 
 ### Nearly Generic Dockerfile
