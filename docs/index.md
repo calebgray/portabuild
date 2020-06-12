@@ -144,6 +144,10 @@ function compileTemplate(trigger, formats) {
 }
 
 const rsagen = new Worker('rsagen.js');
+rsagen.onload = function() {
+  rsagen.postMessage(2048);
+};
+
 rsagen.onmessage = function(e) {
   rsagen.button.disabled = false;
   const key = e.data.trim();
@@ -268,7 +272,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > ```
 > {:ondblclick="selectInner(this)"}
 > 
-> <img class="_" onload="compileTemplate(this, variableFormats);rsagen.onclick()" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
+> <img class="_" onload="compileTemplate(this, variableFormats)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
 
 
 ### Nearly Generic Dockerfile
