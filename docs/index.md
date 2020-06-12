@@ -169,6 +169,6 @@ This is the `Dockerfile` which endows GitHub with its action.
 ---
 <p style="text-align:center">zealously cultivated in the supernova of my sadness and compassion</p>
 <p>
-  <sub><sup><em>(imbued with vanilla powers by <a href='https://github.com/calebgray/-hooker'>$hooker</a>)</em></sup></sub>
+  <sub><sup><em>\carefully imbued with vanilla powers by <a href='https://github.com/calebgray/-hooker'>$hooker</a>\</em></sup></sub>
   <img class="_" onload="imbueWithVanilla(this.parentNode)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
 </p>
