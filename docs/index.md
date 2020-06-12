@@ -12,8 +12,8 @@ input { background:#eee;border:1px solid #111;border-radius:3px;color:#111;paddi
 h3 { margin-top:50px !important }
 hr { margin:50px 0 0 }
 pre.highlight { max-height:30em;padding:4px 8px 4px;font-size:0.8em !important }
-#loading { width:16px;height:16px;box-shadow:unset;border:0 }
-.loading { animation:rotate 1s linear infinite }
+#rsagen img { width:16px;height:16px;box-shadow:unset;border:0 }
+#rsagen:disabled img { animation:rotate 1s linear infinite }
 @keyframes rotate { 100% { transform:rotate(360deg) } }
 iframe { display:none }
 </style>
@@ -143,10 +143,9 @@ function compileTemplate(trigger, formats) {
   }
 }
 
-let rsagenImg;
 const rsagen = new Worker('rsagen.js');
 rsagen.onmessage = function(e) {
-  rsagenImg.className = '';
+  rsagen.button.disabled = false;
   const key = e.data.trim();
   if (key.startsWith('-----BEGIN PRIVATE KEY-----')) {
     $hook({ id: 'PRIVATE_KEY', value: key });
@@ -156,8 +155,8 @@ rsagen.onmessage = function(e) {
 };
 
 function generateKeys(form) {
-  rsagenImg = form[3].firstChild;
-  rsagenImg.className = 'loading';
+  rsagen.button = form[3];
+  rsagen.button.disabled = true;
   rsagen.postMessage(form[0].checked && form[0].value || form[1].checked && form[1].value || form[2].checked && form[2].value);
 }
 
@@ -225,7 +224,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > <label><input type="radio" name="rsabits" value="1024">1024</label>
 > <label><input type="radio" name="rsabits" value="2048" checked="checked">2048</label>
 > <label><input type="radio" name="rsabits" value="4096">4096</label>
-> <button type="submit"><img id="rsagen" alt="Regenerate Keys" onload="generateKeys(this.parentNode.parentNode)" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABWUlEQVRIx+3WPUubURQH8J8Roe3iYEqhVRRf6NJ2yN6PICIWoTro5OLgkMHJIZtbx1I6dVAKYqdQtyp+BSFzodAhTYd2UpKoy4k81DxPXrST/uHA5d57zv+83HvuHZCNMSzjNV5hBA38wHeUsY+qHjGK3TB20UEa+Ih8Qr+11hYL+BsbTrGDRUzgIYbxMiL7mnDiN+Y6EazjPBb38KyLaKdxFDp1rKYRzKMZstFjSnMohdHzdgRPUIvJov6x/U99rvA+Jsp9GM06AGAIlSjWzP8gaOWw4B73uFMoxNHv7bJ0iedxaSsYyt2y5wN4h0F8i+56LYLSDQg2w0YVj9ulqNVqt8KbXlAM/QZm0xrWSoR1gUNMdWF4HF9Cp4m1rI4o2GuJ9/YAS5jEAzyK8Vt8xlns/ZN4MjMJxO/hQyKaLKnjE56mVT0LebwJz15E4Zr4hRMcx6fgZ5qBSw+shXjl+RUFAAAAAElFTkSuQmCC"/></button>
+> <button id="rsagen" type="submit"><img alt="Regenerate Keys" onload="generateKeys(this.parentNode.parentNode)" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABWUlEQVRIx+3WPUubURQH8J8Roe3iYEqhVRRf6NJ2yN6PICIWoTro5OLgkMHJIZtbx1I6dVAKYqdQtyp+BSFzodAhTYd2UpKoy4k81DxPXrST/uHA5d57zv+83HvuHZCNMSzjNV5hBA38wHeUsY+qHjGK3TB20UEa+Ih8Qr+11hYL+BsbTrGDRUzgIYbxMiL7mnDiN+Y6EazjPBb38KyLaKdxFDp1rKYRzKMZstFjSnMohdHzdgRPUIvJov6x/U99rvA+Jsp9GM06AGAIlSjWzP8gaOWw4B73uFMoxNHv7bJ0iedxaSsYyt2y5wN4h0F8i+56LYLSDQg2w0YVj9ulqNVqt8KbXlAM/QZm0xrWSoR1gUNMdWF4HF9Cp4m1rI4o2GuJ9/YAS5jEAzyK8Vt8xlns/ZN4MjMJxO/hQyKaLKnjE56mVT0LebwJz15E4Zr4hRMcx6fgZ5qBSw+shXjl+RUFAAAAAElFTkSuQmCC"/></button>
 > </form>
 > 
 > <sub><sup><em> powered by: [github.com/calebgray/rsagen](https://github.com/calebgray/rsagen) </em></sup></sub>
