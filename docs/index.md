@@ -144,12 +144,8 @@ function compileTemplate(trigger, formats) {
 }
 
 const rsagen = new Worker('rsagen.js');
-rsagen.onload = function() {
-  rsagen.postMessage(2048);
-};
-
 rsagen.onmessage = function(e) {
-  rsagen.button.disabled = false;
+  if (rsagen.button !== undefined) rsagen.button.disabled = false;
   const key = e.data.trim();
   if (key.startsWith('-----BEGIN PRIVATE KEY-----')) {
     $hook({ id: 'PRIVATE_KEY', value: key });
