@@ -156,7 +156,7 @@ rsagen.onmessage = function(e) {
 };
 
 function generateKeys(form) {
-  rsagenImg = form.lastChild.firstChild;
+  rsagenImg = form[3].firstChild;
   rsagenImg.className = 'loading';
   rsagen.postMessage(form[0].checked && form[0].value || form[1].checked && form[1].value || form[2].checked && form[2].value);
 }
