@@ -37,7 +37,7 @@ function generateKeys(form) {
 }
 
 function imbueWithVanilla(power) {
-  document.getElementsByClassName('ribbon-inner')[0].appendChild(power);
+  document.getElementsByClassName('ribbon-inner')[1].appendChild(power);
 }
 
 const variableFormats = {
