@@ -17,132 +17,8 @@ pre.highlight { max-height:30em;padding:4px 8px 4px;font-size:0.8em !important }
 @keyframes rotate { 100% { transform:rotate(360deg) } }
 iframe { display:none }
 </style>
+<script src="-hooker.min.js"></script>
 <script>
-'use strict';
-
-const $hook_prefix = '_';
-const $hook_key = $hook_prefix+'id';
-
-let $hook_id = 0;
-Object.defineProperty(Function.prototype, $hook_key, {
-  get: function() {
-    Object.defineProperty(this, $hook_key, { value: $hook_id++, writable: false });
-    return this[$hook_key];
-  }
-});
-
-const $hook_ = {};
-function $hook(context, id, hook) {
-  switch (arguments.length) {
-  case 1:
-    id = context.id;
-  case 2:
-    if (!$hook_[id]) return;
-    for (const hook of Object.values($hook_[id].hooks)) {
-      for (const trigger of Object.values($hook_[id].triggers)) {
-        hook.call(trigger, context);
-      }
-    }
-    return;
-  default:
-    if (!$hook_[id]) {
-      $hook_[id] = {
-        triggers: { [context[$hook_key]]: context },
-        hooks: { [hook[$hook_key]]: hook },
-      };
-    } else {
-      $hook_[id].triggers[context[$hook_key]] = context;
-      $hook_[id].hooks[hook[$hook_key]] = hook;
-    }
-    for (const hook of Object.values($hook_[id].hooks)) {
-      hook.call(context);
-    }
-  }
-}
-
-function $unhook(context, hook, id) {
-  switch (arguments.length) {
-  case 2:
-    id = context.id;
-  case 3:
-    delete $hook_[id].hooks[hook[$hook_key]];
-    return;
-  default:
-    delete $hook_[context.id];
-  }
-}
-
-function $hook_once(context, id, hook) {
-  const unhook = function(trigger) {
-    $unhook(this, unhook);
-    hook.call(this, trigger);
-  };
-  $hook(context, id, unhook);
-}
-
-function setEscapedHtml(trigger) {
-  if (!trigger) return;
-  this.innerHTML = (typeof trigger === typeof '' ? trigger : trigger.value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
-}
-
-function setEscapedUri(trigger) {
-  if (!trigger) return;
-  this.innerHTML = encodeURI(typeof trigger === typeof '' ? trigger : trigger.value);
-}
-
-function selectInner(target) {
-  if (document.selection) {
-    document.body.createTextRange().moveToElementText(target).select();
-  } else if (window.getSelection) {
-    const range = document.createRange();
-    range.selectNode(target);
-    window.getSelection().removeAllRanges();
-    window.getSelection().addRange(range);
-  }
-}
-
-function renderTemplate(templateHtml, v, trigger) {
-  if (!trigger) return;
-  v[trigger.id] = trigger.value || trigger.dataset.value;
-  this.innerHTML = eval('`'+templateHtml.replace(/`/g, "\\`")+'`');
-}
-
-const $hook_template_variable = /(\$)\({\.(.*?)}\)/g;
-function compileTemplate(trigger, formats) {
-  const templateSource = trigger.parentNode.parentNode;
-  trigger.parentNode.remove();
-
-  if (!templateSource) return;
-  const templateRaw = templateSource.innerHTML;
-  if (!templateRaw) return;
-
-  const variables = {};
-  let templateHtml = '';
-
-  const templateParts = templateRaw.split($hook_template_variable);
-  let partType = templateParts[0] === '$' && templateParts.length > 0 ? 0 : 2;
-  for (let templatePart of templateParts) {
-    switch (partType) {
-    case 0:
-      partType = 1;
-      continue;
-    case 1:
-      partType = 2;
-      variables[templatePart] = !formats ? templatePart : formats.hasOwnProperty(templatePart) ? formats[templatePart].replace('{0}', templatePart) : formats.hasOwnProperty('_') ? formats._.replace('{0}', templatePart) : formats.replace('{0}', templatePart);
-      templateHtml += '${v.'+templatePart+'}';
-      continue;
-    case 2:
-      partType = 0;
-      templateHtml += templatePart;
-    }
-  }
-
-  renderTemplate.call(templateSource, templateHtml, variables, templateSource);
-  for (const variable of Object.keys(variables)) {
-    $hook(templateSource, variable, renderTemplate.bind(templateSource, templateHtml, variables));
-  }
-}
-
 const rsagen = new Worker('rsagen.js');
 rsagen.onmessage = function(e) {
   if (rsagen.button !== undefined) rsagen.button.disabled = false;
@@ -227,7 +103,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > <button id="rsagen" type="submit" onclick="generateKeys(this.parentNode)"><img alt="Regenerate Keys" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABWUlEQVRIx+3WPUubURQH8J8Roe3iYEqhVRRf6NJ2yN6PICIWoTro5OLgkMHJIZtbx1I6dVAKYqdQtyp+BSFzodAhTYd2UpKoy4k81DxPXrST/uHA5d57zv+83HvuHZCNMSzjNV5hBA38wHeUsY+qHjGK3TB20UEa+Ih8Qr+11hYL+BsbTrGDRUzgIYbxMiL7mnDiN+Y6EazjPBb38KyLaKdxFDp1rKYRzKMZstFjSnMohdHzdgRPUIvJov6x/U99rvA+Jsp9GM06AGAIlSjWzP8gaOWw4B73uFMoxNHv7bJ0iedxaSsYyt2y5wN4h0F8i+56LYLSDQg2w0YVj9ulqNVqt8KbXlAM/QZm0xrWSoR1gUNMdWF4HF9Cp4m1rI4o2GuJ9/YAS5jEAzyK8Vt8xlns/ZN4MjMJxO/hQyKaLKnjE56mVT0LebwJz15E4Zr4hRMcx6fgZ5qBSw+shXjl+RUFAAAAAElFTkSuQmCC"/></button>
 > </form>
 > 
-> <sub><sup><em> powered by: [github.com/calebgray/rsagen](https://github.com/calebgray/rsagen) </em></sup></sub>
+> <sub><sup><em>( powered by [github.com/calebgray/rsagen](https://github.com/calebgray/rsagen) )</em></sup></sub>
 >
 > C. [Paste](https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new){:target="_blank"}: `portapoo` `{ write: true }`
 > 
@@ -288,3 +164,4 @@ This is the `Dockerfile` which endows GitHub with its action.
 
 ---
 <p style="text-align:center">Zealously cultivated in the supernova of my sadness and compassion.</p>
+<img class="_" onload="const p=document.createElement('p');p.innerHTML='<sub><sup><em>(imbued with vanilla powers by <a href=\'https://github.com/calebgray/-hooker\'>github.com/calebgray/-hooker</a>)</em></sup></sub>';document.getElementsByClassName('ribbon-inner')[0].appendChild(p)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
