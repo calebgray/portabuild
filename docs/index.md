@@ -36,6 +36,10 @@ function generateKeys(form) {
   rsagen.postMessage(form[0].checked && form[0].value || form[1].checked && form[1].value || form[2].checked && form[2].value);
 }
 
+function imbueWithVanilla(power) {
+  document.getElementsByClassName('ribbon-inner')[0].appendChild(power);
+}
+
 const variableFormats = {
   _: '{0}',
   GITHUB_TOKEN: '$&#123;{secrets.GITHUB_TOKEN}}',
@@ -103,7 +107,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > <button id="rsagen" type="submit" onclick="generateKeys(this.parentNode)"><img alt="Regenerate Keys" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABWUlEQVRIx+3WPUubURQH8J8Roe3iYEqhVRRf6NJ2yN6PICIWoTro5OLgkMHJIZtbx1I6dVAKYqdQtyp+BSFzodAhTYd2UpKoy4k81DxPXrST/uHA5d57zv+83HvuHZCNMSzjNV5hBA38wHeUsY+qHjGK3TB20UEa+Ih8Qr+11hYL+BsbTrGDRUzgIYbxMiL7mnDiN+Y6EazjPBb38KyLaKdxFDp1rKYRzKMZstFjSnMohdHzdgRPUIvJov6x/U99rvA+Jsp9GM06AGAIlSjWzP8gaOWw4B73uFMoxNHv7bJ0iedxaSsYyt2y5wN4h0F8i+56LYLSDQg2w0YVj9ulqNVqt8KbXlAM/QZm0xrWSoR1gUNMdWF4HF9Cp4m1rI4o2GuJ9/YAS5jEAzyK8Vt8xlns/ZN4MjMJxO/hQyKaLKnjE56mVT0LebwJz15E4Zr4hRMcx6fgZ5qBSw+shXjl+RUFAAAAAElFTkSuQmCC"/></button>
 > </form>
 > 
-> <sub><sup><em>( powered by [github.com/calebgray/rsagen](https://github.com/calebgray/rsagen) )</em></sup></sub>
+> <sub><sup><em>(powered by <a href="https://github.com/calebgray/rsagen">github.com/calebgray/rsagen</a>)</em></sup></sub>
 >
 > C. [Paste](https://github.com/$({.username})/$({.reponame})-builds/settings/keys/new){:target="_blank"}: `portapoo` `{ write: true }`
 > 
@@ -163,5 +167,8 @@ This is the `Dockerfile` which endows GitHub with its action.
 > ```
 
 ---
-<p style="text-align:center">Zealously cultivated in the supernova of my sadness and compassion.</p>
-<img class="_" onload="const p=document.createElement('p');p.innerHTML='<sub><sup><em>(imbued with vanilla powers by <a href=\'https://github.com/calebgray/-hooker\'>github.com/calebgray/-hooker</a>)</em></sup></sub>';document.getElementsByClassName('ribbon-inner')[0].appendChild(p)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
+<p style="text-align:center">zealously cultivated in the supernova of my sadness and compassion</p>
+<p>
+  <sub><sup><em>(imbued with vanilla powers by <a href='https://github.com/calebgray/-hooker'>github.com/calebgray/-hooker</a>)</em></sup></sub>
+  <img class="_" onload="imbueWithVanilla(this.parentNode)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
+</p>
