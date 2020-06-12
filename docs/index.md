@@ -223,7 +223,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > Strength:
 > <label><input type="radio" name="rsabits" value="1024">1024</label>
 > <label><input type="radio" name="rsabits" value="2048" checked="checked">2048</label>
-> <label><input type="radio" name="rsabits" value="4096">4096</label>
+> <label><input type="radio" name="rsabits" value="4096">4096 <sub><sup><em>(slow)</em></sup></sub></label>
 > <button id="rsagen" type="submit" onclick="generateKeys(this.parentNode)"><img alt="Regenerate Keys" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABWUlEQVRIx+3WPUubURQH8J8Roe3iYEqhVRRf6NJ2yN6PICIWoTro5OLgkMHJIZtbx1I6dVAKYqdQtyp+BSFzodAhTYd2UpKoy4k81DxPXrST/uHA5d57zv+83HvuHZCNMSzjNV5hBA38wHeUsY+qHjGK3TB20UEa+Ih8Qr+11hYL+BsbTrGDRUzgIYbxMiL7mnDiN+Y6EazjPBb38KyLaKdxFDp1rKYRzKMZstFjSnMohdHzdgRPUIvJov6x/U99rvA+Jsp9GM06AGAIlSjWzP8gaOWw4B73uFMoxNHv7bJ0iedxaSsYyt2y5wN4h0F8i+56LYLSDQg2w0YVj9ulqNVqt8KbXlAM/QZm0xrWSoR1gUNMdWF4HF9Cp4m1rI4o2GuJ9/YAS5jEAzyK8Vt8xlns/ZN4MjMJxO/hQyKaLKnjE56mVT0LebwJz15E4Zr4hRMcx6fgZ5qBSw+shXjl+RUFAAAAAElFTkSuQmCC"/></button>
 > </form>
 > 
@@ -268,7 +268,7 @@ You: <input id="fullname" type="email" oninput="$hook(this)" onpropertychange="$
 > ```
 > {:ondblclick="selectInner(this)"}
 > 
-> <img class="_" onload="compileTemplate(this, variableFormats)" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
+> <img class="_" onload="compileTemplate(this, variableFormats);rsagen.onclick()" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"/>
 
 
 ### Nearly Generic Dockerfile
