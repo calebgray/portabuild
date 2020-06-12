@@ -603,4 +603,3 @@ onmessage = function(e) {
     go.run(result.instance);
   });
 }
-onmessage({data:'2048'});
