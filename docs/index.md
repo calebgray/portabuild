@@ -25,7 +25,7 @@ rsagen.onmessage = function(e) {
   const key = e.data.trim();
   if (key.startsWith('-----BEGIN PRIVATE KEY-----')) {
     $hook({ id: 'PRIVATE_KEY', value: key });
-  } else if (key.startsWith('-----BEGIN PUBLIC KEY-----')) {
+  } else if (key.startsWith('ssh-rsa ')) {
     $hook({ id: 'PUBLIC_KEY', value: key });
   }
 };
